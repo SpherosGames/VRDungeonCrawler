@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127548585620c954086ac7a835fec040, type: 3}
+  m_Name: LCorner
+  m_EditorClassIdentifier: 
+  Name: LCorner
+  Prefab: {fileID: 7193174200293042355, guid: 3861b9df0e5a45046851e1f8b6008c06, type: 3}
+  Top:
+    CompatibleNodes:
+    - {fileID: 11400000, guid: 74fd583d593734842b5a488d2facd298, type: 2}
+    - {fileID: 11400000, guid: 53200e198ccf25743929b32511d9a578, type: 2}
+  Bottom:
+    CompatibleNodes: []
+  Left:
+    CompatibleNodes: []
+  Right:
+    CompatibleNodes:
+    - {fileID: 11400000, guid: 74fd583d593734842b5a488d2facd298, type: 2}
+    - {fileID: 11400000, guid: 650adafc772f48b4098a396ad7336098, type: 2}
