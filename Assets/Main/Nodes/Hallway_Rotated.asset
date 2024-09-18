@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127548585620c954086ac7a835fec040, type: 3}
+  m_Name: Hallway_Rotated
+  m_EditorClassIdentifier: 
+  Name: Hallway_Rotated
+  Prefab: {fileID: 1785077819963196009, guid: d4f381a7abe939549aee92b99a2c12d9, type: 3}
+  Top:
+    CompatibleNodes:
+    - {fileID: 11400000, guid: 74fd583d593734842b5a488d2facd298, type: 2}
+    - {fileID: 11400000}
+  Bottom:
+    CompatibleNodes:
+    - {fileID: 11400000, guid: 74fd583d593734842b5a488d2facd298, type: 2}
+    - {fileID: 11400000, guid: 4b79b4d9a71be5d4dba20593475b5a7d, type: 2}
+    - {fileID: 11400000}
+  Left:
+    CompatibleNodes: []
+  Right:
+    CompatibleNodes: []
