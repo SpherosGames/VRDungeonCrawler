@@ -6,7 +6,7 @@ public class Enemy_Attacking_State : EnemyMoveBaseState
 {
     public override void EnterState(EnemyMoveStateManager enemy)
     {
-
+        enemy.GetComponent<EnemyWander>().enabled = false;
     }
     public override void UpdateState(EnemyMoveStateManager enemy)
     {

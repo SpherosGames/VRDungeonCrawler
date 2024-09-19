@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemyMoveStateManager : MonoBehaviour
 {
-    EnemyMoveBaseState CurrentState;
-    Enemy_Attacking_State AttackingState = new Enemy_Attacking_State();
-    Enemy_Idle_State IdleState = new Enemy_Idle_State();
-    Enemy_Patrol_State PatrolState = new Enemy_Patrol_State();
+    public EnemyMoveBaseState CurrentState;
+    public Enemy_Attacking_State AttackingState = new Enemy_Attacking_State();
+    public Enemy_Idle_State IdleState = new Enemy_Idle_State();
+    public Enemy_Patrol_State PatrolState = new Enemy_Patrol_State();
     void Start()
     {
-        CurrentState = IdleState;
+        CurrentState = PatrolState;
 
         CurrentState.EnterState(this);
     }
