@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 5793789580683090394}
   - component: {fileID: 5332375931114615903}
   m_Layer: 0
-  m_Name: RD-Wall
+  m_Name: BL-Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 2614877703524591671}
   - component: {fileID: 3808821573647244694}
   m_Layer: 0
-  m_Name: LD-Wall
+  m_Name: UL-Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 7519368904370731759}
   - component: {fileID: 8700084368943064156}
   m_Layer: 0
-  m_Name: DL-Wall
+  m_Name: LU-Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 1392248491666430675}
   - component: {fileID: 2576997910020178563}
   m_Layer: 0
-  m_Name: D-AboveEntrance
+  m_Name: L-AboveEntrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 4532662545976089957}
   - component: {fileID: 3090275566278234785}
   m_Layer: 0
-  m_Name: UL-Wall
+  m_Name: RU-Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 7152743243984363654}
   - component: {fileID: 6785190862058528913}
   m_Layer: 0
-  m_Name: UR-Wall
+  m_Name: RB-Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -542,7 +542,7 @@ GameObject:
   - component: {fileID: 7496225327946517245}
   - component: {fileID: 8457363790086404745}
   m_Layer: 0
-  m_Name: RU-Wall
+  m_Name: BR-Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 5633354367205949961}
   - component: {fileID: 2719011361009918946}
   m_Layer: 0
-  m_Name: DR-Wall
+  m_Name: LB-Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 6463123101354760428}
   - component: {fileID: 4605783759583804076}
   m_Layer: 0
-  m_Name: L-AboveEntrance
+  m_Name: U-AboveEntrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -701,7 +701,7 @@ GameObject:
   - component: {fileID: 1847550274751880107}
   - component: {fileID: 7617325271946437292}
   m_Layer: 0
-  m_Name: R-BigWall
+  m_Name: B-BigWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 3209815225050172888}
   - component: {fileID: 4161843716749020103}
   m_Layer: 0
-  m_Name: U-AboveEntrance
+  m_Name: R-AboveEntrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -807,7 +807,7 @@ GameObject:
   - component: {fileID: 1534674418965550010}
   - component: {fileID: 1602535949202451064}
   m_Layer: 0
-  m_Name: R-AboveEntrance
+  m_Name: B-AboveEntrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -988,7 +988,7 @@ GameObject:
   - component: {fileID: 2643696359977294072}
   - component: {fileID: 193469785202161482}
   m_Layer: 0
-  m_Name: LU-Wall
+  m_Name: UR-Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1086,7 +1086,7 @@ GameObject:
   - component: {fileID: 4881972944879266469}
   - component: {fileID: 6306136317258724206}
   m_Layer: 0
-  m_Name: D-BigWall
+  m_Name: L-BigWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1139,7 +1139,7 @@ GameObject:
   - component: {fileID: 6068182304065554520}
   - component: {fileID: 4847277050699213987}
   m_Layer: 0
-  m_Name: U-BigWall
+  m_Name: R-BigWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1192,7 +1192,7 @@ GameObject:
   - component: {fileID: 1365577660497542421}
   - component: {fileID: 8742927595166732571}
   m_Layer: 0
-  m_Name: L-BigWall
+  m_Name: U-BigWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2373,13 +2373,18 @@ PrefabInstance:
     - target: {fileID: 4463566038210007903, guid: 49a5f24a081cbbc44bd23d76c2869723,
         type: 3}
       propertyPath: m_Name
-      value: EntranceD
+      value: EntranceL
       objectReference: {fileID: 0}
     - target: {fileID: 4463566038210007903, guid: 49a5f24a081cbbc44bd23d76c2869723,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6869334544598567689, guid: 49a5f24a081cbbc44bd23d76c2869723,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0015c198b054bac4aa68f16c7b94b26f, type: 2}
     - target: {fileID: 6966706505589406848, guid: 49a5f24a081cbbc44bd23d76c2869723,
         type: 3}
       propertyPath: m_RootOrder
@@ -3323,13 +3328,18 @@ PrefabInstance:
     - target: {fileID: 4463566038210007903, guid: 49a5f24a081cbbc44bd23d76c2869723,
         type: 3}
       propertyPath: m_Name
-      value: EntranceL
+      value: EntranceU
       objectReference: {fileID: 0}
     - target: {fileID: 4463566038210007903, guid: 49a5f24a081cbbc44bd23d76c2869723,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6869334544598567689, guid: 49a5f24a081cbbc44bd23d76c2869723,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c5bbcf5f166ed044cb4e9cff1ce28a7d, type: 2}
     - target: {fileID: 6966706505589406848, guid: 49a5f24a081cbbc44bd23d76c2869723,
         type: 3}
       propertyPath: m_RootOrder
@@ -3615,13 +3625,18 @@ PrefabInstance:
     - target: {fileID: 4463566038210007903, guid: 49a5f24a081cbbc44bd23d76c2869723,
         type: 3}
       propertyPath: m_Name
-      value: EntranceR
+      value: EntranceB
       objectReference: {fileID: 0}
     - target: {fileID: 4463566038210007903, guid: 49a5f24a081cbbc44bd23d76c2869723,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6869334544598567689, guid: 49a5f24a081cbbc44bd23d76c2869723,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 82c7be43483efb04fb70afa949882143, type: 2}
     - target: {fileID: 6966706505589406848, guid: 49a5f24a081cbbc44bd23d76c2869723,
         type: 3}
       propertyPath: m_RootOrder
@@ -5599,13 +5614,18 @@ PrefabInstance:
     - target: {fileID: 4463566038210007903, guid: 49a5f24a081cbbc44bd23d76c2869723,
         type: 3}
       propertyPath: m_Name
-      value: EntraceU
+      value: EntraceR
       objectReference: {fileID: 0}
     - target: {fileID: 4463566038210007903, guid: 49a5f24a081cbbc44bd23d76c2869723,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6869334544598567689, guid: 49a5f24a081cbbc44bd23d76c2869723,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f06c2fc80db1cec4ab0d5b1d81f84b5b, type: 2}
     - target: {fileID: 6966706505589406848, guid: 49a5f24a081cbbc44bd23d76c2869723,
         type: 3}
       propertyPath: m_RootOrder

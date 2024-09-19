@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 127548585620c954086ac7a835fec040, type: 3}
-  m_Name: Up
+  m_Name: Bottom
   m_EditorClassIdentifier: 
-  Name: up
-  Prefab: {fileID: 7171245776851702860, guid: 5b11f6626ef48cf48a18512d19e3ee7a, type: 3}
+  Name: Down
+  Prefab: {fileID: 7171245776851702860, guid: b650641a965a28f45ac63a9fcea9852d, type: 3}
   Top:
-    CompatibleNodes: []
-  Bottom:
-    CompatibleNodes: []
-  Left:
     CompatibleNodes:
-    - {fileID: 11400000, guid: aeeb9e4c2c7809d4b98bb17c500b7a91, type: 2}
+    - {fileID: 11400000, guid: 18a13d6355547c44d90ca83a1ce99b1f, type: 2}
+  Bottom:
+    CompatibleNodes:
+    - {fileID: 11400000, guid: d4bbd72dcb84e174d91dfb77f0d7d8be, type: 2}
+  Left:
+    CompatibleNodes: []
   Right:
     CompatibleNodes: []
