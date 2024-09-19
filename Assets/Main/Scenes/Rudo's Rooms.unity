@@ -185,6 +185,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DLUR-Library
       objectReference: {fileID: 0}
+    - target: {fileID: 7171245776851702860, guid: 0b0db0305f839524e81152f37aa20377,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -390,6 +395,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DL-WindowWall
       objectReference: {fileID: 0}
+    - target: {fileID: 7171245776851702860, guid: 1ba3128f08e342845b7a3132e5f5a629,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -457,6 +467,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DU-BookHallway (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171245776851702860, guid: 05a33798eaa101e40adf4a96bdc59e62,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -644,6 +659,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LR-WallHallway
       objectReference: {fileID: 0}
+    - target: {fileID: 7171245776851702860, guid: 3fd766aeb7e420142a7c44040c3586b9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -693,6 +713,56 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1792134570
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1792134572}
+  - component: {fileID: 1792134571}
+  m_Layer: 0
+  m_Name: Generation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1792134571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792134570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 029ab30b115a49f4f83ec29c79c6d402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Width: 15
+  Height: 15
+  Nodes:
+  - {fileID: 11400000, guid: 26b1a22a11dc2d14594a6f86144b9e6f, type: 2}
+  - {fileID: 11400000, guid: aeeb9e4c2c7809d4b98bb17c500b7a91, type: 2}
+  _ToCollapse: []
+--- !u!4 &1792134572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792134570}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.805023, y: -8.700753, z: 2.0343916}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -761,6 +831,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DLU-BrokenWindow
       objectReference: {fileID: 0}
+    - target: {fileID: 7171245776851702860, guid: 105a699ad4998c94d9a2ac74c0d34537,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -778,3 +853,4 @@ SceneRoots:
   - {fileID: 17314394}
   - {fileID: 663161274}
   - {fileID: 1103347197}
+  - {fileID: 1792134572}
