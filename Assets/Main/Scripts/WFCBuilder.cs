@@ -71,7 +71,7 @@ public class WFCBuilder : MonoBehaviour {
                 _grid[x, y] = PotentialNodes[Random.Range(0, PotentialNodes.Count)];
             }
 
-            GameObject NewNode = Instantiate(_grid[x, y].Prefab, new Vector3(x, 0f, y), Quaternion.identity);
+            GameObject NewNode = Instantiate(_grid[x, y].Prefab, new Vector3(x * 13.3f, 0f, y * 13.3f), Quaternion.identity);
             _ToCollapse.RemoveAt(0);
         }
     }
