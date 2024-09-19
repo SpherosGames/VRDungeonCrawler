@@ -7,18 +7,26 @@ public class EnemyAttack : MonoBehaviour
 {
      NavMeshAgent AttackinAgent;
     public Transform currentTarget;
+    GameObject enemy;
     
     void Start()
     {
+        enemy = GetComponent<FieldOfView>().gameObject;
+        enemy.GetComponent<FieldOfView>().CurrentTarget.transform = 
         AttackinAgent = GetComponent<NavMeshAgent>();
     }
 
     public void StartAttacking(Transform target)
     {
-        currentTarget = target;
-        Debug.Log($"hurr durr im attacking you {currentTarget}");
-        Debug.Log(currentTarget.transform.position);
-        AttackinAgent.SetDestination(currentTarget.position);
+        target = enemy.CurrentTarget.transform;
+       currentTarget = target;
+
+        if (currentTarget != null)
+        {
+            AttackinAgent.SetDestination(currentTarget.position);
+        }
+        
+        Debug.Log("is stopped" + AttackinAgent.isStopped);
 
 
     }

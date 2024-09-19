@@ -16,10 +16,10 @@ public class Enemy_Patrol_State : EnemyMoveBaseState
         if (enemy.GetComponentInChildren<FieldOfView>().HasTarget)
         {
             Debug.Log("in the update state if statement ");
-            enemy.SwitchState(enemy.AttackingState);
             enemy.GetComponent<EnemyAttack>().enabled = true;
-            enemy.GetComponent<EnemyAttack>().StartAttacking(enemy.GetComponentInChildren<FieldOfView>().CurrentTarget.transform);
-           enemy.GetComponent<EnemyWander>().enabled = false;
+            enemy.GetComponent<EnemyWander>().enabled = false;
+            enemy.SwitchState(enemy.AttackingState);
+            
 
         }
         
