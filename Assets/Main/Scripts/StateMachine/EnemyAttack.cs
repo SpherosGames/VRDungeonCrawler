@@ -11,14 +11,14 @@ public class EnemyAttack : MonoBehaviour
     
     void Start()
     {
-        enemy = GetComponent<FieldOfView>().gameObject;
-        enemy.GetComponent<FieldOfView>().CurrentTarget.transform = 
+        enemy = GetComponent<FieldOfView>().CurrentTarget;
+        
         AttackinAgent = GetComponent<NavMeshAgent>();
     }
 
     public void StartAttacking(Transform target)
     {
-        target = enemy.CurrentTarget.transform;
+        target = currentTarget;
        currentTarget = target;
 
         if (currentTarget != null)
