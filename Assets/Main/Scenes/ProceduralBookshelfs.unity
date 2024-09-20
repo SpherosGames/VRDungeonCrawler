@@ -417,7 +417,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b06691fd61a664aa6aca7b678b4d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materials: []
+  materials:
+  - {fileID: 2100000, guid: c5bbcf5f166ed044cb4e9cff1ce28a7d, type: 2}
+  - {fileID: 2100000, guid: f06c2fc80db1cec4ab0d5b1d81f84b5b, type: 2}
+  - {fileID: 2100000, guid: b26da2e193dfe43428d42f62748060da, type: 2}
+  - {fileID: 2100000, guid: 82c7be43483efb04fb70afa949882143, type: 2}
+  - {fileID: 2100000, guid: 0015c198b054bac4aa68f16c7b94b26f, type: 2}
   topLeftShelfPoint: {fileID: 200230105}
   bookPrefab: {fileID: 8561831514617760135, guid: c14b6e9b509ae8142afa46b313cdd0e7,
     type: 3}
@@ -426,6 +431,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   defaultRotation: {x: -0.00000003090862, y: -0.70710677, z: -0.70710677, w: 0.00000003090862}
+  layingRotation: {x: 0.4905103, y: 0.49028563, z: 0.5093045, w: 0.50953764}
+  leftRotation: {x: -0.26525313, y: 0.6407972, z: 0.6656544, w: -0.27554286}
+  rightRotation: {x: -0.26554888, y: -0.6406749, z: -0.6655273, w: -0.2758495}
   amountOfShelfs: 4
   distanceBetweenShelfs: 1.1
   defaultScale: 300

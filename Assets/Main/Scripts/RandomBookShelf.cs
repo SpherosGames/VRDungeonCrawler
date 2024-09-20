@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class RandomBookShelf : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class RandomBookShelf : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private LayerMask bookLayer;
     [SerializeField] private Quaternion defaultRotation;
+    [SerializeField] private Quaternion layingRotation;
+    [SerializeField] private Quaternion leftRotation;
+    [SerializeField] private Quaternion rightRotation;
     [SerializeField] private int amountOfShelfs;
     [SerializeField] private float distanceBetweenShelfs;
     [SerializeField] private float defaultScale;
@@ -59,25 +64,10 @@ public class RandomBookShelf : MonoBehaviour
 
             bookPrefab.transform.localScale = localScale;
 
-            //Renderer bookPrefabRenderer = new();
-
+            //Improve this to make sure that the prefab size isn't changed
             Renderer bookPrefabRenderer = bookPrefab.GetComponent<Renderer>();
 
-            //bookPrefabRenderer.transform.localScale = localScale;
-
-            //Bounds localBounds = bookShelfCol.bounds;
-
-            //Bounds worldBounds = bookPrefabRenderer.bounds;
-
-            //localBounds.size = localScale;
-            //print(bounds.size);
-
-            //bookPrefabRenderer.localBounds = bounds;
-
-            //bookPrefabRenderer.localBounds = localBounds;
-
             Vector3 worldScale = bookPrefabRenderer.bounds.size;
-            print("World scale" + worldScale);
 
             float gapSize = Random.Range(minGapSizeBetweenBooks, maxGapSizeBetweenBooks);
 
@@ -85,6 +75,17 @@ public class RandomBookShelf : MonoBehaviour
             position.y = currentY;
 
             Debug.DrawRay(position, Vector3.up, Color.blue, 30);
+
+            int randomRot = Random.Range(0, 4);
+
+            Quaternion rotation = randomRot switch
+            {
+                0 => defaultRotation,
+                1 => layingRotation,
+                2 => leftRotation,
+                3 => rightRotation,
+                _ => defaultRotation,
+            };
 
             if (MaySpawn(position, defaultRotation, worldScale))
             {
@@ -117,9 +118,7 @@ public class RandomBookShelf : MonoBehaviour
         mesh.material = material;
     }
 
-    Vector3 lastBoxCenter;
-    Vector3 lastBoxSize;
-    Quaternion lastBoxRot;
+    List<Matrix4x4> bookShelfsGoBrr = new();
 
     private bool MaySpawn(Vector3 pos, Quaternion rotation, Vector3 scale)
     {
@@ -127,9 +126,7 @@ public class RandomBookShelf : MonoBehaviour
 
         bool foundAnotherBook = Physics.CheckBox(pos, scale / 2, Quaternion.identity, bookLayer);
 
-        lastBoxCenter = pos;
-        lastBoxSize = scale;
-        lastBoxRot = rotation;
+        bookShelfsGoBrr.Add(Matrix4x4.TRS(pos, rotation, scale));
 
         print("Found another book: " + foundAnotherBook);
 
@@ -146,8 +143,12 @@ public class RandomBookShelf : MonoBehaviour
         return true;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawCube(lastBoxCenter, lastBoxSize);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    for (int i = 0; i < bookShelfsGoBrr.Count; i++)
+    //    {
+    //        Gizmos.matrix = bookShelfsGoBrr[i];
+    //        Gizmos.DrawCube(Vector3.zero, Vector3.one);
+    //    }
+    //}
 }
