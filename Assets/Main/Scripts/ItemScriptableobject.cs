@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class ItemScriptableobject : ScriptableObject
 {
-    public GameObject prefab;
-    public int weight;
+    public GameObject Prefab;
+    public int Weight;
+    public Gradient TrailGradient;
 }
