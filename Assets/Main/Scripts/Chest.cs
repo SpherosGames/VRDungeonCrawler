@@ -39,21 +39,18 @@ public class Chest : MonoBehaviour
             StartCoroutine(OpenChest());
         }
 #endif
-        if(ChestLid.transform.localEulerAngles.x > 60 && LidJoint.useSpring == true)
+        if (ChestLid.transform.localEulerAngles.x > 60 && LidJoint.useMotor == false && HasBeenOpened == false || Opening == true)
         {
-            print("DGFNHTGREWTERFGR");
-            LidJoint.useSpring = false;
+            print("Yay");
             LidJoint.useMotor = true;
-        }else if (ChestLid.transform.localEulerAngles.x < 45 && LidJoint.useSpring == false && ChestLid.transform.localEulerAngles.x > 0)
-        {
-            print("ETBNU9EGTRY8ERVUNEWRVU");
-            LidJoint.useSpring = true;
-            LidJoint.useMotor = false;
-        }else if(ChestLid.transform.localEulerAngles.x < 0)
-        {
-            print("Ba");
+            StartCoroutine(OpenChest());
         }
-        if (Opening)
+        else if (ChestLid.transform.localEulerAngles.x < 60 && LidJoint.useMotor == true || Opening == false)
+        {
+            print("Nay");
+            LidJoint.useMotor = false;
+        }
+/*        if (Opening)
         {
             print("ye");
             ine = Mathf.Lerp(ine, 75, Time.deltaTime);
@@ -65,7 +62,7 @@ public class Chest : MonoBehaviour
                 //Opening = false;
                 //ChestLid.transform.eulerAngles = new Vector3(-30, 0, 180);
             }
-        }
+        }*/
     }
 
     /// <summary>
@@ -78,6 +75,9 @@ public class Chest : MonoBehaviour
         if (!HasBeenOpened)
         {
             Opening = true;
+            //Cant open this chest again
+            HasBeenOpened = true;
+
             //Chooses the amount of items
             int TotalItems = (int)Random.Range(MaxMinPossibleItems.y,MaxMinPossibleItems.x + 1);
 
@@ -94,9 +94,7 @@ public class Chest : MonoBehaviour
                 SpawnItem(TotValue);
                 yield return new WaitForSeconds(TimeBetweenItems);
             }
-
-            //Cant open this chest again
-            HasBeenOpened = true;
+            Opening = false;
         }
     }
 
