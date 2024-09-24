@@ -65,6 +65,8 @@ public class FieldOfView : MonoBehaviour
                 currentTargets.Add(target);
                 enteredTargets.Add(target);
                 CurrentTarget = target;
+                GetComponentInParent<EnemyAttack>().StartAttacking(target.transform);
+                
                 Debug.Log("Target entered: " + target.name);
             }
         }
