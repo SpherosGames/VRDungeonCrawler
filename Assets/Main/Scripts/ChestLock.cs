@@ -34,6 +34,13 @@ public class ChestLock : MonoBehaviour
             ChestLid.isKinematic = false;
             LockModel.isKinematic = false;
             Other.GetComponent<Item>().ItemType = "UsedKey";
+
+            GameObject key = Other.gameObject;
+            key.GetComponent<Rigidbody>().isKinematic = true;
+            key.transform.parent = LockModel.transform;
+            key.GetComponent<BoxCollider>().enabled = false;
+            key.transform.localPosition = new Vector3(0, 0, 0);
+            LockModel.transform.parent = null;
         }
     }
 }
