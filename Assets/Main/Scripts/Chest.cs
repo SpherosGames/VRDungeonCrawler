@@ -38,32 +38,20 @@ public class Chest : MonoBehaviour
         {
             StartCoroutine(OpenChest());
         }
-#endif
+        #endif
+
+        //If the chest hasnt been opened and above 60 degress or is opening, force teh chest fully open and start OpenChest()
         if (ChestLid.transform.localEulerAngles.x > 60 && LidJoint.useMotor == false && HasBeenOpened == false || Opening == true)
         {
-            print("Yay");
             LidJoint.useMotor = true;
             StartCoroutine(OpenChest());
         }
-        else if (ChestLid.transform.localEulerAngles.x < 60 && LidJoint.useMotor == true || Opening == false)
+        //Else make sure the motor is turned off the the lid isnt kinematic
+        else if (ChestLid.transform.localEulerAngles.x < 60 && LidJoint.useMotor == true || Opening == false && LidJoint.useMotor == true)
         {
-            print("Nay");
             LidJoint.useMotor = false;
             ChestLid.GetComponent<Rigidbody>().isKinematic = false;
         }
-/*        if (Opening)
-        {
-            print("ye");
-            ine = Mathf.Lerp(ine, 75, Time.deltaTime);
-            print(ine);
-            ChestLid.transform.localEulerAngles = new Vector3(45 - ine,0,0);
-
-            if(ChestLid.transform.eulerAngles.x < 271)
-            {
-                //Opening = false;
-                //ChestLid.transform.eulerAngles = new Vector3(-30, 0, 180);
-            }
-        }*/
     }
 
     /// <summary>
@@ -75,7 +63,9 @@ public class Chest : MonoBehaviour
         //Cant open multiple times
         if (!HasBeenOpened)
         {
+            //Turns on opening for the lid
             Opening = true;
+
             //Cant open this chest again
             HasBeenOpened = true;
 
@@ -88,14 +78,19 @@ public class Chest : MonoBehaviour
             {
                 TotValue += PossibleItems[i].Weight;
             }
+            //Out of the loop so the rigidbody doesnt get set to kinematic every item
+            SpawnItem(TotValue);
+            yield return new WaitForSeconds(TimeBetweenItems);
+            ChestLid.GetComponent<Rigidbody>().isKinematic = true;
 
             //Spawns the items, and then waits before spawning another
-            for (int i = 0; i < TotalItems; i++)
+            for (int i = 0; i < TotalItems - 1; i++)
             {
                 SpawnItem(TotValue);
                 yield return new WaitForSeconds(TimeBetweenItems);
-                ChestLid.GetComponent<Rigidbody>().isKinematic = true;
             }
+
+            //Turns off opening so you can close the lid again
             Opening = false;
         }
     }
