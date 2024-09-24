@@ -53,7 +53,7 @@ MonoBehaviour:
   handMaterial: {fileID: 13400000, guid: 686ce14378a4c304ba8475dfb84b7217, type: 2}
   colliderEnableDelay: 0.5
   grabButton:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
       m_Name: Grab Button
       m_Type: 0
@@ -63,7 +63,8 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
   grabThreshold: 0.1
   palmPos: {fileID: 1779308465699498504}
   grabCheckSize: 0.1
