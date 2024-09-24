@@ -7,6 +7,7 @@ public class Chest : MonoBehaviour
     [SerializeField] private Transform SpawnSpot;
 
     [Header("Item chances")]
+    [Tooltip("Make sure to have the array sorted from most common to rarest")]
     [SerializeField] private ItemScriptableobject[] PossibleItems;
     [SerializeField] private Vector2 MaxMinPossibleItems;
 
@@ -63,8 +64,6 @@ public class Chest : MonoBehaviour
     }
     public void SpawnItem(int TotalValue)
     {
-        //Spawns a particle and destroys it after 5 seconds
-        Destroy(Instantiate(SpawnParticle, SpawnSpot.position, SpawnSpot.rotation), 5);
 
         //Chooses the random "weight"/item
         int Value = Random.Range(1, TotalValue);
@@ -77,6 +76,14 @@ public class Chest : MonoBehaviour
             CurrentValue += PossibleItems[j].Weight;
             if (CurrentValue > Value)
             {
+                //Spawns a particle and destroys it after 5 seconds
+                GameObject parti = Instantiate(SpawnParticle, SpawnSpot.position, SpawnSpot.rotation);
+                ParticleSystem.Burst burs = new ParticleSystem.Burst();
+                burs.count = (int)((CurrentValue / 20) * 1.5f);
+                print((CurrentValue / (PossibleItems[j].Weight * 2)));
+                parti.transform.GetChild(0).GetComponent<ParticleSystem>().emission.SetBurst(0,burs);
+                Destroy(parti, 5);
+
                 //Spawns the item
                 GameObject item = Instantiate(PossibleItems[j].Prefab, SpawnSpot.position, gameObject.transform.rotation);
 
@@ -120,5 +127,6 @@ public class Chest : MonoBehaviour
                 j = 100;
             }
         }
+
     }
 }
