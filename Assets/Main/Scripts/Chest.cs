@@ -49,6 +49,7 @@ public class Chest : MonoBehaviour
         {
             print("Nay");
             LidJoint.useMotor = false;
+            ChestLid.GetComponent<Rigidbody>().isKinematic = false;
         }
 /*        if (Opening)
         {
@@ -93,6 +94,7 @@ public class Chest : MonoBehaviour
             {
                 SpawnItem(TotValue);
                 yield return new WaitForSeconds(TimeBetweenItems);
+                ChestLid.GetComponent<Rigidbody>().isKinematic = true;
             }
             Opening = false;
         }
