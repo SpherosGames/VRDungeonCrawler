@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3183948883831183695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2356195544248624661}
+  m_Layer: 0
+  m_Name: PalmPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2356195544248624661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183948883831183695}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.0107, z: -0.014}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2335856841702694247}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8294515892480960998
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,6 +63,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7169843504512295454}
+  - {fileID: 2356195544248624661}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8973304355057579371
@@ -48,6 +80,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   rb: {fileID: 4987943211683047369}
+  interactor: {fileID: 0}
+  handMaterial: {fileID: 13400000, guid: 686ce14378a4c304ba8475dfb84b7217, type: 2}
+  colliderEnableDelay: 0.5
+  grabButton:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Grab Button
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 91cf589a-d64c-4f15-91e7-87877c4acd3a
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  grabThreshold: 0.1
+  palmPos: {fileID: 2356195544248624661}
+  grabCheckSize: 0.1
+  grabLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!54 &4987943211683047369
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -56,7 +109,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8294515892480960998}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -74,7 +127,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!1001 &7897474842167580717
 PrefabInstance:
   m_ObjectHideFlags: 0
