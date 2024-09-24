@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Linq;
 using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.InputSystem;
 
 public class HandPhysics : MonoBehaviour
 {
@@ -12,8 +13,15 @@ public class HandPhysics : MonoBehaviour
     [SerializeField] private XRDirectInteractor interactor;
     [SerializeField] private PhysicMaterial handMaterial;
     [SerializeField] private float colliderEnableDelay = 1;
+    [SerializeField] private InputActionProperty grabButton;
+    [SerializeField] private float grabThreshold = 0.1f;
+    [SerializeField] private Transform palmPos;
+    [SerializeField] private float grabCheckSize = 0.1f;
+    [SerializeField] private LayerMask grabLayer;
 
     private Collider[] colliders;
+
+    private FixedJoint joint;
 
     private void Awake()
     {
@@ -35,9 +43,6 @@ public class HandPhysics : MonoBehaviour
 
     private IEnumerator SetColliders(bool value, float delay)
     {
-        print("Setting colliders : " + value);
-        print("Get col : " + colliders[5]);
-
         yield return new WaitForSeconds(delay);
 
         foreach (var item in colliders)
@@ -47,6 +52,23 @@ public class HandPhysics : MonoBehaviour
     }
 
     private void FixedUpdate()
+    {
+        MovementAndRotation();
+
+        bool isGrabButtonPressed = grabButton.action.ReadValue<float>() > grabThreshold;
+
+        if (isGrabButtonPressed)
+        {
+            Collider[] colliders = Physics.OverlapSphere(palmPos.position, grabCheckSize, grabLayer, QueryTriggerInteraction.Ignore);
+
+            if (colliders.Length > 0)
+            {
+                Rigidbody rb = colliders[0].attachedRigidbody;
+            }
+        }
+    }
+
+    private void MovementAndRotation()
     {
         //Phyics position
         rb.velocity = (target.position - transform.position) / Time.fixedDeltaTime;
@@ -58,5 +80,10 @@ public class HandPhysics : MonoBehaviour
         Vector3 rotation = angle * axis;
 
         rb.angularVelocity = (rotation * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(palmPos.position, grabCheckSize);
     }
 }
