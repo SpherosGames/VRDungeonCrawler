@@ -27,14 +27,17 @@ public class HandPhysics : MonoBehaviour
         if (rb == null) rb = GetComponent<Rigidbody>();
 
         interactor.selectEntered.RemoveAllListeners();
-        interactor.selectEntered.AddListener((SelectEnterEventArgs args) => SetColliders(false, 0));
+        interactor.selectEntered.AddListener((SelectEnterEventArgs args) => StartCoroutine(SetColliders(false, 0)));
 
         interactor.selectExited.RemoveAllListeners();
-        interactor.selectExited.AddListener((SelectExitEventArgs args) => SetColliders(true, colliderEnableDelay));
+        interactor.selectExited.AddListener((SelectExitEventArgs args) => StartCoroutine(SetColliders(true, colliderEnableDelay)));
     }
 
     private IEnumerator SetColliders(bool value, float delay)
     {
+        print("Setting colliders : " + value);
+        print("Get col : " + colliders[5]);
+
         yield return new WaitForSeconds(delay);
 
         foreach (var item in colliders)
