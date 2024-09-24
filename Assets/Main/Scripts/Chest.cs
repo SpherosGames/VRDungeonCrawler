@@ -9,11 +9,12 @@ public class Chest : MonoBehaviour
     [Header("Item chances")]
     [Tooltip("Make sure to have the array sorted from most common to rarest")]
     [SerializeField] private ItemScriptableobject[] PossibleItems;
+
+    [Tooltip("Max = x, Min = y")]
     [SerializeField] private Vector2 MaxMinPossibleItems;
 
     [SerializeField] private float TimeBetweenItems = 0.5f;
 
-    //The force which the items comes out of the chest with
     [SerializeField] private int ItemLaunchUpAmount = 500;
     [SerializeField] private int ItemSpread = 100;
 
@@ -23,7 +24,7 @@ public class Chest : MonoBehaviour
     [Header("Particles")]
     [SerializeField] private GameObject SpawnParticle;
 
-    private bool hasBeenOpened = false;
+    private bool HasBeenOpened = false;
 
     private void Update()
     {
@@ -36,10 +37,14 @@ public class Chest : MonoBehaviour
         #endif
     }
 
+    /// <summary>
+    /// Opens the chest, dropping all items in a few seconds.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator OpenChest()
     {
         //Cant open multiple times
-        if (!hasBeenOpened)
+        if (!HasBeenOpened)
         {
             //Chooses the amount of items
             int TotalItems = (int)Random.Range(MaxMinPossibleItems.y,MaxMinPossibleItems.x + 1);
@@ -59,12 +64,15 @@ public class Chest : MonoBehaviour
             }
 
             //Cant open this chest again
-            hasBeenOpened = true;
+            HasBeenOpened = true;
         }
     }
+
+    /// <summary>
+    /// Spawns an actual item
+    /// </summary>
     public void SpawnItem(int TotalValue)
     {
-
         //Chooses the random "weight"/item
         int Value = Random.Range(1, TotalValue);
 
@@ -76,12 +84,15 @@ public class Chest : MonoBehaviour
             CurrentValue += PossibleItems[j].Weight;
             if (CurrentValue > Value)
             {
-                //Spawns a particle and destroys it after 5 seconds
+                //Spawns a particle
                 GameObject parti = Instantiate(SpawnParticle, SpawnSpot.position, SpawnSpot.rotation);
+
+                //Sets the burst particle count based on the rarity of the item.
                 ParticleSystem.Burst burs = new ParticleSystem.Burst();
-                burs.count = (int)((CurrentValue / 20) * 1.5f);
-                print((CurrentValue / (PossibleItems[j].Weight * 2)));
+                burs.count = (j + 1) * (3 * (j + 1));
                 parti.transform.GetChild(0).GetComponent<ParticleSystem>().emission.SetBurst(0,burs);
+
+                //Destroys the particle after 5 seconds
                 Destroy(parti, 5);
 
                 //Spawns the item
