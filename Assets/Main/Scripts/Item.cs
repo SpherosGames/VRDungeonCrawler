@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-
+    public string ItemType;
     public virtual void UseItem()
     {
 

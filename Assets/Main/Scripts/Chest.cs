@@ -26,7 +26,7 @@ public class Chest : MonoBehaviour
     [SerializeField] private GameObject ChestLid;
     [SerializeField] private HingeJoint LidJoint;
 
-    private bool HasBeenOpened = false;
+    public bool HasBeenOpened = false;
     private bool Opening = false; 
     float ine = 0;
 
