@@ -150,14 +150,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2dd311a056df242b8b85b5c2ed0bad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnSpot: {fileID: 5406631943995409997}
   PossibleItems:
   - {fileID: 11400000, guid: 8b271aef48095cc46b3dd1208e376fc6, type: 2}
   - {fileID: 11400000, guid: 05ff3eb7b85406c4584ae093c0f9bd8a, type: 2}
   - {fileID: 11400000, guid: 6b7dd5092348d9344afb834edb81815e, type: 2}
-  SpawnSpot: {fileID: 5406631943995409997}
+  MaxMinPossibleItems: {x: 3, y: 1}
   MaxPossibleItems: 3
   MinPossibleItems: 1
-  TimeBetweenItems: 0.2
+  TimeBetweenItems: 0.5
   ItemLaunchUpAmount: 400
   ItemSpread: 100
   DefaultTrailMat: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}

@@ -1068,28 +1068,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2935003465242887737, guid: 90fbadf21c236374a8cc3a00c48746bd,
         type: 3}
-      propertyPath: ItemSpread
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 2935003465242887737, guid: 90fbadf21c236374a8cc3a00c48746bd,
-        type: 3}
       propertyPath: MaxPossibleItems
-      value: 999
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2935003465242887737, guid: 90fbadf21c236374a8cc3a00c48746bd,
         type: 3}
       propertyPath: MinPossibleItems
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2935003465242887737, guid: 90fbadf21c236374a8cc3a00c48746bd,
         type: 3}
-      propertyPath: TimeBetweenItems
-      value: 0.5
+      propertyPath: MaxMinPossibleItems.x
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 2935003465242887737, guid: 90fbadf21c236374a8cc3a00c48746bd,
         type: 3}
-      propertyPath: ItemLaunchUpAmount
-      value: 600
+      propertyPath: MaxMinPossibleItems.y
+      value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 2935003465242887737, guid: 90fbadf21c236374a8cc3a00c48746bd,
         type: 3}

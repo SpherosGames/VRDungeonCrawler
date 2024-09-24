@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestScript : MonoBehaviour
+public class Chest : MonoBehaviour
 {
     [SerializeField] private Transform SpawnSpot;
 
     [Header("Item chances")]
     [SerializeField] private ItemScriptableobject[] PossibleItems;
-    [SerializeField] private int MaxPossibleItems;
-    [SerializeField] private int MinPossibleItems;
+    [SerializeField] private Vector2 MaxMinPossibleItems;
 
     [SerializeField] private float TimeBetweenItems = 0.5f;
 
@@ -42,7 +41,7 @@ public class ChestScript : MonoBehaviour
         if (!hasBeenOpened)
         {
             //Chooses the amount of items
-            int TotalItems = Random.Range(MinPossibleItems, MaxPossibleItems + 1);
+            int TotalItems = (int)Random.Range(MaxMinPossibleItems.y,MaxMinPossibleItems.x + 1);
 
             //Gets the total weight of all items
             int TotValue = 0;
