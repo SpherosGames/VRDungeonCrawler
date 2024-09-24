@@ -4,37 +4,34 @@ using UnityEngine;
 
 public class ChestLock : MonoBehaviour
 {
-
     [SerializeField] private Rigidbody ChestLid;
     [SerializeField] private Chest LockedChest;
     [SerializeField] private Rigidbody LockModel;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         CheckOpenLock(other);
     }
 
+    /// <summary>
+    /// Checks if you can open the lock on trigger, opens it if you can
+    /// </summary>
     private void CheckOpenLock(Collider Other)
     {
+        //If it isnt an item, it cant be a key
         if (Other.GetComponent<Item>() == null) return;
+
+        //If it is a key and the chest hasnt been openend
         if (Other.GetComponent<Item>().ItemType == "Key" && !LockedChest.HasBeenOpened)
         {
-            print("Opened chest");
+            //Makes the lid and lock do gravity
             ChestLid.isKinematic = false;
             LockModel.isKinematic = false;
+
+            //Makes the key unusable
             Other.GetComponent<Item>().ItemType = "UsedKey";
 
+            //Sets it to the locks position, turns off its own gravity and changes its parent
             GameObject key = Other.gameObject;
             key.GetComponent<Rigidbody>().isKinematic = true;
             key.transform.parent = LockModel.transform;
