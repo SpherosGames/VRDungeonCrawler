@@ -21,10 +21,14 @@ public class Chest : MonoBehaviour
     [Header("Material")]
     [SerializeField] private Material DefaultTrailMat;
 
-    [Header("Particles")]
+    [Header("Visuals")]
     [SerializeField] private GameObject SpawnParticle;
+    [SerializeField] private GameObject ChestLid;
+    [SerializeField] private HingeJoint LidJoint;
 
     private bool HasBeenOpened = false;
+    private bool Opening = false; 
+    float ine = 0;
 
     private void Update()
     {
@@ -34,7 +38,34 @@ public class Chest : MonoBehaviour
         {
             StartCoroutine(OpenChest());
         }
-        #endif
+#endif
+        if(ChestLid.transform.localEulerAngles.x > 60 && LidJoint.useSpring == true)
+        {
+            print("DGFNHTGREWTERFGR");
+            LidJoint.useSpring = false;
+            LidJoint.useMotor = true;
+        }else if (ChestLid.transform.localEulerAngles.x < 45 && LidJoint.useSpring == false && ChestLid.transform.localEulerAngles.x > 0)
+        {
+            print("ETBNU9EGTRY8ERVUNEWRVU");
+            LidJoint.useSpring = true;
+            LidJoint.useMotor = false;
+        }else if(ChestLid.transform.localEulerAngles.x < 0)
+        {
+            print("Ba");
+        }
+        if (Opening)
+        {
+            print("ye");
+            ine = Mathf.Lerp(ine, 75, Time.deltaTime);
+            print(ine);
+            ChestLid.transform.localEulerAngles = new Vector3(45 - ine,0,0);
+
+            if(ChestLid.transform.eulerAngles.x < 271)
+            {
+                //Opening = false;
+                //ChestLid.transform.eulerAngles = new Vector3(-30, 0, 180);
+            }
+        }
     }
 
     /// <summary>
@@ -46,6 +77,7 @@ public class Chest : MonoBehaviour
         //Cant open multiple times
         if (!HasBeenOpened)
         {
+            Opening = true;
             //Chooses the amount of items
             int TotalItems = (int)Random.Range(MaxMinPossibleItems.y,MaxMinPossibleItems.x + 1);
 
