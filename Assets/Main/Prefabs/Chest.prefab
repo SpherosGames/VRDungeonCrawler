@@ -162,7 +162,6 @@ GameObject:
   - component: {fileID: 42323809098347387}
   - component: {fileID: 8877217319280487169}
   - component: {fileID: 9216259940394147322}
-  - component: {fileID: 7652558294838085597}
   - component: {fileID: 2935003465242887737}
   m_Layer: 0
   m_Name: Chest
@@ -240,27 +239,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7652558294838085597
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4237584932624013015}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2935003465242887737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,6 +477,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chest (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8428412414282425459, guid: 91844aa3775cb704e8ed7a7b7316118a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758941489726977425, guid: 91844aa3775cb704e8ed7a7b7316118a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -522,7 +510,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8758941489726977425, guid: 91844aa3775cb704e8ed7a7b7316118a,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3966083759482469010}
+      addedObject: {fileID: 3393031066698675399}
   m_SourcePrefab: {fileID: 100100000, guid: 91844aa3775cb704e8ed7a7b7316118a, type: 3}
 --- !u!1 &496135150641457839 stripped
 GameObject:
@@ -596,8 +584,8 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!135 &3966083759482469010
-SphereCollider:
+--- !u!65 &3393031066698675399
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -615,8 +603,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.0019655235
-  m_Center: {x: 0.00000011995031, y: -0.005046528, z: 0.011873586}
+  m_Size: {x: 0.033996925, y: 0.020128977, z: 0.01777895}
+  m_Center: {x: 9.31323e-10, y: -0.006761618, z: 0.0085555315}
 --- !u!1 &836295990834182989 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8428412414282425459, guid: 91844aa3775cb704e8ed7a7b7316118a,
