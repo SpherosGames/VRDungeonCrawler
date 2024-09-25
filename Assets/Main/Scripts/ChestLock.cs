@@ -7,6 +7,7 @@ public class ChestLock : MonoBehaviour
     [SerializeField] private Rigidbody ChestLid;
     [SerializeField] private Chest LockedChest;
     [SerializeField] private Rigidbody LockModel;
+    private bool BeenUnlocked = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,7 +23,7 @@ public class ChestLock : MonoBehaviour
         if (Other.GetComponent<Item>() == null) return;
 
         //If it is a key and the chest hasnt been openend
-        if (Other.GetComponent<Item>().ItemType == "Key" && !LockedChest.HasBeenOpened)
+        if (Other.GetComponent<Item>().ItemType == "Key" && !LockedChest.HasBeenOpened && !BeenUnlocked)
         {
             //Makes the lid and lock do gravity
             ChestLid.isKinematic = false;
@@ -38,6 +39,7 @@ public class ChestLock : MonoBehaviour
             key.GetComponent<BoxCollider>().enabled = false;
             key.transform.localPosition = new Vector3(0, 0, 0);
             LockModel.transform.parent = null;
+            BeenUnlocked = true;
         }
     }
 }
