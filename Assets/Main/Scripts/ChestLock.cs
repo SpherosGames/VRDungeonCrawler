@@ -25,9 +25,14 @@ public class ChestLock : MonoBehaviour
         //If it is a key and the chest hasnt been openend
         if (Other.GetComponent<Item>().ItemType == "Key" && !LockedChest.HasBeenOpened && !BeenUnlocked)
         {
-            //Makes the lid and lock do gravity
-            ChestLid.isKinematic = false;
-            LockModel.isKinematic = false;
+            //Sets the chests hinge limits higher
+            JointLimits limits = ChestLid.GetComponent<HingeJoint>().limits;
+            limits.min = -135;
+            ChestLid.GetComponent<HingeJoint>().limits = limits;
+
+            //Makes the lock do gravity
+            Destroy(LockModel.GetComponent<HingeJoint>());
+            LockModel.gameObject.layer = LayerMask.NameToLayer("Grabbable");
 
             //Makes the key unusable
             Other.GetComponent<Item>().ItemType = "UsedKey";

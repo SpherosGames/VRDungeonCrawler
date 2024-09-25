@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2979422246097748041}
   - component: {fileID: 349582961387625059}
   - component: {fileID: 7568169505913817593}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,8 +60,8 @@ Transform:
   m_GameObject: {fileID: 3680569100967321413}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0079, y: 0.3636, z: -0.4756}
-  m_LocalScale: {x: 0.17732961, y: 0.54011875, z: 0.44489264}
+  m_LocalPosition: {x: 0.0079, y: 0.3636, z: -0.582}
+  m_LocalScale: {x: 0.0970791, y: 0.295688, z: 0.24355648}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 42323809098347387}
@@ -279,7 +279,8 @@ GameObject:
   - component: {fileID: 651882159413224841}
   - component: {fileID: 2647559466165163555}
   - component: {fileID: 7552341787948841703}
-  m_Layer: 0
+  - component: {fileID: 6436121660938190474}
+  m_Layer: 11
   m_Name: LockModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,10 +396,49 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!59 &6436121660938190474
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7514750604973963173}
+  m_ConnectedBody: {fileID: 6885218472548650719}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0.5, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_UseSpring: 1
+  m_Spring:
+    spring: 1
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 1
+  m_ExtendedLimits: 0
+  m_UseAcceleration: 0
+  m_Limits:
+    min: 0
+    max: 20
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1001 &9181892594300018494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -541,7 +581,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -573,7 +613,7 @@ HingeJoint:
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
-    min: -135
+    min: -2
     max: 0
     bounciness: 0
     bounceMinVelocity: 0.2
