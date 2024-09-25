@@ -11,15 +11,15 @@ public class HandPhysics : MonoBehaviour
     [SerializeField] private float colliderEnableDelay = 1;
     [SerializeField] private InputActionProperty grabButton;
     [SerializeField] private float grabThreshold = 0.1f;
+    [SerializeField] private LayerMask grabLayerMask;
     [SerializeField] private Transform palmPos;
     [SerializeField] private float grabCheckSize = 0.1f;
-    [SerializeField] private LayerMask grabLayer;
 
     private Collider[] colliders;
 
     private FixedJoint fixedJoint;
 
-    private bool isGrabbing;
+    private Grabbable currentGrabbable;
 
     private void Awake()
     {
@@ -49,14 +49,27 @@ public class HandPhysics : MonoBehaviour
 
         bool isGrabButtonPressed = grabButton.action.ReadValue<float>() > grabThreshold;
 
-        if (isGrabButtonPressed && !isGrabbing)
+        //Check if this hand is trying to grab something, but isn't already holding something
+        if (isGrabButtonPressed && !currentGrabbable)
         {
-            Collider[] colliders = Physics.OverlapSphere(palmPos.position, grabCheckSize, grabLayer, QueryTriggerInteraction.Ignore);
+            //Look for all colliders in an area around the palm of the hand
+            Collider[] colliders = Physics.OverlapSphere(palmPos.position, grabCheckSize, grabLayerMask, QueryTriggerInteraction.Ignore);
 
-            if (colliders.Length > 0)
+            print("Colliders length: " + colliders.Length);
+            //print("Colliders length: " + colliders[0].tryget);
+
+            //Check if there are any valid colliders and check if the first one has a grabbable script on it
+            if (colliders.Length > 0 && colliders[0].TryGetComponent(out Grabbable grabbable))
             {
+                print("Grab");
+
+                //Set grabble hand
+                currentGrabbable = grabbable;
+                currentGrabbable.hand = this;
+
                 Rigidbody rb = colliders[0].attachedRigidbody;
 
+                //Setup fixedjoint
                 fixedJoint = gameObject.AddComponent<FixedJoint>();
                 fixedJoint.autoConfigureConnectedAnchor = false;
 
@@ -70,16 +83,14 @@ public class HandPhysics : MonoBehaviour
                     fixedJoint.connectedAnchor = palmPos.position;
                 }
 
-                isGrabbing = true;
                 StartCoroutine(SetColliders(false, 0));
             }
         }
-        else if (!isGrabButtonPressed && isGrabbing)
+        //Releasing
+        else if (!isGrabButtonPressed && currentGrabbable)
         {
             StartCoroutine(SetColliders(true, colliderEnableDelay));
-            isGrabbing = false;
-
-            if (fixedJoint) Destroy(fixedJoint);
+            ForceRelease();
         }
     }
 
@@ -95,6 +106,14 @@ public class HandPhysics : MonoBehaviour
         Vector3 rotation = angle * axis;
 
         rb.angularVelocity = (rotation * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+    }
+
+    public void ForceRelease()
+    {
+        currentGrabbable.hand = null;
+        currentGrabbable = null;
+
+        if (fixedJoint) Destroy(fixedJoint);
     }
 
     private void OnDrawGizmosSelected()
