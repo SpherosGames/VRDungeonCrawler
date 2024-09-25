@@ -1,16 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 using System.Linq;
-using static UnityEngine.Rendering.DebugUI;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class HandPhysics : MonoBehaviour
 {
     [SerializeField] private Transform target;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private XRDirectInteractor interactor;
     [SerializeField] private PhysicMaterial handMaterial;
     [SerializeField] private float colliderEnableDelay = 1;
     [SerializeField] private InputActionProperty grabButton;
@@ -21,7 +17,9 @@ public class HandPhysics : MonoBehaviour
 
     private Collider[] colliders;
 
-    private FixedJoint joint;
+    private FixedJoint fixedJoint;
+
+    private bool isGrabbing;
 
     private void Awake()
     {
@@ -33,12 +31,6 @@ public class HandPhysics : MonoBehaviour
     {
         //Set rigidbody
         if (rb == null) rb = GetComponent<Rigidbody>();
-
-        interactor.selectEntered.RemoveAllListeners();
-        interactor.selectEntered.AddListener((SelectEnterEventArgs args) => StartCoroutine(SetColliders(false, 0)));
-
-        interactor.selectExited.RemoveAllListeners();
-        interactor.selectExited.AddListener((SelectExitEventArgs args) => StartCoroutine(SetColliders(true, colliderEnableDelay)));
     }
 
     private IEnumerator SetColliders(bool value, float delay)
@@ -57,14 +49,37 @@ public class HandPhysics : MonoBehaviour
 
         bool isGrabButtonPressed = grabButton.action.ReadValue<float>() > grabThreshold;
 
-        if (isGrabButtonPressed)
+        if (isGrabButtonPressed && !isGrabbing)
         {
             Collider[] colliders = Physics.OverlapSphere(palmPos.position, grabCheckSize, grabLayer, QueryTriggerInteraction.Ignore);
 
             if (colliders.Length > 0)
             {
                 Rigidbody rb = colliders[0].attachedRigidbody;
+
+                fixedJoint = gameObject.AddComponent<FixedJoint>();
+                fixedJoint.autoConfigureConnectedAnchor = false;
+
+                if (rb)
+                {
+                    fixedJoint.connectedBody = rb;
+                    fixedJoint.connectedAnchor = rb.transform.InverseTransformPoint(palmPos.position);
+                }
+                else
+                {
+                    fixedJoint.connectedAnchor = palmPos.position;
+                }
+
+                isGrabbing = true;
+                StartCoroutine(SetColliders(false, 0));
             }
+        }
+        else if (!isGrabButtonPressed && isGrabbing)
+        {
+            StartCoroutine(SetColliders(true, colliderEnableDelay));
+            isGrabbing = false;
+
+            if (fixedJoint) Destroy(fixedJoint);
         }
     }
 
