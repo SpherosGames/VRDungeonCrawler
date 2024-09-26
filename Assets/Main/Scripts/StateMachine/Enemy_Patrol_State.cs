@@ -6,9 +6,11 @@ using UnityEngine.PlayerLoop;
 
 public class Enemy_Patrol_State : EnemyMoveBaseState
 {
-
+    Animator animator;
     public override void EnterState(EnemyMoveStateManager enemy) 
     {
+        animator = GetComponent<Animator>();
+        animator.SetBool("IsWalking", true);
        enemy.GetComponent<EnemyWander>().enabled = true;
     }
     public override void UpdateState(EnemyMoveStateManager enemy)
@@ -23,8 +25,5 @@ public class Enemy_Patrol_State : EnemyMoveBaseState
         }
         
     }
-    public override void OnCollisionEnter(EnemyMoveStateManager enemy, Collision collision)
-    {
-
-    }
+    
 }

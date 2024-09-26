@@ -69,6 +69,7 @@ public class WFCBuilder : MonoBehaviour {
                 Debug.Log("Attempted to collapse wave on " + x + ", " + y + " but found no compatible nodes.");
             } else {
                 _grid[x, y] = PotentialNodes[Random.Range(0, PotentialNodes.Count)];
+                Debug.Log("?");
             }
 
             GameObject NewNode = Instantiate(_grid[x, y].Prefab, new Vector3(x * 13.3f, 0f, y * 13.3f), Quaternion.identity);
