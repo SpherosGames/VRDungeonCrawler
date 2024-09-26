@@ -12,7 +12,7 @@ public class Enemy_Attacking_State : EnemyMoveBaseState
     {
 
     }
-    public override void OnCollisionEnter(EnemyMoveStateManager enemy)
+    public override void OnCollisionEnter(EnemyMoveStateManager enemy,Collision collision)
     {
 
     }
