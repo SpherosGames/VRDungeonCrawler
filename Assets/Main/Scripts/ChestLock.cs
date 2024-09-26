@@ -32,7 +32,7 @@ public class ChestLock : MonoBehaviour
 
             //Makes the lock do gravity
             Destroy(LockModel.GetComponent<HingeJoint>());
-            LockModel.gameObject.layer = LayerMask.NameToLayer("Grabbable");
+            LockModel.gameObject.layer = LayerMask.NameToLayer("Chest");
 
             //Makes the key unusable
             Other.GetComponent<Item>().ItemType = "UsedKey";
@@ -42,7 +42,8 @@ public class ChestLock : MonoBehaviour
             key.GetComponent<Rigidbody>().isKinematic = true;
             key.transform.parent = LockModel.transform;
             key.GetComponent<BoxCollider>().enabled = false;
-            key.transform.localPosition = new Vector3(0, 0, 0);
+            key.transform.localPosition = new Vector3(0, 0, -1);
+            key.transform.localEulerAngles = new Vector3(0, 90, 0);
             LockModel.transform.parent = null;
             BeenUnlocked = true;
         }
