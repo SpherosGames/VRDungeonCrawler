@@ -7,6 +7,7 @@ public class Grabbable : MonoBehaviour
     public HandPhysics hand;
     public Rigidbody rb;
     public VRSocket socket;
+    public Transform grabPoint;
 
     private void Awake()
     {

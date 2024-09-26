@@ -101,14 +101,31 @@ public class HandPhysics : MonoBehaviour
                 fixedJoint = gameObject.AddComponent<FixedJoint>();
                 fixedJoint.autoConfigureConnectedAnchor = false;
 
-                if (rb)
+                Vector3 position;
+
+                if (grabbable.grabPoint != null)
                 {
-                    fixedJoint.connectedBody = rb;
-                    fixedJoint.connectedAnchor = rb.transform.InverseTransformPoint(palmPos.position);
+                    position = grabbable.grabPoint.position;
                 }
                 else
                 {
-                    fixedJoint.connectedAnchor = palmPos.position;
+                    position = palmPos.position;
+                }
+
+                if (rb)
+                {
+                    fixedJoint.connectedBody = rb;
+                    fixedJoint.connectedAnchor = rb.transform.InverseTransformPoint(position);
+                }
+                else
+                {
+                    fixedJoint.connectedAnchor = position;
+                }
+
+                if (grabbable.grabPoint != null)
+                {
+                    print("rotate grabbable");
+                    grabbable.transform.forward = grabbable.grabPoint.forward;
                 }
 
                 StartCoroutine(SetColliders(false, 0));
