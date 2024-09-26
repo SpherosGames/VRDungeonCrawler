@@ -12,7 +12,6 @@ public class EnemyMoveStateManager : MonoBehaviour
     public Animator animator;
     void Start()
     {
-        Debug.Log(CurrentState);
         CurrentState = IdleState;
         CurrentState.EnterState(this);
     }
