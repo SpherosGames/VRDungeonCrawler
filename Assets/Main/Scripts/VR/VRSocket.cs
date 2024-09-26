@@ -1,19 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using System.Net.WebSockets;
 using UnityEngine;
 
 public class VRSocket : MonoBehaviour
 {
     [SerializeField] private SocketableType allowedSocketType;
     [SerializeField] private Transform socketPoint;
-    [SerializeField] private bool turnOffCollider = true;
+    [SerializeField] private float reSocketDelay = 1f;
+
+    private bool maySocket;
+    private float reSocketTimer;
 
     private GameObject socketedObject;
-    private Collider[] socketedObjectColliders;
+    private Grabbable socketedGrabbable;
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!maySocket) return;
+
         if (other.TryGetComponent(out Socketable socket))
         {
             if (socket.GetSocketableType() == allowedSocketType)
@@ -23,51 +29,61 @@ public class VRSocket : MonoBehaviour
         }
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.TryGetComponent(out Socketable socket))
-    //    {
-    //        if (socket.GetSocketableType() == allowedSocketType)
-    //        {
-    //            UnSocketObject(other);
-    //        }
-    //    }
-    //}
+    private void Update()
+    {
+        if (!maySocket)
+        {
+            reSocketTimer -= Time.deltaTime;
 
-    //private void UnSocketObject(Collider other)
-    //{
+            if (reSocketTimer <= 0)
+            {
+                maySocket = true;
+                reSocketTimer = reSocketDelay;
+            }
+        }
+    }
 
-    //}
+    public void UnSocketObject()
+    {
+        if (socketedGrabbable.rb)
+        {
+            socketedGrabbable.rb.isKinematic = false;
+        }
+
+        socketedGrabbable.socket = null;
+        socketedGrabbable = null;
+
+        socketedObject = null;
+    }
 
     private void SocketObject(GameObject _socketedObject)
     {
-        print("Socketed");
+        //sockettimer to make sure the object doenst get immmediatly resocketed;
+        reSocketTimer = reSocketDelay;
+        maySocket = false;
+
         socketedObject = _socketedObject.gameObject;
-        Grabbable grabbable = socketedObject.GetComponent<Grabbable>();
+        socketedGrabbable = socketedObject.GetComponent<Grabbable>();
         //Release the socketable from the hand
-        grabbable.hand.ForceRelease();
+        socketedGrabbable.hand.ForceRelease();
 
         //Set gravity of socketable off
-        if (grabbable.rb)
+        if (socketedGrabbable.rb)
         {
-            grabbable.rb.velocity = Vector3.zero;
-            grabbable.rb.angularVelocity = Vector3.zero;
-            grabbable.rb.useGravity = false;
+            socketedGrabbable.rb.velocity = Vector3.zero;
+            socketedGrabbable.rb.angularVelocity = Vector3.zero;
+            socketedGrabbable.rb.isKinematic = true;
         }
+        else
+        {
+            Debug.Log("WARNING No rigidbody found, can't socket object", socketedObject);
+        }
+
+        socketedGrabbable.socket = this;
 
         if (socketPoint) socketedObject.transform.position = socketPoint.position;
         else socketedObject.transform.position = transform.position;
 
         socketedObject.transform.rotation = socketPoint.transform.rotation;
-
-        if (turnOffCollider)
-        {
-            socketedObjectColliders = socketedObject.GetComponentsInChildren<Collider>();
-
-            for (int i = 0; i < socketedObjectColliders.Length; i++)
-            {
-                socketedObjectColliders[i].enabled = false;
-            }
-        }
     }
 }

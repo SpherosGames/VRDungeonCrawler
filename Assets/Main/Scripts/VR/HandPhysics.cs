@@ -21,6 +21,8 @@ public class HandPhysics : MonoBehaviour
 
     private Grabbable currentGrabbable;
 
+    private bool mayGrab;
+
     private void Awake()
     {
         colliders = GetComponentsInChildren<Collider>();
@@ -49,6 +51,16 @@ public class HandPhysics : MonoBehaviour
 
         bool isGrabButtonPressed = grabButton.action.ReadValue<float>() > grabThreshold;
 
+        if (!mayGrab)
+        {
+            if (!isGrabButtonPressed)
+            {
+                print("May grab again");
+                mayGrab = true;
+            }
+            return;
+        }
+
         //Check if this hand is trying to grab something, but isn't already holding something
         if (isGrabButtonPressed && !currentGrabbable)
         {
@@ -66,6 +78,11 @@ public class HandPhysics : MonoBehaviour
                 //Set grabble hand
                 currentGrabbable = grabbable;
                 currentGrabbable.hand = this;
+
+                if (currentGrabbable.socket)
+                {
+                    currentGrabbable.socket.UnSocketObject();
+                }
 
                 Rigidbody rb = colliders[0].attachedRigidbody;
 
@@ -112,6 +129,8 @@ public class HandPhysics : MonoBehaviour
     {
         currentGrabbable.hand = null;
         currentGrabbable = null;
+
+        mayGrab = false;
 
         if (fixedJoint) Destroy(fixedJoint);
     }
