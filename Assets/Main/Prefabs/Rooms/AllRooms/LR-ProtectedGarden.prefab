@@ -139,6 +139,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4867416193605402411}
+  - component: {fileID: 467811948859971308}
+  - component: {fileID: 9155837357594807950}
   m_Layer: 0
   m_Name: EntryL
   m_TagString: Untagged
@@ -161,6 +163,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6249765864924743349}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &467811948859971308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727021116336849826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff1987e7087e314890d0958991d1b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9155837357594807950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727021116336849826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff1987e7087e314890d0958991d1b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2039500707314887638
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +761,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 75893095996308339}
+  - component: {fileID: 5358837517519889136}
+  - component: {fileID: 6024410430893170231}
   m_Layer: 0
   m_Name: EntryR
   m_TagString: Untagged
@@ -757,6 +785,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6249765864924743349}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &5358837517519889136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7128504915012292831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff1987e7087e314890d0958991d1b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6024410430893170231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7128504915012292831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff1987e7087e314890d0958991d1b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7171245776851702860
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,6 +819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1410671625099030226}
   - component: {fileID: 1077202380019660750}
+  - component: {fileID: 3118677457250412842}
   m_Layer: 0
   m_Name: LR-ProtectedGarden
   m_TagString: Untagged
@@ -810,13 +863,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoomsLayerMask:
     serializedVersion: 2
-    m_Bits: 0
-  _DungeonPartType: 0
-  FillerWall: {fileID: 0}
+    m_Bits: 16384
+  _DungeonPartType: 1
+  FillerWall: {fileID: 3215400668637039694, guid: 90a001d280113534c91ed596fb0b4258,
+    type: 3}
   EntryPoints:
   - {fileID: 4867416193605402411}
   - {fileID: 75893095996308339}
-  _Collider: {fileID: 0}
+  _Collider: {fileID: 3118677457250412842}
+--- !u!65 &3118677457250412842
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7171245776851702860}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 27, y: 6.0888853, z: 26}
+  m_Center: {x: 0, y: 3.0705009, z: 0}
 --- !u!1 &7388772606030882107
 GameObject:
   m_ObjectHideFlags: 0

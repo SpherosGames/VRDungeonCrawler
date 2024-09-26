@@ -19,13 +19,15 @@ public class NewDungeonGenerator : MonoBehaviour {
     [Header("Variables")]
     [SerializeField] private int NumOfRooms = 10;
     [SerializeField] private LayerMask RoomsLayerMask;
+    [SerializeField] private List<DungeonPart> GeneratedRooms;
 
-    private List<DungeonPart> GeneratedRooms;
     private bool IsGenerated;
 
-    private void Start() {
+    private void Awake() {
         Instance = this;
+    }
 
+    private void Start() {
         _Generate();
         _GenerateAlternateEntrances();
         _FillEmptyEntrances();
