@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7574279294339068274}
   - component: {fileID: 2031174957619844481}
   - component: {fileID: 4752214013191704218}
+  - component: {fileID: 3128158967792320679}
   m_Layer: 0
   m_Name: Bone
   m_TagString: Untagged
@@ -83,3 +84,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3128158967792320679
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770405131491501191}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.005047682, y: 0.001313179, z: 0.0006439991}
+  m_Center: {x: -0.00020255847, y: -0.0002919151, z: -0.000044762834}
