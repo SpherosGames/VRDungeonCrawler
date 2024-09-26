@@ -65,7 +65,7 @@ public class NewDungeonGenerator : MonoBehaviour {
                 }
 
                 GameObject DoorToAlign = Instantiate(Door, transform.position, transform.rotation);
-                DoorToAlign.transform.SetParent(null);
+                //DoorToAlign.transform.SetParent(null);
 
                 if (ShouldPlaceHallway) {
                     int RandomIndex = Random.Range(0, Hallways.Count);
@@ -113,7 +113,6 @@ public class NewDungeonGenerator : MonoBehaviour {
 
                             DoorToAlign.transform.position = Room1EntryPoint.transform.position;
                             DoorToAlign.transform.rotation = Room1EntryPoint.transform.rotation;
-
                             AlignRooms(RandomGeneratedRoom.transform, GeneratedRoom.transform, Room1EntryPoint, Room2EntryPoint);
 
                             if (HandleIntersection(_DungeonPart)) {

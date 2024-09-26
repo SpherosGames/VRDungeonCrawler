@@ -210,6 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6669165427028211519}
+  - component: {fileID: 6660691926373922271}
   m_Layer: 0
   m_Name: EntryB
   m_TagString: Untagged
@@ -232,6 +233,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1086236741851103417}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6660691926373922271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140507343134224921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff1987e7087e314890d0958991d1b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1314271411596967686
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,6 +254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 259214907078068502}
+  - component: {fileID: 4813614916882385612}
   m_Layer: 0
   m_Name: EntryU
   m_TagString: Untagged
@@ -263,6 +277,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1086236741851103417}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &4813614916882385612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314271411596967686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff1987e7087e314890d0958991d1b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1591234867092054017
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,6 +705,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2611475856043555228}
+  - component: {fileID: 5189729138439973952}
   m_Layer: 0
   m_Name: EntryL
   m_TagString: Untagged
@@ -701,6 +728,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1086236741851103417}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &5189729138439973952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6002766989527171493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff1987e7087e314890d0958991d1b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6016870313440592712
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +894,7 @@ GameObject:
   - component: {fileID: 1410671625099030226}
   - component: {fileID: 4810171702664286074}
   - component: {fileID: 5880008571793476030}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: DLU-BrokenWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

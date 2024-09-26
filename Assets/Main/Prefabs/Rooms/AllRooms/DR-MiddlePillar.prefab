@@ -402,6 +402,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6707728395408864826}
+  - component: {fileID: 2060452490679609589}
   m_Layer: 0
   m_Name: EntryB
   m_TagString: Untagged
@@ -424,6 +425,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3734657662407170693}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2060452490679609589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497928724199429942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff1987e7087e314890d0958991d1b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3511173333221758449
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,6 +499,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7412427578006297743}
+  - component: {fileID: 4054933967805873881}
   m_Layer: 0
   m_Name: EntryR
   m_TagString: Untagged
@@ -508,6 +522,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3734657662407170693}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &4054933967805873881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3528963891532227196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff1987e7087e314890d0958991d1b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4950804873219921293
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1410671625099030226}
   - component: {fileID: 4708321705519696940}
+  - component: {fileID: 2147008745776188817}
   m_Layer: 0
   m_Name: DR-MiddlePillar
   m_TagString: Untagged
@@ -756,13 +783,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoomsLayerMask:
     serializedVersion: 2
-    m_Bits: 0
-  _DungeonPartType: 0
-  FillerWall: {fileID: 0}
+    m_Bits: 16384
+  _DungeonPartType: 1
+  FillerWall: {fileID: 3215400668637039694, guid: 90a001d280113534c91ed596fb0b4258,
+    type: 3}
   EntryPoints:
   - {fileID: 6707728395408864826}
   - {fileID: 7412427578006297743}
-  _Collider: {fileID: 0}
+  _Collider: {fileID: 2147008745776188817}
+--- !u!65 &2147008745776188817
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7171245776851702860}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 27, y: 6.0888853, z: 26}
+  m_Center: {x: 0, y: 3.0705009, z: 0}
 --- !u!1 &7388772606030882107
 GameObject:
   m_ObjectHideFlags: 0
