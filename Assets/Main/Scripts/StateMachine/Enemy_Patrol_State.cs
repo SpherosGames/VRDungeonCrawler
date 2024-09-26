@@ -15,7 +15,6 @@ public class Enemy_Patrol_State : EnemyMoveBaseState
     {
         if (enemy.GetComponentInChildren<FieldOfView>().HasTarget)
         {
-            Debug.Log("in the update state if statement ");
             enemy.GetComponent<EnemyAttack>().enabled = true;
             enemy.GetComponent<EnemyWander>().enabled = false;
             enemy.SwitchState(enemy.AttackingState);
@@ -24,7 +23,7 @@ public class Enemy_Patrol_State : EnemyMoveBaseState
         }
         
     }
-    public override void OnCollisionEnter(EnemyMoveStateManager enemy)
+    public override void OnCollisionEnter(EnemyMoveStateManager enemy, Collision collision)
     {
 
     }

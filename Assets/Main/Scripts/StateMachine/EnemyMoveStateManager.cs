@@ -8,6 +8,7 @@ public class EnemyMoveStateManager : MonoBehaviour
     public Enemy_Attacking_State AttackingState = new Enemy_Attacking_State();
     public Enemy_Idle_State IdleState = new Enemy_Idle_State();
     public Enemy_Patrol_State PatrolState = new Enemy_Patrol_State();
+    public Animator animator;
     void Start()
     {
         CurrentState = PatrolState;
