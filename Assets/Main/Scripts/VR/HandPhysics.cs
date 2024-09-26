@@ -14,10 +14,11 @@ public class HandPhysics : MonoBehaviour
     [SerializeField] private LayerMask grabLayerMask;
     [SerializeField] private Transform palmPos;
     [SerializeField] private float grabCheckSize = 0.1f;
+    [SerializeField] private bool useJoint;
 
     private Collider[] colliders;
 
-    //private FixedJoint fixedJoint;
+    private FixedJoint fixedJoint;
 
     private Grabbable currentGrabbable;
 
@@ -62,14 +63,28 @@ public class HandPhysics : MonoBehaviour
             return;
         }
 
-        if (isGrabButtonPressed && currentGrabbable)
+        if (isGrabButtonPressed && currentGrabbable && !useJoint)
         {
-            //for rot fromtorotation
-            //Vector3 rot = Quaternion.FromToRotation(currentGrabbable.transform.rotation, palmPos.transform.rotation);
+            Transform target;
 
-            currentGrabbable.rb.velocity = (palmPos.position - currentGrabbable.transform.position).normalized * 100 
-                * Vector3.Distance(palmPos.position, currentGrabbable.transform.position);
-            currentGrabbable.rb.angularVelocity = Vector3.zero;
+            if (currentGrabbable.grabPoint)
+            {
+                target = currentGrabbable.grabPoint;
+            }
+            else
+            {
+                target = currentGrabbable.transform;
+            }
+
+            currentGrabbable.rb.velocity = (palmPos.position - target.position).normalized * 10
+                * Vector3.Distance(palmPos.position, target.position);
+
+            Quaternion rotationDifference = palmPos.rotation * Quaternion.Inverse(target.rotation);
+
+            rotationDifference.ToAngleAxis(out float angle, out Vector3 axis);
+            Vector3 angularVelocity = 10 * angle * Mathf.Deg2Rad * axis;
+
+            currentGrabbable.rb.angularVelocity = angularVelocity;
         }
 
         //Check if this hand is trying to grab something, but isn't already holding something
@@ -107,11 +122,15 @@ public class HandPhysics : MonoBehaviour
                     print("Set");
                 }
 
-                Rigidbody rb = colliders[0].attachedRigidbody;
+                //Rigidbody rb = colliders[0].attachedRigidbody;
+                
+                StartCoroutine(SetColliders(false, 0));
+
+                if (!useJoint) return;
 
                 //Setup fixedjoint
-                //fixedJoint = gameObject.AddComponent<FixedJoint>();
-                //fixedJoint.autoConfigureConnectedAnchor = false;
+                fixedJoint = gameObject.AddComponent<FixedJoint>();
+                fixedJoint.autoConfigureConnectedAnchor = false;
 
                 Vector3 position;
 
@@ -124,14 +143,22 @@ public class HandPhysics : MonoBehaviour
                     position = palmPos.position;
                 }
 
-                if (rb)
+                if (grabbable.rb)
                 {
-                    //fixedJoint.connectedBody = rb;
-                    //fixedJoint.connectedAnchor = rb.transform.InverseTransformPoint(position);
+                    if (grabbable.grabPoint)
+                    {
+                        fixedJoint.connectedBody = grabbable.grabPoint.GetComponent<Rigidbody>();
+                        fixedJoint.connectedAnchor = grabbable.grabPoint.transform.InverseTransformPoint(position);
+                    }
+                    else
+                    {
+                        fixedJoint.connectedBody = grabbable.rb;
+                        fixedJoint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
+                    }   
                 }
                 else
                 {
-                    //fixedJoint.connectedAnchor = position;
+                    fixedJoint.connectedAnchor = position;
                 }
 
                 if (grabbable.grabPoint != null)
@@ -139,8 +166,6 @@ public class HandPhysics : MonoBehaviour
                     print("rotate grabbable");
                     grabbable.transform.forward = grabbable.grabPoint.forward;
                 }
-
-                StartCoroutine(SetColliders(false, 0));
             }
         }
         //Releasing
@@ -173,7 +198,7 @@ public class HandPhysics : MonoBehaviour
 
         mayGrab = false;
 
-        //if (fixedJoint) Destroy(fixedJoint);
+        if (fixedJoint) Destroy(fixedJoint);
     }
 
     private void OnDrawGizmosSelected()
