@@ -17,7 +17,7 @@ public class HandPhysics : MonoBehaviour
 
     private Collider[] colliders;
 
-    private FixedJoint fixedJoint;
+    //private FixedJoint fixedJoint;
 
     private Grabbable currentGrabbable;
 
@@ -62,6 +62,16 @@ public class HandPhysics : MonoBehaviour
             return;
         }
 
+        if (isGrabButtonPressed && currentGrabbable)
+        {
+            //for rot fromtorotation
+            //Vector3 rot = Quaternion.FromToRotation(currentGrabbable.transform.rotation, palmPos.transform.rotation);
+
+            currentGrabbable.rb.velocity = (palmPos.position - currentGrabbable.transform.position).normalized * 100 
+                * Vector3.Distance(palmPos.position, currentGrabbable.transform.position);
+            currentGrabbable.rb.angularVelocity = Vector3.zero;
+        }
+
         //Check if this hand is trying to grab something, but isn't already holding something
         if (isGrabButtonPressed && !currentGrabbable)
         {
@@ -76,6 +86,7 @@ public class HandPhysics : MonoBehaviour
                     return;
                 }
             }
+
 
             //Look for all colliders in an area around the palm of the hand
             Collider[] colliders = Physics.OverlapSphere(palmPos.position, grabCheckSize, grabLayerMask, QueryTriggerInteraction.Ignore);
@@ -93,13 +104,14 @@ public class HandPhysics : MonoBehaviour
                     //Set grabble hand
                     currentGrabbable = grabbable;
                     currentGrabbable.hand = this;
+                    print("Set");
                 }
 
                 Rigidbody rb = colliders[0].attachedRigidbody;
 
                 //Setup fixedjoint
-                fixedJoint = gameObject.AddComponent<FixedJoint>();
-                fixedJoint.autoConfigureConnectedAnchor = false;
+                //fixedJoint = gameObject.AddComponent<FixedJoint>();
+                //fixedJoint.autoConfigureConnectedAnchor = false;
 
                 Vector3 position;
 
@@ -114,12 +126,12 @@ public class HandPhysics : MonoBehaviour
 
                 if (rb)
                 {
-                    fixedJoint.connectedBody = rb;
-                    fixedJoint.connectedAnchor = rb.transform.InverseTransformPoint(position);
+                    //fixedJoint.connectedBody = rb;
+                    //fixedJoint.connectedAnchor = rb.transform.InverseTransformPoint(position);
                 }
                 else
                 {
-                    fixedJoint.connectedAnchor = position;
+                    //fixedJoint.connectedAnchor = position;
                 }
 
                 if (grabbable.grabPoint != null)
@@ -155,12 +167,13 @@ public class HandPhysics : MonoBehaviour
 
     public void ForceRelease()
     {
+        print("Delete");
         currentGrabbable.hand = null;
         currentGrabbable = null;
 
         mayGrab = false;
 
-        if (fixedJoint) Destroy(fixedJoint);
+        //if (fixedJoint) Destroy(fixedJoint);
     }
 
     private void OnDrawGizmosSelected()
