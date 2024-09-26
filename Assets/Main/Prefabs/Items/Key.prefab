@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7684314840963893597}
   - component: {fileID: 4987337113176995681}
   - component: {fileID: 6918686052521140393}
+  - component: {fileID: 3162976050164111651}
   m_Layer: 10
   m_Name: Key
   m_TagString: Untagged
@@ -151,6 +152,21 @@ MonoBehaviour:
   KeyPlus: {fileID: 4533529904983479303}
   SpinSpeedMultiplier: 1
   RigidB: {fileID: 4987337113176995681}
+--- !u!114 &3162976050164111651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5257068463920258789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f056bb622adae544aba12f8419ec8730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 0}
+  rb: {fileID: 0}
+  socket: {fileID: 0}
 --- !u!1001 &7391056639412653867
 PrefabInstance:
   m_ObjectHideFlags: 0
