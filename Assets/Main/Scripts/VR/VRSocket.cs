@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Sockets;
-using System.Net.WebSockets;
 using UnityEngine;
 
 public class VRSocket : MonoBehaviour
@@ -9,6 +5,16 @@ public class VRSocket : MonoBehaviour
     [SerializeField] private SocketableType allowedSocketType;
     [SerializeField] private Transform socketPoint;
     [SerializeField] private float reSocketDelay = 1f;
+    [SerializeField] private bool makeKinematic;
+    [SerializeField] private float releaseDistance;
+    [SerializeField] private RigidbodyConstraints contraintsr1;
+    [SerializeField] private RigidbodyConstraints contraintsr2;
+    [SerializeField] private RigidbodyConstraints contraintsr3;
+    [SerializeField] private RigidbodyConstraints contraintsp1;
+    [SerializeField] private RigidbodyConstraints contraintsp2;
+    [SerializeField] private RigidbodyConstraints contraintsp3;
+
+    public float ReleaseDistance => releaseDistance;
 
     private bool maySocket;
     private float reSocketTimer;
@@ -18,7 +24,7 @@ public class VRSocket : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!maySocket) return;
+        if (!maySocket || socketedObject) return;
 
         if (other.TryGetComponent(out Socketable socket))
         {
@@ -45,9 +51,19 @@ public class VRSocket : MonoBehaviour
 
     public void UnSocketObject()
     {
+        if (!maySocket) return;
+
+        reSocketTimer = reSocketDelay;
+        maySocket = false;
+
         if (socketedGrabbable.rb)
         {
             socketedGrabbable.rb.isKinematic = false;
+
+            if (!socketedGrabbable.rb.isKinematic)
+            {
+                socketedGrabbable.rb.constraints = RigidbodyConstraints.None;
+            }
         }
 
         socketedGrabbable.socket = null;
@@ -72,7 +88,16 @@ public class VRSocket : MonoBehaviour
         {
             socketedGrabbable.rb.velocity = Vector3.zero;
             socketedGrabbable.rb.angularVelocity = Vector3.zero;
-            socketedGrabbable.rb.isKinematic = true;
+
+            if (makeKinematic)
+            {
+                socketedGrabbable.rb.isKinematic = true;
+            }
+            else
+            {
+                //Rudo code here
+                socketedGrabbable.rb.constraints = contraintsp1 | contraintsp2 | contraintsp3 | contraintsr1 | contraintsr2 | contraintsr3;
+            }
         }
         else
         {

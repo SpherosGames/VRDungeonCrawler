@@ -344,6 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   rb: {fileID: 0}
+  socket: {fileID: 0}
 --- !u!1 &603874035 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7514750604973963173, guid: 90fbadf21c236374a8cc3a00c48746bd,
@@ -364,6 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   rb: {fileID: 0}
+  socket: {fileID: 0}
 --- !u!1001 &705406898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -538,13 +540,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824932025}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.7071079}
   m_LocalPosition: {x: 0.53, y: 1.1200001, z: -2.1}
   m_LocalScale: {x: 0.49286, y: 0.13361952, z: 0.33656}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!54 &824932030
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -599,6 +601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   rb: {fileID: 0}
+  socket: {fileID: 0}
 --- !u!1 &1114206634 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 496135150641457839, guid: 90fbadf21c236374a8cc3a00c48746bd,
@@ -619,6 +622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   rb: {fileID: 0}
+  socket: {fileID: 0}
 --- !u!4 &1128754140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8671179065624590336, guid: f144e2e3cd05f3a41838e58b81f32ea2,
@@ -804,6 +808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   rb: {fileID: 0}
+  socket: {fileID: 0}
 --- !u!1001 &1378021114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1002,7 +1007,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowedSocketType: 0
   socketPoint: {fileID: 1181988622}
-  turnOffCollider: 0
+  reSocketDelay: 0.1
+  makeKinematic: 0
+  releaseDistance: 0
+  contraintsr1: 14
+  contraintsr2: 32
+  contraintsr3: 64
+  contraintsp1: 0
+  contraintsp2: 0
+  contraintsp3: 0
 --- !u!135 &1519737104
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1277,6 +1290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   rb: {fileID: 0}
+  socket: {fileID: 0}
 --- !u!1 &1945313322
 GameObject:
   m_ObjectHideFlags: 0

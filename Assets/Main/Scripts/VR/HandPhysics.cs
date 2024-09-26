@@ -21,7 +21,9 @@ public class HandPhysics : MonoBehaviour
 
     private Grabbable currentGrabbable;
 
-    private bool mayGrab;
+    private Grabbable socketedObject;
+
+    private bool mayGrab = true;
 
     private void Awake()
     {
@@ -55,7 +57,6 @@ public class HandPhysics : MonoBehaviour
         {
             if (!isGrabButtonPressed)
             {
-                print("May grab again");
                 mayGrab = true;
             }
             return;
@@ -64,24 +65,34 @@ public class HandPhysics : MonoBehaviour
         //Check if this hand is trying to grab something, but isn't already holding something
         if (isGrabButtonPressed && !currentGrabbable)
         {
+            if (socketedObject)
+            {
+                if (Vector3.Distance(transform.TransformPoint(palmPos.position), socketedObject.transform.position) >= socketedObject.socket.ReleaseDistance)
+                {
+                    currentGrabbable = socketedObject;
+                    currentGrabbable.hand = this;
+                    currentGrabbable.socket.UnSocketObject();
+                    socketedObject = null;
+                    return;
+                }
+            }
+
             //Look for all colliders in an area around the palm of the hand
             Collider[] colliders = Physics.OverlapSphere(palmPos.position, grabCheckSize, grabLayerMask, QueryTriggerInteraction.Ignore);
-
-            print("Colliders length: " + colliders.Length);
-            //print("Colliders length: " + colliders[0].tryget);
 
             //Check if there are any valid colliders and check if the first one has a grabbable script on it
             if (colliders.Length > 0 && colliders[0].TryGetComponent(out Grabbable grabbable))
             {
-                print("Grab");
-
-                //Set grabble hand
-                currentGrabbable = grabbable;
-                currentGrabbable.hand = this;
-
-                if (currentGrabbable.socket)
+                //Socket
+                if (grabbable.socket)
                 {
-                    currentGrabbable.socket.UnSocketObject();
+                    socketedObject = grabbable;
+                }
+                else
+                {
+                    //Set grabble hand
+                    currentGrabbable = grabbable;
+                    currentGrabbable.hand = this;
                 }
 
                 Rigidbody rb = colliders[0].attachedRigidbody;
