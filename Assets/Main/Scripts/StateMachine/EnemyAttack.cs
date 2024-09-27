@@ -113,23 +113,22 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-        void SetAttackingState()
-        {
-            animator.SetBool(IsAttacking, true);
-            animator.SetBool(IsMoving, false);
-            animator.SetTrigger(TriggerAttack);
-        }
+    void SetAttackingState()
+    {
+        animator.SetBool(IsAttacking, true);
+        animator.SetBool(IsMoving, false);
+        animator.SetTrigger(TriggerAttack);
+    }
 
-        void SetWalkingState()
-        {
-            animator.SetBool(IsAttacking, false);
-            animator.SetBool(IsMoving, true);
-        }
+    void SetWalkingState()
+    {
+        animator.SetBool(IsAttacking, false);
+        animator.SetBool(IsMoving, true);
+    }
 
-        void SetIdleState()
-        {
-            animator.SetBool(IsAttacking, false);
-            animator.SetBool(IsMoving, false);
-        }
+    void SetIdleState()
+    {
+        animator.SetBool(IsAttacking, false);
+        animator.SetBool(IsMoving, false);
     }
 }
