@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wobble : MonoBehaviour
 {
-    Renderer rend;
+    public Renderer rend;
     Vector3 lastPos;
     Vector3 velocity;
     Vector3 lastRot;  

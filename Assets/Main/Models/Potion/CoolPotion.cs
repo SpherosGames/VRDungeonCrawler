@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class CoolPotion : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private bool IsLatched = true;
+     private float FluidLevel;
+    Wobble wobblescript;
+
     void Start()
     {
-        
+
+       
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+        while (true)
+        {
+            wobblescript = GetComponentInChildren<Wobble>();
+            FluidLevel = wobblescript.rend.material.GetFloat("_Fill");
+            Debug.Log(FluidLevel);
+        }
+       
     }
 }
