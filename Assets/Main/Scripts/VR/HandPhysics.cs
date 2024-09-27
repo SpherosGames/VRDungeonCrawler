@@ -15,6 +15,7 @@ public class HandPhysics : MonoBehaviour
     [SerializeField] private Transform palmPos;
     [SerializeField] private float grabCheckSize = 0.1f;
     [SerializeField] private bool useJoint;
+    [SerializeField] private Transform palmPosTarget;
 
     private Collider[] colliders;
 
@@ -65,8 +66,11 @@ public class HandPhysics : MonoBehaviour
 
         if (isGrabButtonPressed && currentGrabbable && !useJoint)
         {
+            print("AAAAAAAAAAAAAAAAA");
+
             Transform target;
 
+            //Set movement and rotation target to grabpoint or object itself
             if (currentGrabbable.grabPoint)
             {
                 target = currentGrabbable.grabPoint;
@@ -76,9 +80,11 @@ public class HandPhysics : MonoBehaviour
                 target = currentGrabbable.transform;
             }
 
+            //Move object towards palm of hand
             currentGrabbable.rb.velocity = (palmPos.position - target.position).normalized * 10
                 * Vector3.Distance(palmPos.position, target.position);
 
+            //Rotate the object towards the palm of the hand
             Quaternion rotationDifference = palmPos.rotation * Quaternion.Inverse(target.rotation);
 
             rotationDifference.ToAngleAxis(out float angle, out Vector3 axis);
@@ -92,7 +98,7 @@ public class HandPhysics : MonoBehaviour
         {
             if (socketedObject)
             {
-                if (Vector3.Distance(transform.TransformPoint(palmPos.position), socketedObject.transform.position) >= socketedObject.socket.ReleaseDistance)
+                if (Vector3.Distance(transform.TransformPoint(palmPosTarget.position), socketedObject.transform.position) >= socketedObject.socket.ReleaseDistance)
                 {
                     currentGrabbable = socketedObject;
                     currentGrabbable.hand = this;
@@ -104,7 +110,7 @@ public class HandPhysics : MonoBehaviour
 
 
             //Look for all colliders in an area around the palm of the hand
-            Collider[] colliders = Physics.OverlapSphere(palmPos.position, grabCheckSize, grabLayerMask, QueryTriggerInteraction.Ignore);
+            Collider[] colliders = Physics.OverlapSphere(palmPosTarget.position, grabCheckSize, grabLayerMask, QueryTriggerInteraction.Ignore);
 
             //Check if there are any valid colliders and check if the first one has a grabbable script on it
             if (colliders.Length > 0 && colliders[0].TryGetComponent(out Grabbable grabbable))
@@ -129,29 +135,38 @@ public class HandPhysics : MonoBehaviour
                 if (!useJoint) return;
 
                 //Setup fixedjoint
-                fixedJoint = gameObject.AddComponent<FixedJoint>();
+                fixedJoint = palmPos.gameObject.AddComponent<FixedJoint>();
                 fixedJoint.autoConfigureConnectedAnchor = false;
+                fixedJoint.enablePreprocessing = false;
 
                 Vector3 position;
 
+                //When there is a grabpoint, set connectedanchor there instead
                 if (grabbable.grabPoint != null)
                 {
                     position = grabbable.grabPoint.position;
                 }
                 else
                 {
-                    position = palmPos.position;
+                    position = palmPosTarget.position;
                 }
 
                 if (grabbable.rb)
                 {
                     if (grabbable.grabPoint)
                     {
-                        fixedJoint.connectedBody = grabbable.grabPoint.GetComponent<Rigidbody>();
-                        fixedJoint.connectedAnchor = grabbable.grabPoint.transform.InverseTransformPoint(position);
+                        print("Grab point go brr");
+                        //fixedJoint.connectedBody = grabbable.grabPoint.GetComponent<Rigidbody>();
+                        fixedJoint.connectedBody = grabbable.GetComponent<Rigidbody>();
+                        fixedJoint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
+                        //fixedJoint.axis = transform.forward;
+
+                        Quaternion rot = Quaternion.FromToRotation(grabbable.transform.forward, transform.forward);
+                        palmPos.rotation = rot * palmPos.rotation;
                     }
                     else
                     {
+                        //fixedJoint.axis = transform.right;
                         fixedJoint.connectedBody = grabbable.rb;
                         fixedJoint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
                     }   
@@ -161,11 +176,11 @@ public class HandPhysics : MonoBehaviour
                     fixedJoint.connectedAnchor = position;
                 }
 
-                if (grabbable.grabPoint != null)
-                {
-                    print("rotate grabbable");
-                    grabbable.transform.forward = grabbable.grabPoint.forward;
-                }
+                //if (grabbable.grabPoint != null)
+                //{
+                //    print("rotate grabbable");
+                //    grabbable.transform.forward = grabbable.grabPoint.forward;
+                //}
             }
         }
         //Releasing
@@ -188,6 +203,9 @@ public class HandPhysics : MonoBehaviour
         Vector3 rotation = angle * axis;
 
         rb.angularVelocity = (rotation * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+
+        //Phyics position
+        palmPos.GetComponent<Rigidbody>().velocity = (palmPosTarget.position - palmPos.position) / Time.fixedDeltaTime;
     }
 
     public void ForceRelease()
@@ -203,6 +221,6 @@ public class HandPhysics : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(palmPos.position, grabCheckSize);
+        Gizmos.DrawWireSphere(palmPosTarget.position, grabCheckSize);
     }
 }

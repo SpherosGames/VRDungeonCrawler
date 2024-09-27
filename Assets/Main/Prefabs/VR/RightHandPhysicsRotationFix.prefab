@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 445976614417480438}
   - component: {fileID: 4255691729451082507}
   - component: {fileID: 729641582786643231}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RightHandPhysicsRotationFix
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,11 +65,12 @@ MonoBehaviour:
     m_Reference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   grabThreshold: 0.1
+  grabLayerMask:
+    serializedVersion: 2
+    m_Bits: 3073
   palmPos: {fileID: 1779308465699498504}
   grabCheckSize: 0.1
-  grabLayer:
-    serializedVersion: 2
-    m_Bits: 3072
+  useJoint: 1
 --- !u!54 &729641582786643231
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -106,7 +107,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1779308465699498504}
-  m_Layer: 0
+  - component: {fileID: 4690408740434706512}
+  m_Layer: 9
   m_Name: PalmPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,6 +130,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 445976614417480438}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &4690408740434706512
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5357104111773436048}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &6886896113101558526
 PrefabInstance:
   m_ObjectHideFlags: 0

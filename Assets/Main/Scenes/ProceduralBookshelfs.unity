@@ -286,22 +286,22 @@ PrefabInstance:
     - target: {fileID: 2340264485433816261, guid: 225dd16acd01b8b4698916e6e416a0cd,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.27933207
       objectReference: {fileID: 0}
     - target: {fileID: 2340264485433816261, guid: 225dd16acd01b8b4698916e6e416a0cd,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -0.27933204
       objectReference: {fileID: 0}
     - target: {fileID: 2340264485433816261, guid: 225dd16acd01b8b4698916e6e416a0cd,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.649595
       objectReference: {fileID: 0}
     - target: {fileID: 2340264485433816261, guid: 225dd16acd01b8b4698916e6e416a0cd,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.64959496
       objectReference: {fileID: 0}
     - target: {fileID: 2340264485433816261, guid: 225dd16acd01b8b4698916e6e416a0cd,
         type: 3}
@@ -316,7 +316,7 @@ PrefabInstance:
     - target: {fileID: 2340264485433816261, guid: 225dd16acd01b8b4698916e6e416a0cd,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 133.464
       objectReference: {fileID: 0}
     - target: {fileID: 2340264485433816261, guid: 225dd16acd01b8b4698916e6e416a0cd,
         type: 3}
@@ -427,6 +427,8 @@ MonoBehaviour:
   bookPrefab: {fileID: 8561831514617760135, guid: c14b6e9b509ae8142afa46b313cdd0e7,
     type: 3}
   bookShelfCol: {fileID: 152768746}
+  bookShelfMesh: {fileID: 152768747}
+  bookParent: {fileID: 446908230}
   bookLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -438,8 +440,8 @@ MonoBehaviour:
   distanceBetweenShelfs: 1.1
   defaultScale: 300
   scaleRandomDifference: 20
-  minGapSizeBetweenBooks: 0
-  maxGapSizeBetweenBooks: 0.2
+  minGapSizeBetweenBooks: 0.1
+  maxGapSizeBetweenBooks: 0.5
   maxTries: 10000
 --- !u!4 &152768745 stripped
 Transform:
@@ -450,6 +452,12 @@ Transform:
 --- !u!65 &152768746 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 1142571475417767607, guid: 225dd16acd01b8b4698916e6e416a0cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 152768742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &152768747 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4558130375722412252, guid: 225dd16acd01b8b4698916e6e416a0cd,
     type: 3}
   m_PrefabInstance: {fileID: 152768742}
   m_PrefabAsset: {fileID: 0}
@@ -483,6 +491,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 152768745}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &446908229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 446908230}
+  m_Layer: 0
+  m_Name: Books
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &446908230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446908229}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.20208, y: 6.1800513, z: 4.407678}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &613879354
 GameObject:
@@ -521,7 +560,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -628,3 +667,4 @@ SceneRoots:
   - {fileID: 613879357}
   - {fileID: 52129974}
   - {fileID: 152768742}
+  - {fileID: 446908230}

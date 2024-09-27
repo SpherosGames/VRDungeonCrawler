@@ -451,7 +451,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6a0616d496df9341b662439dd916994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  walkSpeed: 0
+  sprintSpeed: 0
+  sprintButton:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Sprint Button
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: d231908a-be93-43a9-a951-d07165c0c703
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  turnSpeed: 0
+  snapTurn: 0
+  snapTurnAngle: 0
+  snapTurnCooldown: 0
   moveInput:
     m_UseReference: 1
     m_Action:
@@ -465,8 +482,21 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
+  turnInput:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Turn Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 9b8504b1-34ab-4e0b-b222-6222e44d0bb3
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   rb: {fileID: 6770217039488987794}
   directionSource: {fileID: 132388940681249107}
+  pivotPoint: {fileID: 0}
 --- !u!54 &6770217039488987794
 Rigidbody:
   m_ObjectHideFlags: 0

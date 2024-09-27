@@ -443,6 +443,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "JoyStickClick",
+                    "type": "Button",
+                    "id": "7d300678-3d4d-4be1-b254-7a8956c7c053",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -674,6 +683,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Grip Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b1313f4-0a41-4d58-b8e0-243c2ac4074c",
+                    "path": "<XRController>{LeftHand}/joystickClicked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JoyStickClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
