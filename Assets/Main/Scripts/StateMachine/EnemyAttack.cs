@@ -1,29 +1,31 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAttack : MonoBehaviour
 {
-    NavMeshAgent AttackinAgent;
     public Transform currentTarget;
-    GameObject enemy;
     public float AttackDelay = 3f;
-    bool isFollowing;
     public float attackRange = 5f;
-
     public int attackDamage = 10;
-    public string attackAnimationTrigger = "Attack";
+    public float damageDelay = 0.5f;
 
+    private NavMeshAgent AttackinAgent;
     private Animator animator;
     private float lastAttackTime;
-    [SerializeField]private bool isAttacking = false;
+    private bool isFollowing;
+    private bool isAttacking = false;
+
+    private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
+    private static readonly int IsMoving = Animator.StringToHash("IsMoving");
+    private static readonly int TriggerAttack = Animator.StringToHash("TriggerAttack");
 
     void Start()
     {
         AttackinAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        lastAttackTime = -AttackDelay; // Allow immediate first attack
+        lastAttackTime = -AttackDelay;
+        SetIdleState();
     }
 
     public void GoToTarget(Transform target)
@@ -33,48 +35,8 @@ public class EnemyAttack : MonoBehaviour
         {
             isFollowing = true;
             AttackinAgent.SetDestination(currentTarget.position);
+            SetWalkingState();
         }
-    }
-
-    public void Attacking()
-    {
-        if (CanAttack())
-        {
-            StartAttack();
-        }
-    }
-
-    bool CanAttack()
-    {
-        float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
-        float timeSinceLastAttack = Time.time - lastAttackTime;
-
-        return distanceToTarget <= attackRange && timeSinceLastAttack >= AttackDelay && !isAttacking;
-    }
-
-    void StartAttack()
-    {
-        isAttacking = true;
-        animator.SetBool("IsAttacking",true);
-        lastAttackTime = Time.time;
-    }
-
-    // This method should be called by an Animation Event at the appropriate frame of the attack animation
-    public void DealDamage()
-    {
-        float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
-
-        if (distanceToTarget <= attackRange)
-        {
-            Unit playerHealth = currentTarget.GetComponent<Unit>();
-            if (playerHealth != null)
-            {
-                Debug.Log(playerHealth);
-                playerHealth.TakeDamage(attackDamage);
-            }
-        }
-
-        isAttacking = false;
     }
 
     void Update()
@@ -86,12 +48,88 @@ public class EnemyAttack : MonoBehaviour
             {
                 AttackinAgent.isStopped = false;
                 AttackinAgent.SetDestination(currentTarget.position);
+                SetWalkingState();
             }
             else
             {
                 AttackinAgent.isStopped = true;
-                Attacking(); 
+                Attacking();
             }
+        }
+        else
+        {
+            SetIdleState();
+        }
+    }
+
+    void Attacking()
+    {
+        if (CanAttack())
+        {
+            StartAttack();
+        }
+        else if (!isAttacking)
+        {
+            SetIdleState();
+        }
+    }
+
+    bool CanAttack()
+    {
+        float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
+        float timeSinceLastAttack = Time.time - lastAttackTime;
+        return distanceToTarget <= attackRange && timeSinceLastAttack >= AttackDelay && !isAttacking;
+    }
+
+    void StartAttack()
+    {
+        isAttacking = true;
+        SetAttackingState();
+        lastAttackTime = Time.time;
+        AttackinAgent.isStopped = true;
+        StartCoroutine(DealDamageAfterDelay());
+    }
+
+    IEnumerator DealDamageAfterDelay()
+    {
+        yield return new WaitForSeconds(damageDelay);
+        DealDamage();
+        isAttacking = false;
+        SetIdleState();
+        AttackinAgent.isStopped = false;
+    }
+
+    void DealDamage()
+    {
+        float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
+        if (distanceToTarget <= attackRange && currentTarget != null)
+        {
+            Unit targetUnit = currentTarget.GetComponentInParent<Unit>();
+            if (targetUnit != null)
+            {
+                targetUnit.TakeDamage(attackDamage);
+            }
+
+        }
+    }
+
+        void SetAttackingState()
+        {
+            animator.SetBool(IsAttacking, true);
+            animator.SetBool(IsMoving, false);
+            animator.SetTrigger(TriggerAttack);
+        }
+
+        void SetWalkingState()
+        {
+            animator.SetBool(IsAttacking, false);
+            animator.SetBool(IsMoving, true);
+        }
+
+        void SetIdleState()
+        {
+            animator.SetBool(IsAttacking, false);
+            animator.SetBool(IsMoving, false);
         }
     }
 }
