@@ -27,6 +27,8 @@ public class HandPhysics : MonoBehaviour
 
     private bool mayGrab = true;
 
+    private Quaternion palmRot;
+
     private void Awake()
     {
         colliders = GetComponentsInChildren<Collider>();
@@ -37,6 +39,14 @@ public class HandPhysics : MonoBehaviour
     {
         //Set rigidbody
         if (rb == null) rb = GetComponent<Rigidbody>();
+
+        ResetPalmRot();
+    }
+
+    private void ResetPalmRot()
+    {
+        palmRot = palmPosTarget.rotation;
+        palmPos.rotation = palmRot;
     }
 
     private IEnumerator SetColliders(bool value, float delay)
@@ -162,7 +172,7 @@ public class HandPhysics : MonoBehaviour
                         //fixedJoint.axis = transform.forward;
 
                         Quaternion rot = Quaternion.FromToRotation(grabbable.transform.forward, transform.forward);
-                        palmPos.rotation = rot * palmPos.rotation;
+                        palmRot = rot * palmPos.rotation;
                     }
                     else
                     {
@@ -204,13 +214,35 @@ public class HandPhysics : MonoBehaviour
 
         rb.angularVelocity = (rotation * Mathf.Deg2Rad) / Time.fixedDeltaTime;
 
+        Rigidbody palmRB = palmPos.GetComponent<Rigidbody>();
+
         //Phyics position
-        palmPos.GetComponent<Rigidbody>().velocity = (palmPosTarget.position - palmPos.position) / Time.fixedDeltaTime;
+        palmRB.velocity = (palmPosTarget.position - palmPos.position) / Time.fixedDeltaTime;
+
+        if (currentGrabbable)
+        {
+            Quaternion rot = Quaternion.FromToRotation(currentGrabbable.transform.forward, transform.forward);
+            palmRot = rot * palmPos.rotation;
+        }
+        else
+        {
+            print("Rotation go brr");
+            Quaternion rot = Quaternion.FromToRotation(palmPosTarget.forward, palmPos.forward);
+            palmRot = rot * palmPos.rotation;
+        }
+
+        Quaternion rotationDifference2 = palmRot * Quaternion.Inverse(palmPos.rotation);
+        rotationDifference2.ToAngleAxis(out float angle2, out Vector3 axis2);
+
+        Vector3 rotation2 = angle2 * axis2;
+
+        palmRB.angularVelocity = (rotation2 * Mathf.Deg2Rad) / Time.fixedDeltaTime;
     }
 
     public void ForceRelease()
     {
         print("Delete");
+        ResetPalmRot();
         currentGrabbable.hand = null;
         currentGrabbable = null;
 
