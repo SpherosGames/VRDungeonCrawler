@@ -19,7 +19,7 @@ public class HandPhysics : MonoBehaviour
 
     private Collider[] colliders;
 
-    private FixedJoint fixedJoint;
+    private ConfigurableJoint joint;
 
     private Grabbable currentGrabbable;
 
@@ -144,8 +144,14 @@ public class HandPhysics : MonoBehaviour
                 if (!useJoint) return;
 
                 //Setup fixedjoint
-                fixedJoint = palmPos.gameObject.AddComponent<FixedJoint>();
-                fixedJoint.autoConfigureConnectedAnchor = false;
+                joint = palmPos.gameObject.AddComponent<ConfigurableJoint>();
+                joint.autoConfigureConnectedAnchor = false;
+                joint.angularXMotion = ConfigurableJointMotion.Locked;
+                joint.angularYMotion = ConfigurableJointMotion.Locked;
+                joint.angularZMotion = ConfigurableJointMotion.Locked;
+                joint.xMotion = ConfigurableJointMotion.Locked;
+                joint.yMotion = ConfigurableJointMotion.Locked;
+                joint.zMotion = ConfigurableJointMotion.Locked;
 
                 Vector3 position;
 
@@ -166,8 +172,8 @@ public class HandPhysics : MonoBehaviour
                     if (grabbable.grabPoint)
                     {
                         print("Grab point go brr");
-                        fixedJoint.connectedBody = grabbable.GetComponent<Rigidbody>();
-                        fixedJoint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
+                        joint.connectedBody = grabbable.GetComponent<Rigidbody>();
+                        joint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
 
                         Quaternion rot = Quaternion.FromToRotation(grabbable.transform.forward, transform.forward);
                         palmRot = rot * palmPos.rotation;
@@ -175,13 +181,13 @@ public class HandPhysics : MonoBehaviour
                     else
                     {
                         //fixedJoint.axis = transform.right;
-                        fixedJoint.connectedBody = grabbable.rb;
-                        fixedJoint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
+                        joint.connectedBody = grabbable.rb;
+                        joint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
                     }   
                 }
                 else
                 {
-                    fixedJoint.connectedAnchor = position;
+                    joint.connectedAnchor = position;
                 }
             }
         }
@@ -254,7 +260,7 @@ public class HandPhysics : MonoBehaviour
 
         mayGrab = false;
 
-        if (fixedJoint) Destroy(fixedJoint);
+        if (joint) Destroy(joint);
     }
 
     private void OnDrawGizmosSelected()
