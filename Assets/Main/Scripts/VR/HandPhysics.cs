@@ -53,6 +53,8 @@ public class HandPhysics : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
+        if (value) print("Turn on");
+
         foreach (var item in colliders)
         {
             item.enabled = value;
@@ -118,7 +120,6 @@ public class HandPhysics : MonoBehaviour
                 }
             }
 
-
             //Look for all colliders in an area around the palm of the hand
             Collider[] colliders = Physics.OverlapSphere(palmPosTarget.position, grabCheckSize, grabLayerMask, QueryTriggerInteraction.Ignore);
 
@@ -138,8 +139,6 @@ public class HandPhysics : MonoBehaviour
                     print("Set");
                 }
 
-                //Rigidbody rb = colliders[0].attachedRigidbody;
-                
                 StartCoroutine(SetColliders(false, 0));
 
                 if (!useJoint) return;
@@ -147,7 +146,6 @@ public class HandPhysics : MonoBehaviour
                 //Setup fixedjoint
                 fixedJoint = palmPos.gameObject.AddComponent<FixedJoint>();
                 fixedJoint.autoConfigureConnectedAnchor = false;
-                fixedJoint.enablePreprocessing = false;
 
                 Vector3 position;
 
@@ -163,13 +161,13 @@ public class HandPhysics : MonoBehaviour
 
                 if (grabbable.rb)
                 {
+                    grabbable.rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
                     if (grabbable.grabPoint)
                     {
                         print("Grab point go brr");
-                        //fixedJoint.connectedBody = grabbable.grabPoint.GetComponent<Rigidbody>();
                         fixedJoint.connectedBody = grabbable.GetComponent<Rigidbody>();
                         fixedJoint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
-                        //fixedJoint.axis = transform.forward;
 
                         Quaternion rot = Quaternion.FromToRotation(grabbable.transform.forward, transform.forward);
                         palmRot = rot * palmPos.rotation;
@@ -185,12 +183,6 @@ public class HandPhysics : MonoBehaviour
                 {
                     fixedJoint.connectedAnchor = position;
                 }
-
-                //if (grabbable.grabPoint != null)
-                //{
-                //    print("rotate grabbable");
-                //    grabbable.transform.forward = grabbable.grabPoint.forward;
-                //}
             }
         }
         //Releasing
@@ -219,30 +211,44 @@ public class HandPhysics : MonoBehaviour
         //Phyics position
         palmRB.velocity = (palmPosTarget.position - palmPos.position) / Time.fixedDeltaTime;
 
-        if (currentGrabbable)
+        if (currentGrabbable && currentGrabbable.grabPoint)
         {
             Quaternion rot = Quaternion.FromToRotation(currentGrabbable.transform.forward, transform.forward);
             palmRot = rot * palmPos.rotation;
+
+            //palmRot = Quaternion.identity;
         }
         else
         {
-            print("Rotation go brr");
-            Quaternion rot = Quaternion.FromToRotation(palmPosTarget.forward, palmPos.forward);
-            palmRot = rot * palmPos.rotation;
+            palmRot = Quaternion.identity;
+            //Quaternion rot = Quaternion.FromToRotation(palmPos.forward, palmPosTarget.forward);
+            //palmRot = rot * palmPos.rotation;
         }
 
-        Quaternion rotationDifference2 = palmRot * Quaternion.Inverse(palmPos.rotation);
-        rotationDifference2.ToAngleAxis(out float angle2, out Vector3 axis2);
+        if (currentGrabbable && currentGrabbable.grabPoint)
+        {
+            Quaternion rotationDifference2 = palmRot * Quaternion.Inverse(palmPos.rotation);
+            rotationDifference2.ToAngleAxis(out float angle2, out Vector3 axis2);
 
-        Vector3 rotation2 = angle2 * axis2;
+            Vector3 rotation2 = angle2 * axis2;
 
-        palmRB.angularVelocity = (rotation2 * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+            palmRB.angularVelocity = (rotation2 * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+
+            //palmPos.rotation = palmRot;
+        }
+        else
+        {
+            palmPos.localRotation = palmRot;
+        }
     }
 
     public void ForceRelease()
     {
         print("Delete");
         ResetPalmRot();
+
+        currentGrabbable.rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+
         currentGrabbable.hand = null;
         currentGrabbable = null;
 
