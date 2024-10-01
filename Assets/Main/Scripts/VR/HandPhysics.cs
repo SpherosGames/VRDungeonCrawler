@@ -223,6 +223,10 @@ public class HandPhysics : MonoBehaviour
 
         //print("Desired vel: " + desiredVelocity);
 
+        //Vector3 targetVelo = (palmPosTarget.position - palmPos.position) / Time.fixedDeltaTime;
+
+        //palmRB.velocity = Vector3.MoveTowards(palmRB.velocity, targetVelo, 10000);
+
         palmRB.velocity = desiredVelocity;
 
         if (currentGrabbable && currentGrabbable.grabPoint)
@@ -255,7 +259,9 @@ public class HandPhysics : MonoBehaviour
             //_bdy.Velocity = Vector3.MoveTowards(_bdy.Velocity, targetVelo, HSVR.MAXVELOCITY);
             //_bdy.AngularVelocity = Vector3.MoveTowards(_bdy.AngularVelocity, targetRotVelo, HSVR.MAXANGULARVELOCITY);
 
-            palmRB.angularVelocity = CalculateAngularVelocityToReachTarget(palmRB, palmPos.rotation, palmPosTarget.rotation);
+            Vector3 targetRotVelo = AngularVelocity(palmRB.rotation, palmRot, Time.fixedDeltaTime);
+
+            palmRB.angularVelocity = Vector3.MoveTowards(palmRB.angularVelocity, targetRotVelo, 1000);
 
             //palmPos.rotation = palmRot;
         }
@@ -344,5 +350,23 @@ public class HandPhysics : MonoBehaviour
         print("ang vel: " + finalAngularVelocity);
 
         return finalAngularVelocity;
+    }
+
+    public static Vector3 AngularVelocity(Quaternion from, Quaternion to, float delta)
+    {
+        return AngularVelocity(to * Quaternion.Inverse(from), delta);
+    }
+    /// <summary> Calculates angular velocity from a rotational delta </summary>
+    public static Vector3 AngularVelocity(Quaternion rotDelta, float delta)
+    {
+        Vector3 axis = Vector3.zero; float angle = 0; rotDelta.ToAngleAxis(out angle, out axis);
+        if (angle > 180) angle -= 360;
+        if (angle < -180) angle += 360; // probably not necessary
+        angle = Mathf.Clamp(angle, -1000 * Mathf.Rad2Deg * delta, 1000 * Mathf.Rad2Deg * delta);
+        // if( angle/delta >  MAXANGULARVELOCITY ) angle =  MAXANGULARVELOCITY *delta;
+        // if( angle/delta < -MAXANGULARVELOCITY ) angle = -MAXANGULARVELOCITY *delta;
+        Vector3 aVelo = axis.normalized * angle * Mathf.Deg2Rad / delta;
+        if (float.IsNaN(aVelo.x) || float.IsNaN(aVelo.y) || float.IsNaN(aVelo.z)) return Vector3.zero;
+        return aVelo;
     }
 }
