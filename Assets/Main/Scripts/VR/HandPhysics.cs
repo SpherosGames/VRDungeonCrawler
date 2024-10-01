@@ -19,15 +19,13 @@ public class HandPhysics : MonoBehaviour
 
     private Collider[] colliders;
 
-    private ConfigurableJoint joint;
+    private FixedJoint fixedJoint;
 
     private Grabbable currentGrabbable;
 
     private Grabbable socketedObject;
 
     private bool mayGrab = true;
-
-    private Quaternion palmRot;
 
     private void Awake()
     {
@@ -39,21 +37,11 @@ public class HandPhysics : MonoBehaviour
     {
         //Set rigidbody
         if (rb == null) rb = GetComponent<Rigidbody>();
-
-        ResetPalmRot();
-    }
-
-    private void ResetPalmRot()
-    {
-        palmRot = palmPosTarget.rotation;
-        palmPos.rotation = palmRot;
     }
 
     private IEnumerator SetColliders(bool value, float delay)
     {
         yield return new WaitForSeconds(delay);
-
-        if (value) print("Turn on");
 
         foreach (var item in colliders)
         {
@@ -65,6 +53,13 @@ public class HandPhysics : MonoBehaviour
     {
         MovementAndRotation();
 
+        MovePalm();
+
+        Grabbing();
+    }
+
+    private void Grabbing()
+    {
         bool isGrabButtonPressed = grabButton.action.ReadValue<float>() > grabThreshold;
 
         if (!mayGrab)
@@ -76,10 +71,9 @@ public class HandPhysics : MonoBehaviour
             return;
         }
 
+        //TODO: Remove this if im sure fixed joint are the way to go
         if (isGrabButtonPressed && currentGrabbable && !useJoint)
         {
-            print("AAAAAAAAAAAAAAAAA");
-
             Transform target;
 
             //Set movement and rotation target to grabpoint or object itself
@@ -136,7 +130,6 @@ public class HandPhysics : MonoBehaviour
                     //Set grabble hand
                     currentGrabbable = grabbable;
                     currentGrabbable.hand = this;
-                    print("Set");
                 }
 
                 StartCoroutine(SetColliders(false, 0));
@@ -144,14 +137,8 @@ public class HandPhysics : MonoBehaviour
                 if (!useJoint) return;
 
                 //Setup fixedjoint
-                joint = palmPos.gameObject.AddComponent<ConfigurableJoint>();
-                joint.autoConfigureConnectedAnchor = false;
-                joint.angularXMotion = ConfigurableJointMotion.Locked;
-                joint.angularYMotion = ConfigurableJointMotion.Locked;
-                joint.angularZMotion = ConfigurableJointMotion.Locked;
-                joint.xMotion = ConfigurableJointMotion.Locked;
-                joint.yMotion = ConfigurableJointMotion.Locked;
-                joint.zMotion = ConfigurableJointMotion.Locked;
+                fixedJoint = palmPos.gameObject.AddComponent<FixedJoint>();
+                fixedJoint.autoConfigureConnectedAnchor = false;
 
                 Vector3 position;
 
@@ -171,23 +158,22 @@ public class HandPhysics : MonoBehaviour
 
                     if (grabbable.grabPoint)
                     {
-                        print("Grab point go brr");
-                        joint.connectedBody = grabbable.GetComponent<Rigidbody>();
-                        joint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
+                        fixedJoint.connectedBody = grabbable.rb;
+                        fixedJoint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
 
-                        Quaternion rot = Quaternion.FromToRotation(grabbable.grabPoint.transform.forward, transform.forward);
-                        palmRot = rot * palmPos.rotation;
+                        //Uncomment this when it's not done in fixedupdate (MovementAndRotation)
+                        //Quaternion rot = Quaternion.FromToRotation(grabbable.grabPoint.transform.forward, transform.forward);
+                        //palmRot = rot * palmPos.rotation;
                     }
                     else
                     {
-                        //fixedJoint.axis = transform.right;
-                        joint.connectedBody = grabbable.rb;
-                        joint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
+                        fixedJoint.connectedBody = grabbable.rb;
+                        fixedJoint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
                     }
                 }
                 else
                 {
-                    joint.connectedAnchor = position;
+                    fixedJoint.connectedAnchor = position;
                 }
             }
         }
@@ -198,8 +184,6 @@ public class HandPhysics : MonoBehaviour
             ForceRelease();
         }
     }
-
-    Vector3 velocity = Vector3.zero;
 
     private void MovementAndRotation()
     {
@@ -213,63 +197,30 @@ public class HandPhysics : MonoBehaviour
         Vector3 rotation = angle * axis;
 
         rb.angularVelocity = (rotation * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+    }
 
-        Rigidbody palmRB = palmPos.GetComponent<Rigidbody>();
+    private void MovePalm()
+    {
+        //move palmpos to it's target
+        palmPos.position = palmPosTarget.position;
 
-        //Phyics position
-        //Vector3 dir = palmPosTarget.position - palmPos.position;
-
-        Vector3 desiredVelocity = CalculateVelocityToReachTarget(palmRB, palmPos.position, palmPosTarget.position);
-
-        //print("Desired vel: " + desiredVelocity);
-
-        palmRB.velocity = desiredVelocity;
-
+        //rotate palmpos to it's target
         if (currentGrabbable && currentGrabbable.grabPoint)
         {
+            //TODO: optimize this by calculating an offset and using localrotation instead
             Quaternion rot = Quaternion.FromToRotation(currentGrabbable.grabPoint.transform.forward, transform.forward);
-            palmRot = rot * palmPos.rotation;
+            Quaternion worldRot = rot * palmPos.rotation;
 
-            //palmRot = Quaternion.identity;
+            palmPos.rotation = worldRot;
         }
         else
         {
-            palmRot = Quaternion.identity;
-            //Quaternion rot = Quaternion.FromToRotation(palmPos.forward, palmPosTarget.forward);
-            //palmRot = rot * palmPos.rotation;
-        }
-
-        if (currentGrabbable && currentGrabbable.grabPoint)
-        {
-            //Quaternion rotationDifference2 = palmRot * Quaternion.Inverse(palmPos.rotation);
-            //rotationDifference2.ToAngleAxis(out float angle2, out Vector3 axis2);
-
-            //Vector3 rotation2 = angle2 * axis2;
-
-            //palmRB.angularVelocity = (rotation2 * Mathf.Deg2Rad) / Time.fixedDeltaTime;
-
-            //HSVR GO BRR
-            //Vector3 targetVelo = (_handTargetTransform.position - _bdy.Position) / Time.fixedDeltaTime;
-            //Vector3 targetRotVelo = HSVR.AngularVelocity(_bdy.Rotation, _handTargetTransform.rotation, Time.fixedDeltaTime);
-
-            //_bdy.Velocity = Vector3.MoveTowards(_bdy.Velocity, targetVelo, HSVR.MAXVELOCITY);
-            //_bdy.AngularVelocity = Vector3.MoveTowards(_bdy.AngularVelocity, targetRotVelo, HSVR.MAXANGULARVELOCITY);
-
-            palmRB.angularVelocity = CalculateAngularVelocityToReachTarget(palmRB, palmPos.rotation, palmPosTarget.rotation);
-
-            //palmPos.rotation = palmRot;
-        }
-        else
-        {
-            palmPos.localRotation = palmRot;
+            palmPos.localRotation = Quaternion.identity;
         }
     }
 
     public void ForceRelease()
     {
-        print("Delete");
-        ResetPalmRot();
-
         currentGrabbable.rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
 
         currentGrabbable.hand = null;
@@ -277,72 +228,11 @@ public class HandPhysics : MonoBehaviour
 
         mayGrab = false;
 
-        if (joint) Destroy(joint);
+        if (fixedJoint) Destroy(fixedJoint);
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(palmPosTarget.position, grabCheckSize);
-    }
-
-    Vector3 CalculateVelocityToReachTarget(Rigidbody rb, Vector3 currentPosition, Vector3 targetPosition)
-    {
-        Vector3 displacement = targetPosition - currentPosition;
-
-        // Calculate the velocity needed to cover the distance in one frame
-        Vector3 requiredVelocity = displacement / Time.fixedDeltaTime;
-
-        float totalMass = rb.mass + (currentGrabbable ? currentGrabbable.rb.mass : 0);
-
-        // Calculate the force needed to achieve this velocity change
-        Vector3 force = (requiredVelocity - rb.velocity) * totalMass / Time.fixedDeltaTime;
-
-        // Limit the force to prevent extreme accelerations
-        float maxForce = totalMass * 100f; // Adjust this value as needed
-        if (force.magnitude > maxForce)
-        {
-            force = force.normalized * maxForce;
-        }
-
-        // Calculate the final velocity based on the limited force
-        Vector3 finalVelocity = rb.velocity + (force / rb.mass) * Time.fixedDeltaTime;
-
-        return finalVelocity;
-    }
-
-    Vector3 CalculateAngularVelocityToReachTarget(Rigidbody rb, Quaternion currentRotation, Quaternion targetRotation)
-    {
-        Quaternion rotationDifference = targetRotation * Quaternion.Inverse(currentRotation);
-        //Quaternion rotationDifference = Quaternion.RotateTowards(currentRotation, targetRotation, 10000);
-        rotationDifference.ToAngleAxis(out float angle, out Vector3 axis);
-
-        print("Angle: " + angle);
-
-        if (angle > 180f)
-            angle -= 360f;
-
-        Vector3 targetAngularVelocity = axis * (angle * Mathf.Deg2Rad / Time.fixedDeltaTime);
-
-        float totalMass = rb.mass + (currentGrabbable ? currentGrabbable.rb.mass : 0);
-
-        // Calculate the torque needed to achieve this angular velocity change
-        Vector3 torque = (targetAngularVelocity - rb.angularVelocity) * totalMass / Time.fixedDeltaTime;
-
-        print("Torque: " + torque);
-
-        // Limit the torque to prevent extreme rotations
-        float maxTorque = rb.mass * 10f; // Adjust this value as needed
-        if (torque.magnitude > maxTorque)
-        {
-            print("Max torque reached");
-            torque = torque.normalized * maxTorque;
-        }
-
-        // Calculate the final angular velocity based on the limited torque
-        Vector3 finalAngularVelocity = rb.angularVelocity + (torque / rb.mass) * Time.fixedDeltaTime;
-
-        print("ang vel: " + finalAngularVelocity);
-
-        return finalAngularVelocity;
     }
 }
