@@ -37,6 +37,8 @@ public class HandPhysics : MonoBehaviour
     {
         //Set rigidbody
         if (rb == null) rb = GetComponent<Rigidbody>();
+
+        transform.position = target.transform.position;
     }
 
     private IEnumerator SetColliders(bool value, float delay)
@@ -56,6 +58,22 @@ public class HandPhysics : MonoBehaviour
         MovePalm();
 
         Grabbing();
+
+        LimitPalmSpeed();
+    }
+
+    private void LimitPalmSpeed()
+    {
+        Rigidbody rb = palmPos.GetComponent<Rigidbody>();
+
+        if (rb.velocity.magnitude > 10)
+        {
+            rb.velocity = rb.velocity.normalized * 10;
+        }
+        if (rb.angularVelocity.magnitude > 10)
+        {
+            rb.angularVelocity = rb.angularVelocity.normalized * 10;
+        }
     }
 
     private void Grabbing()
@@ -139,6 +157,7 @@ public class HandPhysics : MonoBehaviour
                 //Setup fixedjoint
                 fixedJoint = palmPos.gameObject.AddComponent<FixedJoint>();
                 fixedJoint.autoConfigureConnectedAnchor = false;
+                fixedJoint.enablePreprocessing = false;
 
                 Vector3 position;
 
