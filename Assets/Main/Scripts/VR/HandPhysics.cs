@@ -175,7 +175,7 @@ public class HandPhysics : MonoBehaviour
                         joint.connectedBody = grabbable.GetComponent<Rigidbody>();
                         joint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
 
-                        Quaternion rot = Quaternion.FromToRotation(grabbable.transform.forward, transform.forward);
+                        Quaternion rot = Quaternion.FromToRotation(grabbable.grabPoint.transform.forward, transform.forward);
                         palmRot = rot * palmPos.rotation;
                     }
                     else
@@ -183,7 +183,7 @@ public class HandPhysics : MonoBehaviour
                         //fixedJoint.axis = transform.right;
                         joint.connectedBody = grabbable.rb;
                         joint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
-                    }   
+                    }
                 }
                 else
                 {
@@ -198,6 +198,8 @@ public class HandPhysics : MonoBehaviour
             ForceRelease();
         }
     }
+
+    Vector3 velocity = Vector3.zero;
 
     private void MovementAndRotation()
     {
@@ -215,11 +217,17 @@ public class HandPhysics : MonoBehaviour
         Rigidbody palmRB = palmPos.GetComponent<Rigidbody>();
 
         //Phyics position
-        palmRB.velocity = (palmPosTarget.position - palmPos.position) / Time.fixedDeltaTime;
+        //Vector3 dir = palmPosTarget.position - palmPos.position;
+
+        Vector3 desiredVelocity = CalculateVelocityToReachTarget(palmRB, palmPos.position, palmPosTarget.position);
+
+        //print("Desired vel: " + desiredVelocity);
+
+        palmRB.velocity = desiredVelocity;
 
         if (currentGrabbable && currentGrabbable.grabPoint)
         {
-            Quaternion rot = Quaternion.FromToRotation(currentGrabbable.transform.forward, transform.forward);
+            Quaternion rot = Quaternion.FromToRotation(currentGrabbable.grabPoint.transform.forward, transform.forward);
             palmRot = rot * palmPos.rotation;
 
             //palmRot = Quaternion.identity;
@@ -233,12 +241,21 @@ public class HandPhysics : MonoBehaviour
 
         if (currentGrabbable && currentGrabbable.grabPoint)
         {
-            Quaternion rotationDifference2 = palmRot * Quaternion.Inverse(palmPos.rotation);
-            rotationDifference2.ToAngleAxis(out float angle2, out Vector3 axis2);
+            //Quaternion rotationDifference2 = palmRot * Quaternion.Inverse(palmPos.rotation);
+            //rotationDifference2.ToAngleAxis(out float angle2, out Vector3 axis2);
 
-            Vector3 rotation2 = angle2 * axis2;
+            //Vector3 rotation2 = angle2 * axis2;
 
-            palmRB.angularVelocity = (rotation2 * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+            //palmRB.angularVelocity = (rotation2 * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+
+            //HSVR GO BRR
+            //Vector3 targetVelo = (_handTargetTransform.position - _bdy.Position) / Time.fixedDeltaTime;
+            //Vector3 targetRotVelo = HSVR.AngularVelocity(_bdy.Rotation, _handTargetTransform.rotation, Time.fixedDeltaTime);
+
+            //_bdy.Velocity = Vector3.MoveTowards(_bdy.Velocity, targetVelo, HSVR.MAXVELOCITY);
+            //_bdy.AngularVelocity = Vector3.MoveTowards(_bdy.AngularVelocity, targetRotVelo, HSVR.MAXANGULARVELOCITY);
+
+            palmRB.angularVelocity = CalculateAngularVelocityToReachTarget(palmRB, palmPos.rotation, palmPosTarget.rotation);
 
             //palmPos.rotation = palmRot;
         }
@@ -266,5 +283,66 @@ public class HandPhysics : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(palmPosTarget.position, grabCheckSize);
+    }
+
+    Vector3 CalculateVelocityToReachTarget(Rigidbody rb, Vector3 currentPosition, Vector3 targetPosition)
+    {
+        Vector3 displacement = targetPosition - currentPosition;
+
+        // Calculate the velocity needed to cover the distance in one frame
+        Vector3 requiredVelocity = displacement / Time.fixedDeltaTime;
+
+        float totalMass = rb.mass + (currentGrabbable ? currentGrabbable.rb.mass : 0);
+
+        // Calculate the force needed to achieve this velocity change
+        Vector3 force = (requiredVelocity - rb.velocity) * totalMass / Time.fixedDeltaTime;
+
+        // Limit the force to prevent extreme accelerations
+        float maxForce = totalMass * 100f; // Adjust this value as needed
+        if (force.magnitude > maxForce)
+        {
+            force = force.normalized * maxForce;
+        }
+
+        // Calculate the final velocity based on the limited force
+        Vector3 finalVelocity = rb.velocity + (force / rb.mass) * Time.fixedDeltaTime;
+
+        return finalVelocity;
+    }
+
+    Vector3 CalculateAngularVelocityToReachTarget(Rigidbody rb, Quaternion currentRotation, Quaternion targetRotation)
+    {
+        Quaternion rotationDifference = targetRotation * Quaternion.Inverse(currentRotation);
+        //Quaternion rotationDifference = Quaternion.RotateTowards(currentRotation, targetRotation, 10000);
+        rotationDifference.ToAngleAxis(out float angle, out Vector3 axis);
+
+        print("Angle: " + angle);
+
+        if (angle > 180f)
+            angle -= 360f;
+
+        Vector3 targetAngularVelocity = axis * (angle * Mathf.Deg2Rad / Time.fixedDeltaTime);
+
+        float totalMass = rb.mass + (currentGrabbable ? currentGrabbable.rb.mass : 0);
+
+        // Calculate the torque needed to achieve this angular velocity change
+        Vector3 torque = (targetAngularVelocity - rb.angularVelocity) * totalMass / Time.fixedDeltaTime;
+
+        print("Torque: " + torque);
+
+        // Limit the torque to prevent extreme rotations
+        float maxTorque = rb.mass * 10f; // Adjust this value as needed
+        if (torque.magnitude > maxTorque)
+        {
+            print("Max torque reached");
+            torque = torque.normalized * maxTorque;
+        }
+
+        // Calculate the final angular velocity based on the limited torque
+        Vector3 finalAngularVelocity = rb.angularVelocity + (torque / rb.mass) * Time.fixedDeltaTime;
+
+        print("ang vel: " + finalAngularVelocity);
+
+        return finalAngularVelocity;
     }
 }
