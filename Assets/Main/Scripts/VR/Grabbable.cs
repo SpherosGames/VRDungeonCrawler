@@ -8,6 +8,8 @@ public class Grabbable : MonoBehaviour
     public Rigidbody rb;
     public VRSocket socket;
     public Transform grabPoint;
+    public bool twoHanded = false;
+    public bool isGrabbed;
 
     private void Awake()
     {

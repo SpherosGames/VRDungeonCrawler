@@ -16,6 +16,7 @@ public class HandPhysics : MonoBehaviour
     [SerializeField] private float grabCheckSize = 0.1f;
     [SerializeField] private bool useJoint;
     [SerializeField] private Transform palmPosTarget;
+    [SerializeField] private Vector3 offsetRotation;
 
     private Collider[] colliders;
 
@@ -138,6 +139,10 @@ public class HandPhysics : MonoBehaviour
             //Check if there are any valid colliders and check if the first one has a grabbable script on it
             if (colliders.Length > 0 && colliders[0].TryGetComponent(out Grabbable grabbable))
             {
+                if (grabbable.isGrabbed && !grabbable.twoHanded) return;
+
+                grabbable.isGrabbed = true;
+
                 //Socket
                 if (grabbable.socket)
                 {
@@ -192,6 +197,12 @@ public class HandPhysics : MonoBehaviour
 
                         // Set the object's position
                         grabbable.transform.position = newPosition;
+
+                        //grabbable.transform.position -= transform.TransformPoint(palmPos.position);
+
+                        //grabbable.transform.RotateAround(palmPos.position, offsetRotation);
+
+                        //grabbable.transform.position += transform.TransformPoint(palmPos.position);
 
                         // Set up the joint
                         fixedJoint.connectedBody = grabbable.rb;
@@ -258,6 +269,7 @@ public class HandPhysics : MonoBehaviour
     public void ForceRelease()
     {
         currentGrabbable.rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        currentGrabbable.isGrabbed = false;
 
         currentGrabbable.hand = null;
         currentGrabbable = null;

@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &108583718
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -272,6 +272,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   socket: {fileID: 0}
   grabPoint: {fileID: 0}
+  twoHanded: 0
+  isGrabbed: 0
 --- !u!1001 &216078742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -414,6 +416,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   socket: {fileID: 0}
   grabPoint: {fileID: 0}
+  twoHanded: 1
+  isGrabbed: 0
 --- !u!54 &323753108
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -422,7 +426,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323753105}
   serializedVersion: 4
-  m_Mass: 500000
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -628,7 +632,7 @@ Transform:
   m_GameObject: {fileID: 441825374}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.583, y: 1.165, z: 2.519}
+  m_LocalPosition: {x: 0.583, y: 1.165, z: 2.089}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -677,6 +681,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   socket: {fileID: 0}
   grabPoint: {fileID: 0}
+  twoHanded: 0
+  isGrabbed: 0
 --- !u!1 &488740310
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!59 &488740311
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -1118,6 +1124,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   socket: {fileID: 0}
   grabPoint: {fileID: 0}
+  twoHanded: 0
+  isGrabbed: 0
 --- !u!1 &952258544
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,6 +1163,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   socket: {fileID: 0}
   grabPoint: {fileID: 0}
+  twoHanded: 0
+  isGrabbed: 0
 --- !u!54 &952258546
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1406,7 +1416,7 @@ Transform:
   m_GameObject: {fileID: 1287567231}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.181, y: 1.165, z: 2.576}
+  m_LocalPosition: {x: 0.181, y: 1.165, z: 2.146}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1420,7 +1430,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287567231}
   serializedVersion: 4
-  m_Mass: 100
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1455,6 +1465,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   socket: {fileID: 0}
   grabPoint: {fileID: 0}
+  twoHanded: 0
+  isGrabbed: 0
 --- !u!1001 &1378021114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1743,6 +1755,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   socket: {fileID: 0}
   grabPoint: {fileID: 1794997478}
+  twoHanded: 0
+  isGrabbed: 0
 --- !u!65 &1828131334
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1976,7 +1990,6 @@ GameObject:
   - component: {fileID: 1872650441}
   - component: {fileID: 1872650440}
   - component: {fileID: 1872650445}
-  - component: {fileID: 1872650446}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -1992,7 +2005,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872650438}
   serializedVersion: 4
-  m_Mass: 100000
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2091,7 +2104,7 @@ Transform:
   m_GameObject: {fileID: 1872650438}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.077, y: 1.165, z: 2.576}
+  m_LocalPosition: {x: -0.077, y: 1.165, z: 2.146}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2113,19 +2126,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   socket: {fileID: 0}
   grabPoint: {fileID: 0}
---- !u!114 &1872650446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872650438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6729ce932dbe72e48a8e37d325db71e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  intertiaTensor: {x: 10, y: 10, z: 10}
+  twoHanded: 0
+  isGrabbed: 0
 --- !u!1 &1945313322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2577,6 +2579,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 729641582786643231, guid: 86cf4bbda3999844486a9c5251bb10e7,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1779308465699498504, guid: 86cf4bbda3999844486a9c5251bb10e7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2612,6 +2619,11 @@ PrefabInstance:
       propertyPath: palmPosTarget
       value: 
       objectReference: {fileID: 630673454}
+    - target: {fileID: 4255691729451082507, guid: 86cf4bbda3999844486a9c5251bb10e7,
+        type: 3}
+      propertyPath: offsetRotation.y
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 4255691729451082507, guid: 86cf4bbda3999844486a9c5251bb10e7,
         type: 3}
       propertyPath: rotationOffset.y
@@ -3095,6 +3107,11 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4987943211683047369, guid: 94c55a9a96ead1e429e55ba50edb481a,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7169843504512295454, guid: 94c55a9a96ead1e429e55ba50edb481a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3140,6 +3157,11 @@ PrefabInstance:
       propertyPath: palmPosTarget
       value: 
       objectReference: {fileID: 228611742}
+    - target: {fileID: 8973304355057579371, guid: 94c55a9a96ead1e429e55ba50edb481a,
+        type: 3}
+      propertyPath: offsetRotation.y
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 8973304355057579371, guid: 94c55a9a96ead1e429e55ba50edb481a,
         type: 3}
       propertyPath: rotationOffset.y
