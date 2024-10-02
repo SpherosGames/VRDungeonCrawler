@@ -55,11 +55,11 @@ public class HandPhysics : MonoBehaviour
     {
         MovementAndRotation();
 
-        MovePalm();
+        //MovePalm();
 
         Grabbing();
 
-        LimitPalmSpeed();
+        //LimitPalmSpeed();
     }
 
     private void LimitPalmSpeed()
@@ -155,16 +155,16 @@ public class HandPhysics : MonoBehaviour
                 if (!useJoint) return;
 
                 //Setup fixedjoint
-                fixedJoint = palmPos.gameObject.AddComponent<FixedJoint>();
+                fixedJoint = gameObject.AddComponent<FixedJoint>();
                 fixedJoint.autoConfigureConnectedAnchor = false;
-                fixedJoint.enablePreprocessing = false;
 
                 Vector3 position;
 
                 //When there is a grabpoint, set connectedanchor there instead
                 if (grabbable.grabPoint != null)
                 {
-                    position = grabbable.grabPoint.position;
+                    //position = grabbable.grabPoint.position;
+                    position = palmPosTarget.position;
                 }
                 else
                 {
@@ -177,6 +177,23 @@ public class HandPhysics : MonoBehaviour
 
                     if (grabbable.grabPoint)
                     {
+                        // Store the original position of the grabbable object
+                        Vector3 originalPosition = grabbable.transform.position;
+
+                        // Calculate and apply rotation
+                        Quaternion rotationDifference = transform.rotation * Quaternion.Inverse(grabbable.grabPoint.rotation);
+                        grabbable.transform.rotation = rotationDifference * grabbable.transform.rotation;
+
+                        // Calculate the offset from the grab point to the object's center
+                        Vector3 grabOffset = grabbable.transform.position - grabbable.grabPoint.position;
+
+                        // Calculate the new position
+                        Vector3 newPosition = position + transform.rotation * Quaternion.Inverse(grabbable.grabPoint.rotation) * grabOffset;
+
+                        // Set the object's position
+                        grabbable.transform.position = newPosition;
+
+                        // Set up the joint
                         fixedJoint.connectedBody = grabbable.rb;
                         fixedJoint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
 
