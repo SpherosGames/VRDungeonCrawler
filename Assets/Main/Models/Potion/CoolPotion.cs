@@ -4,25 +4,18 @@ using UnityEngine;
 
 public class CoolPotion : MonoBehaviour
 {
-    [SerializeField] private bool IsLatched = true;
-     private float FluidLevel;
-    Wobble wobblescript;
-
-    void Start()
-    {
-
-       
-    }
-
+    public ParticleSystem potionParticles;  // Reference to the Particle System
+    
 
     void Update()
     {
-        while (true)
+        if (transform.rotation.x > -130f)
         {
-            wobblescript = GetComponentInChildren<Wobble>();
-            FluidLevel = wobblescript.rend.material.GetFloat("_Fill");
-            Debug.Log(FluidLevel);
+            potionParticles.Play();
         }
-       
+        else
+        {
+            potionParticles.Stop();
+        }
     }
 }
