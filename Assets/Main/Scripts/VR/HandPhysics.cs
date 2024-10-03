@@ -16,7 +16,6 @@ public class HandPhysics : MonoBehaviour
     [SerializeField] private float grabCheckSize = 0.1f;
     [SerializeField] private bool useJoint;
     [SerializeField] private Transform palmPosTarget;
-    [SerializeField] private Vector3 offsetRotation;
 
     private Collider[] colliders;
 
@@ -197,12 +196,6 @@ public class HandPhysics : MonoBehaviour
 
                         // Set the object's position
                         grabbable.transform.position = newPosition;
-
-                        //grabbable.transform.position -= transform.TransformPoint(palmPos.position);
-
-                        //grabbable.transform.RotateAround(palmPos.position, offsetRotation);
-
-                        //grabbable.transform.position += transform.TransformPoint(palmPos.position);
 
                         // Set up the joint
                         fixedJoint.connectedBody = grabbable.rb;
