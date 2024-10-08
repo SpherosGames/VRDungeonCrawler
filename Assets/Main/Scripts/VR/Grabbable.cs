@@ -32,15 +32,15 @@ public class Grabbable : MonoBehaviour
     {
         if (isSleeping || isGrabbed || keepAwake) return;
 
-        print("Update go brr");
-        print(rb.velocity.magnitude);
+        //print("Update go brr");
+        //print(rb.velocity.magnitude);
 
         if (rb.velocity.magnitude < velocityThreshold)
         {
             sleepTimer += Time.fixedDeltaTime;
             if (sleepTimer >= sleepDelay)
             {
-                print("Sleep");
+                //print("Sleep");
                 rb.Sleep();
                 isSleeping = true;
             }
