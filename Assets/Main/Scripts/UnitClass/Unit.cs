@@ -14,13 +14,13 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public void Die()
+    public virtual void Die()
     {
         Debug.Log($"{Name} has died");
         Destroy(gameObject);
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         Health = Mathf.Max(0, Health - damage);
         Debug.Log($"{Name} took {damage} damage. Current health: {Health}");

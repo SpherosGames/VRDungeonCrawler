@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class VRSocket : MonoBehaviour
 {
@@ -14,12 +15,14 @@ public class VRSocket : MonoBehaviour
     [SerializeField] private RigidbodyConstraints contraintsp2;
     [SerializeField] private RigidbodyConstraints contraintsp3;
 
+    [SerializeField] private UnityEvent OnOpenChest;
+
     public float ReleaseDistance => releaseDistance;
 
     private bool maySocket;
     private float reSocketTimer;
 
-    private GameObject socketedObject;
+    public GameObject socketedObject;
     private Grabbable socketedGrabbable;
 
     private void OnTriggerEnter(Collider other)
@@ -46,6 +49,11 @@ public class VRSocket : MonoBehaviour
                 maySocket = true;
                 reSocketTimer = reSocketDelay;
             }
+        }
+
+        if(socketedObject)
+        {
+            print(socketedObject.transform.eulerAngles);
         }
     }
 
@@ -81,7 +89,10 @@ public class VRSocket : MonoBehaviour
         socketedObject = _socketedObject.gameObject;
         socketedGrabbable = socketedObject.GetComponent<Grabbable>();
         //Release the socketable from the hand
-        socketedGrabbable.hand.ForceRelease();
+        if (socketedGrabbable.hand)
+        {
+            socketedGrabbable.hand.ForceRelease();
+        }
 
         //Set gravity of socketable off
         if (socketedGrabbable.rb)
