@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class RandomBookShelf : MonoBehaviour
 {
@@ -55,7 +54,7 @@ public class RandomBookShelf : MonoBehaviour
 
             if (shelfDone)
             {
-                print("Calculate new y pos");
+                //print("Calculate new y pos");
                 currentY -= distanceBetweenShelfs;
                 shelfDone = false;
 
@@ -81,7 +80,6 @@ public class RandomBookShelf : MonoBehaviour
 
             Vector3 position = topLeftShelfPoint.position + rotatedGapPosition;
             position.y = currentY;
-            print(gapPosition);
 
             Debug.DrawRay(position, Vector3.up, Color.blue, 30);
 
@@ -100,18 +98,18 @@ public class RandomBookShelf : MonoBehaviour
 
             if (MaySpawn(position, rot, worldScale))
             {
-                print("Spawned book");
+                //print("Spawned book");
                 bookCount++;
                 GenerateBook(position, rot, localScale);
             }
             else
             {
-                print("Failed to spawn book...");
+                //print("Failed to spawn book...");
             }
 
             if (tries >= maxTries)
             {
-                print("Timeout");
+                //print("Timeout");
                 return;
             }
         }
@@ -124,7 +122,7 @@ public class RandomBookShelf : MonoBehaviour
         GameObject spawnedBook = Instantiate(bookPrefab, pos, rot, bookParent);
         spawnedBook.transform.localScale = scale;
         Rigidbody rb = spawnedBook.GetComponent<Rigidbody>();
-        rb.isKinematic = true;
+        //rb.isKinematic = true;
         MeshRenderer mesh = spawnedBook.GetComponent<MeshRenderer>();
         mesh.material = material;
     }
@@ -135,15 +133,17 @@ public class RandomBookShelf : MonoBehaviour
     {
         pos.y -= scale.y / 2;
 
-        bool foundAnotherBook = Physics.CheckBox(pos, scale / 2, Quaternion.identity, bookLayer);
+        bool foundAnotherBook = Physics.CheckBox(pos, scale / 4, Quaternion.identity, bookLayer);
 
         bookShelfsGoBrr.Add(Matrix4x4.TRS(pos, rotation, scale));
 
-        print("Found another book: " + foundAnotherBook);
+        //print("Found another book: " + foundAnotherBook);
 
         if (foundAnotherBook) return false;
 
-        if (pos.x >= bookShelfLocalBounds.max.x)
+        Vector3 localPos = transform.InverseTransformPoint(pos);
+
+        if (localPos.x >= bookShelfLocalBounds.max.x)
         {
             shelfDone = true;
             bookCount = 0;
@@ -154,12 +154,12 @@ public class RandomBookShelf : MonoBehaviour
         return true;
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    for (int i = 0; i < bookShelfsGoBrr.Count; i++)
-    //    {
-    //        Gizmos.matrix = bookShelfsGoBrr[i];
-    //        Gizmos.DrawCube(Vector3.zero, Vector3.one);
-    //    }
-    //}
+    private void OnDrawGizmos()
+    {
+        for (int i = 0; i < bookShelfsGoBrr.Count; i++)
+        {
+            Gizmos.matrix = bookShelfsGoBrr[i];
+            Gizmos.DrawCube(Vector3.zero, Vector3.one);
+        }
+    }
 }
