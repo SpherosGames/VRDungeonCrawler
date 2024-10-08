@@ -45,8 +45,7 @@ public class VRPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        bodyCollider.height = Mathf.Clamp(playerHead.position.y, bodyHeightLimits.x, bodyHeightLimits.y);
-        bodyCollider.center = new Vector3(playerHead.localPosition.x, bodyCollider.height / 2, playerHead.localPosition.z);
+        Crouching();
 
         Sprinting();
 
@@ -57,6 +56,12 @@ public class VRPlayerMovement : MonoBehaviour
         if (snapTurn) return;
 
         SmoothRotation();
+    }
+
+    private void Crouching()
+    {
+        bodyCollider.height = Mathf.Clamp(playerHead.position.y, bodyHeightLimits.x, bodyHeightLimits.y);
+        bodyCollider.center = new Vector3(playerHead.localPosition.x, bodyCollider.height / 2, playerHead.localPosition.z);
     }
 
     private void Sprinting()
