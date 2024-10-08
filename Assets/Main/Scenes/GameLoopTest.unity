@@ -180,11 +180,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2964208623171399835, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+    - target: {fileID: 2285830695010482872, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
-      propertyPath: m_TagString
-      value: Target
-      objectReference: {fileID: 0}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 2091310789}
     - target: {fileID: 4741988324052386136, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
       propertyPath: m_Name
@@ -193,11 +193,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2964208623171399835, guid: f144e2e3cd05f3a41838e58b81f32ea2,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1100669471}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f144e2e3cd05f3a41838e58b81f32ea2, type: 3}
 --- !u!4 &43842773 stripped
 Transform:
@@ -915,29 +911,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLayerNum: 12
   sceneName: WinScreen
---- !u!1 &1100669466 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2964208623171399835, guid: f144e2e3cd05f3a41838e58b81f32ea2,
-    type: 3}
-  m_PrefabInstance: {fileID: 43842772}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1100669471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100669466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cb0415330fb6fb479f76db557af696c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Player
-  Health: 100
-  Speed: 5
-  loseSceneName: LoseRoom
-  healthSlider: {fileID: 0}
 --- !u!1001 &1320833098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1029,7 +1002,7 @@ PrefabInstance:
     - target: {fileID: 7548789760577353205, guid: 1a30acfea8a6e3247854d82cbe67c46a,
         type: 3}
       propertyPath: VisionObstructingLayer.m_Bits
-      value: 4097
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1271,6 +1244,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5025115231966803913, guid: 94c55a9a96ead1e429e55ba50edb481a,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthSlider
+      objectReference: {fileID: 0}
     - target: {fileID: 8294515892480960998, guid: 94c55a9a96ead1e429e55ba50edb481a,
         type: 3}
       propertyPath: m_Name
@@ -1297,6 +1275,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2091310787}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2091310789 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6537910418824843523, guid: 94c55a9a96ead1e429e55ba50edb481a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2091310787}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9082840160354360659
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,9 +4,10 @@ public class Unit : MonoBehaviour
 {
     public string Name;
     public float Health = 100f;
+    public float MaxHealth = 100f;
     public float Speed = 5;
 
-    private void Update()
+    public virtual void Update()
     {
         if (Health <= 0)
         {

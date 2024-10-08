@@ -383,9 +383,10 @@ GameObject:
   - component: {fileID: 8114538837139019700}
   - component: {fileID: 8118175836125429116}
   - component: {fileID: 6770217039488987794}
+  - component: {fileID: 2285830695010482872}
   m_Layer: 12
   m_Name: XR Origin (XR Rig)
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -465,6 +466,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &2285830695010482872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2964208623171399835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cb0415330fb6fb479f76db557af696c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Player
+  Health: 100
+  MaxHealth: 100
+  Speed: 5
+  loseSceneName: LoseRoom
+  healthSlider: {fileID: 0}
 --- !u!1 &3311258874411185050
 GameObject:
   m_ObjectHideFlags: 0
