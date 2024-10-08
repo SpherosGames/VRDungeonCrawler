@@ -18,6 +18,11 @@ public class VRPlayerMovement : MonoBehaviour
     [SerializeField] private Transform directionSource;
     [SerializeField] private Transform pivotPoint;
 
+    [Header("Body Collider")]
+    [SerializeField] private Transform playerHead;
+    [SerializeField] private CapsuleCollider bodyCollider;
+    [SerializeField] private Vector2 bodyHeightLimits = new Vector2(0.5f, 2f);
+
     private Vector2 moveInputAxis;
     private float inputTurnAxis;
 
@@ -40,9 +45,10 @@ public class VRPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        bool isSprinting = sprintButton.action.ReadValue<float>() > 0.5f;
+        bodyCollider.height = Mathf.Clamp(playerHead.position.y, bodyHeightLimits.x, bodyHeightLimits.y);
+        bodyCollider.center = new Vector3(playerHead.localPosition.x, bodyCollider.height / 2, playerHead.localPosition.z);
 
-        moveSpeed = isSprinting ? sprintSpeed : walkSpeed;
+        Sprinting();
 
         Movement();
 
@@ -51,6 +57,13 @@ public class VRPlayerMovement : MonoBehaviour
         if (snapTurn) return;
 
         SmoothRotation();
+    }
+
+    private void Sprinting()
+    {
+        bool isSprinting = sprintButton.action.ReadValue<float>() > 0.5f;
+
+        moveSpeed = isSprinting ? sprintSpeed : walkSpeed;
     }
 
     private void SmoothRotation()

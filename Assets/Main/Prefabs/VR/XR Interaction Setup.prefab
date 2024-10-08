@@ -382,9 +382,7 @@ GameObject:
   - component: {fileID: 572520673027607909}
   - component: {fileID: 8114538837139019700}
   - component: {fileID: 8118175836125429116}
-  - component: {fileID: 5270648296030843774}
   - component: {fileID: 6770217039488987794}
-  - component: {fileID: 7382363348354389182}
   m_Layer: 12
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -401,11 +399,12 @@ Transform:
   m_GameObject: {fileID: 2964208623171399835}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.999}
+  m_LocalPosition: {x: 0, y: 0.463, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3808199904261798872}
+  - {fileID: 3122931452460713117}
   m_Father: {fileID: 697043533033433889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8114538837139019700
@@ -421,9 +420,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 2857648575618757635}
-  m_OriginBaseGameObject: {fileID: 2964208623171399835}
+  m_OriginBaseGameObject: {fileID: 4741988324052386136}
   m_CameraFloorOffsetObject: {fileID: 3311258874411185050}
-  m_RequestedTrackingOriginMode: 0
+  m_RequestedTrackingOriginMode: 2
   m_CameraYOffset: 1.1176
 --- !u!114 &8118175836125429116
 MonoBehaviour:
@@ -439,64 +438,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionAssets:
   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
---- !u!114 &5270648296030843774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2964208623171399835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a0616d496df9341b662439dd916994, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 0
-  sprintSpeed: 0
-  sprintButton:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Sprint Button
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: d231908a-be93-43a9-a951-d07165c0c703
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  turnSpeed: 0
-  snapTurn: 0
-  snapTurnAngle: 0
-  snapTurnCooldown: 0
-  moveInput:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Move Input
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 4b9c93ce-042c-48c5-8844-11211c6edec1
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
-  turnInput:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Turn Input
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 9b8504b1-34ab-4e0b-b222-6222e44d0bb3
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  rb: {fileID: 6770217039488987794}
-  directionSource: {fileID: 132388940681249107}
-  pivotPoint: {fileID: 0}
 --- !u!54 &6770217039488987794
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -506,7 +447,7 @@ Rigidbody:
   m_GameObject: {fileID: 2964208623171399835}
   serializedVersion: 4
   m_Mass: 4
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -519,34 +460,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
---- !u!136 &7382363348354389182
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2964208623171399835}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.47509
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.737545, z: 0}
 --- !u!1 &3311258874411185050
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,6 +554,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 697043533033433889}
+  - component: {fileID: 7072096583862972683}
   m_Layer: 0
   m_Name: XR Interaction Setup
   m_TagString: Untagged
@@ -662,6 +581,69 @@ Transform:
   - {fileID: 572520673027607909}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7072096583862972683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4741988324052386136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a0616d496df9341b662439dd916994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 3
+  sprintSpeed: 5
+  sprintButton:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Sprint Button
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: d231908a-be93-43a9-a951-d07165c0c703
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 7407727582901167953, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  turnSpeed: 60
+  snapTurn: 0
+  snapTurnAngle: 30
+  snapTurnCooldown: 0.5
+  moveInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Move Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 4b9c93ce-042c-48c5-8844-11211c6edec1
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  turnInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Turn Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 9b8504b1-34ab-4e0b-b222-6222e44d0bb3
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  rb: {fileID: 6770217039488987794}
+  directionSource: {fileID: 132388940681249107}
+  pivotPoint: {fileID: 132388940681249107}
+  playerHead: {fileID: 132388940681249107}
+  bodyCollider: {fileID: 8047372491740212349}
+  bodyHeightLimits: {x: 0.5, y: 2}
 --- !u!1 &5035768664723494542
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,6 +966,61 @@ MonoBehaviour:
     m_Reference: {fileID: -6447266317303757838, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   m_ButtonPressPoint: 0.5
+--- !u!1 &6585313206182117131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3122931452460713117}
+  - component: {fileID: 8047372491740212349}
+  m_Layer: 12
+  m_Name: BodyCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3122931452460713117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6585313206182117131}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.807, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 572520673027607909}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8047372491740212349
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6585313206182117131}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.17424989
+  m_Height: 1.9379952
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7913383739277536534
 GameObject:
   m_ObjectHideFlags: 0
