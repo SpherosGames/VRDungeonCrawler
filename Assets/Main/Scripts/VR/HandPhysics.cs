@@ -138,6 +138,8 @@ public class HandPhysics : MonoBehaviour
             //Check if there are any valid colliders and check if the first one has a grabbable script on it
             if (colliders.Length > 0 && colliders[0].TryGetComponent(out Grabbable grabbable))
             {
+                grabbable.WakeUp();
+
                 if (grabbable.isGrabbed && !grabbable.twoHanded) return;
 
                 grabbable.isGrabbed = true;
