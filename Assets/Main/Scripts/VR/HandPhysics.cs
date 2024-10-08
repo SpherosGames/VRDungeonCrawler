@@ -274,6 +274,6 @@ public class HandPhysics : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(palmPosTarget.position, grabCheckSize);
+        if (palmPosTarget) Gizmos.DrawWireSphere(palmPosTarget.position, grabCheckSize);
     }
 }
