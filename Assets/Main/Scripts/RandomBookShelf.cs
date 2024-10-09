@@ -121,7 +121,7 @@ public class RandomBookShelf : MonoBehaviour
 
         GameObject spawnedBook = Instantiate(bookPrefab, pos, rot, bookParent);
         spawnedBook.transform.localScale = scale;
-        Rigidbody rb = spawnedBook.GetComponent<Rigidbody>();
+        //Rigidbody rb = spawnedBook.GetComponent<Rigidbody>();
         //rb.isKinematic = true;
         MeshRenderer mesh = spawnedBook.GetComponent<MeshRenderer>();
         mesh.material = material;
