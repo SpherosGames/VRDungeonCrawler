@@ -6,124 +6,146 @@ using UnityEngine;
 public class FieldOfView : MonoBehaviour
 {
     public Material VisionConeMaterial;
-    public float VisionRange;
-    public float VisionAngle;
-    public LayerMask VisionObstructingLayer; // Layer with objects that obstruct the enemy view, like walls, for example
-    public LayerMask TargetLayer; // Layer for potential targets
-    public int VisionConeResolution = 120; // The vision cone will be made up of triangles, the higher this value is the prettier the vision cone will be
+    public float VisionRange = 10f;
+    public float VisionAngle = 90f;
+    public LayerMask VisionObstructingLayer;
+    public LayerMask TargetLayer;
+    public int RadialResolution = 20;  // Number of segments around the cone
     public Mesh VisionConeMesh;
     public MeshFilter MeshFilter_;
     public bool HasTarget;
     public List<GameObject> currentTargets = new List<GameObject>();
     public GameObject CurrentTarget;
-    private List<GameObject> enteredTargets = new List<GameObject>(); 
-    public List<GameObject> potentialTargets = new List<GameObject>(); 
+    private List<GameObject> enteredTargets = new List<GameObject>();
+    public List<GameObject> potentialTargets = new List<GameObject>();
 
-    // Create all of these variables, most of them are self explanatory, but for the ones that aren't i've added a comment to clue you in on what they do
-    // for the ones that you dont understand dont worry, just follow along
-    void Start()
+    private void Start()
     {
-
         transform.AddComponent<MeshRenderer>().material = VisionConeMaterial;
         MeshFilter_ = transform.AddComponent<MeshFilter>();
         VisionConeMesh = new Mesh();
-        VisionAngle = 1.24f;
     }
 
-    void Update()
+    private void Update()
     {
-       
-        if (currentTargets.Count > 0)
-        {
-            HasTarget = true;
-        }
-        else
-        {
-            HasTarget = false;
-        }
-        enteredTargets.Clear(); 
-        potentialTargets.Clear(); 
+        HasTarget = currentTargets.Count > 0;
+        enteredTargets.Clear();
+        potentialTargets.Clear();
 
         DrawVisionCone();
-
-        
-        foreach (GameObject target in currentTargets)
-        {
-            if (!IsInView(target.transform.position, target))
-            {
-           
-                currentTargets.Remove(target);
-                Debug.Log("Target left: " + target.name);
-            }
-        }
-
-        foreach (GameObject target in potentialTargets)
-        {
-            if (!currentTargets.Contains(target) && IsInView(target.transform.position, target))
-            {
-      
-                currentTargets.Add(target);
-                enteredTargets.Add(target);
-                CurrentTarget = target;
-                GetComponentInParent<EnemyAttack>().GoToTarget(target.transform);
-                
-                Debug.Log("Target entered: " + target.name);
-            }
-        }
+        CheckTargets();
     }
 
-    void DrawVisionCone()
+    private void DrawVisionCone()
     {
-        int[] triangles = new int[(VisionConeResolution - 1) * 3];
-        Vector3[] Vertices = new Vector3[VisionConeResolution + 1];
-        Vertices[0] = Vector3.zero;
-        float Currentangle = -VisionAngle / 2;
-        float angleIcrement = VisionAngle / (VisionConeResolution - 1);
-        float Sine;
-        float Cosine;
+        List<Vector3> vertices = new List<Vector3>();
+        List<int> triangles = new List<int>();
 
-        for (int i = 0; i < VisionConeResolution; i++)
+        // Add center vertex (cone apex)
+        vertices.Add(Vector3.zero);
+
+        float angleStep = 2f * Mathf.PI / RadialResolution;
+        float coneRadius = Mathf.Tan(VisionAngle * 0.5f * Mathf.Deg2Rad) * VisionRange;
+
+        // Generate vertices for the base of the cone
+        for (int i = 0; i < RadialResolution; i++)
         {
-            Sine = Mathf.Sin(Currentangle);
-            Cosine = Mathf.Cos(Currentangle);
-            Vector3 RaycastDirection = (transform.forward * Cosine) + (transform.right * Sine);
-            Vector3 VertForward = (Vector3.forward * Cosine) + (Vector3.right * Sine);
+            float angle = i * angleStep;
 
-            if (Physics.Raycast(transform.position, RaycastDirection, out RaycastHit hit, VisionRange, TargetLayer))
+            // Calculate the point on the circle at the base of the cone
+            float x = Mathf.Cos(angle) * coneRadius;
+            float y = Mathf.Sin(angle) * coneRadius;
+
+            Vector3 basePoint = transform.forward * VisionRange + transform.right * x + transform.up * y;
+            Vector3 rayDirection = (basePoint - transform.position).normalized;
+
+            // Raycast to check for obstacles
+            if (Physics.Raycast(transform.position, rayDirection, out RaycastHit hit, VisionRange, VisionObstructingLayer))
             {
-     
-                potentialTargets.Add(hit.collider.gameObject);
-                Vertices[i + 1] = VertForward * hit.distance;
+                vertices.Add(transform.InverseTransformPoint(hit.point));
+
+                // Check if hit object is a potential target
+                if (((1 << hit.collider.gameObject.layer) & TargetLayer) != 0)
+                {
+                    potentialTargets.Add(hit.collider.gameObject);
+                }
             }
             else
             {
-       
-                Vertices[i + 1] = VertForward * VisionRange;
+                // If no hit, use the point on the cone base
+                vertices.Add(transform.InverseTransformDirection(basePoint));
             }
-
-            Currentangle += angleIcrement;
         }
 
-        for (int i = 0, j = 0; i < triangles.Length; i += 3, j++)
+        // Generate triangles
+        for (int i = 0; i < RadialResolution; i++)
         {
-            triangles[i] = 0;
-            triangles[i + 1] = j + 1;
-            triangles[i + 2] = j + 2;
+            int nextIndex = (i + 1) % RadialResolution;
+
+            // Triangle from apex to base segment
+            triangles.Add(0); // apex
+            triangles.Add(i + 1);
+            triangles.Add(nextIndex + 1);
         }
 
         VisionConeMesh.Clear();
-        VisionConeMesh.vertices = Vertices;
-        VisionConeMesh.triangles = triangles;
+        VisionConeMesh.SetVertices(vertices);
+        VisionConeMesh.SetTriangles(triangles, 0);
+        VisionConeMesh.RecalculateNormals();
         MeshFilter_.mesh = VisionConeMesh;
     }
 
-    bool IsInView(Vector3 targetPosition, GameObject target)
+    private void CheckTargets()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit, VisionRange, TargetLayer))
+        // Remove targets that are no longer in view
+        currentTargets.RemoveAll(target => target == null || !IsInView(target.transform.position));
+
+        // Check for new targets
+        Collider[] potentialColliders = Physics.OverlapSphere(transform.position, VisionRange, TargetLayer);
+        foreach (Collider collider in potentialColliders)
         {
-            return hit.collider.gameObject == target; 
+            GameObject target = collider.gameObject;
+            if (!currentTargets.Contains(target) && IsInView(target.transform.position))
+            {
+                currentTargets.Add(target);
+                enteredTargets.Add(target);
+                CurrentTarget = target;
+                GetComponentInParent<EnemyAttack>()?.GoToTarget(target.transform);
+                Debug.Log($"Target entered: {target.name}");
+            }
+        }
+    }
+
+    private bool IsInView(Vector3 targetPosition)
+    {
+        Vector3 directionToTarget = targetPosition - transform.position;
+        float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
+
+        if (directionToTarget.magnitude <= VisionRange && angleToTarget <= VisionAngle * 0.5f)
+        {
+            // Check if there are obstacles between
+            if (Physics.Raycast(transform.position, directionToTarget, out RaycastHit hit, VisionRange, VisionObstructingLayer | TargetLayer))
+            {
+                return ((1 << hit.collider.gameObject.layer) & TargetLayer) != 0;
+            }
         }
         return false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Visualize the cone in the editor
+        Gizmos.color = Color.yellow;
+        Vector3 forward = transform.forward * VisionRange;
+        float radius = Mathf.Tan(VisionAngle * 0.5f * Mathf.Deg2Rad) * VisionRange;
+        Vector3 right = transform.right * radius;
+        Vector3 up = transform.up * radius;
+
+        for (int i = 0; i < 360; i += 30)
+        {
+            float angle = i * Mathf.Deg2Rad;
+            Vector3 point = forward + right * Mathf.Cos(angle) + up * Mathf.Sin(angle);
+            Gizmos.DrawLine(transform.position, transform.position + point);
+        }
     }
 }

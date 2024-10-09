@@ -1,32 +1,35 @@
 using System.Collections;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAttack : MonoBehaviour
 {
+    [Header("Attack Settings")]
     public Transform currentTarget;
     public float AttackDelay = 3f;
     public float attackRange = 5f;
     public int attackDamage = 10;
-    public float damageDelay = 0.5f;
 
-    private NavMeshAgent AttackinAgent;
+    [Header("Animation")]
+    public float attackAnimationDuration = 1.0f; // Should match your actual animation length
+    public float damageDelay = 0.5f; // Time into attack animation when damage is dealt
+
+    private NavMeshAgent AttackingAgent;
     private Animator animator;
     private float lastAttackTime;
     private bool isFollowing;
     private bool isAttacking = false;
 
+    // Animator parameter hashes for better performance
     private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
     private static readonly int IsMoving = Animator.StringToHash("IsMoving");
     private static readonly int TriggerAttack = Animator.StringToHash("TriggerAttack");
 
     void Start()
     {
-        AttackinAgent = GetComponent<NavMeshAgent>();
+        AttackingAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         lastAttackTime = -AttackDelay;
-        //SetIdleState();
     }
 
     public void GoToTarget(Transform target)
@@ -35,7 +38,7 @@ public class EnemyAttack : MonoBehaviour
         if (currentTarget != null)
         {
             isFollowing = true;
-            AttackinAgent.SetDestination(currentTarget.position);
+            AttackingAgent.SetDestination(currentTarget.position);
             SetWalkingState();
         }
     }
@@ -49,20 +52,20 @@ public class EnemyAttack : MonoBehaviour
             // If out of attack range, move towards the target
             if (distanceToTarget > attackRange)
             {
-                AttackinAgent.isStopped = false;
-                AttackinAgent.SetDestination(currentTarget.position);
-                SetWalkingState();  // Should set IsMoving to true
+                AttackingAgent.isStopped = false;
+                AttackingAgent.SetDestination(currentTarget.position);
+                SetWalkingState();
             }
             else
             {
                 // If within attack range, check for attacking
-                AttackinAgent.isStopped = true;
-                Attacking();  // Handles attack state
+                AttackingAgent.isStopped = true;
+                Attacking();
             }
         }
         else
         {
-            SetIdleState();  // If not following, go to idle
+            SetIdleState();
         }
     }
 
@@ -80,6 +83,8 @@ public class EnemyAttack : MonoBehaviour
 
     bool CanAttack()
     {
+        if (currentTarget == null) return false;
+
         float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
         float timeSinceLastAttack = Time.time - lastAttackTime;
         return distanceToTarget <= attackRange && timeSinceLastAttack >= AttackDelay && !isAttacking;
@@ -90,52 +95,90 @@ public class EnemyAttack : MonoBehaviour
         isAttacking = true;
         SetAttackingState();
         lastAttackTime = Time.time;
-        AttackinAgent.isStopped = true;
-        StartCoroutine(DealDamageAfterDelay());
+        AttackingAgent.isStopped = true;
+        StartCoroutine(AttackSequence());
     }
 
-    IEnumerator DealDamageAfterDelay()
+    IEnumerator AttackSequence()
     {
+        // Trigger attack animation
+        animator.SetTrigger(TriggerAttack);
+
+        // Wait for damageDelay before dealing damage
         yield return new WaitForSeconds(damageDelay);
+
+        // Deal damage
         DealDamage();
+
+        // Wait for the remaining animation duration
+        float remainingDuration = attackAnimationDuration - damageDelay;
+        if (remainingDuration > 0)
+        {
+            yield return new WaitForSeconds(remainingDuration);
+        }
+
+        // End attack state
         isAttacking = false;
-        SetIdleState();
-        AttackinAgent.isStopped = false;
+
+        // Check if we should return to walking or idle
+        if (currentTarget != null && Vector3.Distance(transform.position, currentTarget.position) > attackRange)
+        {
+            SetWalkingState();
+            AttackingAgent.isStopped = false;
+        }
+        else
+        {
+            SetIdleState();
+        }
     }
 
     void DealDamage()
     {
+        if (currentTarget == null) return;
+
         float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
-        if (distanceToTarget <= attackRange && currentTarget != null)
+        if (distanceToTarget <= attackRange)
         {
             Unit targetUnit = currentTarget.GetComponentInParent<Unit>();
             if (targetUnit != null)
             {
                 targetUnit.TakeDamage(attackDamage);
             }
-
         }
+    }
+
+    // This method can be called by an animation event if you prefer
+    public void OnAnimationDamageFrame()
+    {
+        DealDamage();
     }
 
     void SetAttackingState()
     {
-        animator.SetBool(IsAttacking, true);  // Set to attacking
+        animator.SetBool(IsAttacking, true);
         animator.SetBool(IsMoving, false);
-        animator.SetTrigger(TriggerAttack);  // Trigger attack
+        animator.SetTrigger(TriggerAttack);
         Debug.Log("Setting Attacking State");
     }
 
     void SetWalkingState()
     {
         animator.SetBool(IsAttacking, false);
-        animator.SetBool(IsMoving, true);  // Set to walking
+        animator.SetBool(IsMoving, true);
         Debug.Log("Setting Walking State");
     }
 
     void SetIdleState()
     {
         animator.SetBool(IsAttacking, false);
-        animator.SetBool(IsMoving, false);  // Set to idle
+        animator.SetBool(IsMoving, false);
         Debug.Log("Setting Idle State");
+    }
+
+    // Visualization for attack range in editor
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
