@@ -9,6 +9,7 @@ public class StandInArea : MonoBehaviour
     [SerializeField] private UnityEvent OnEnoughTimeIn;
     [SerializeField] private Gradient ChangeColorOnTime;
     [SerializeField] private float TimeBeforeUse;
+    [SerializeField] private float ParticleGravityIncrease = 1;
 
     [Tooltip("The cooldown between going back")]
     [SerializeField] private float Cooldown;
@@ -79,10 +80,34 @@ public class StandInArea : MonoBehaviour
     private void ChangeParticleColor()
     {
         //Get current color
-        Color CurrentColor = ChangeColorOnTime.Evaluate(CurrentTime / 5);
+        Color CurrentColor = ChangeColorOnTime.Evaluate(CurrentTime / TimeBeforeUse);
 
-        //Get the main
+        //Get the main and emission
         ParticleSystem.MainModule main = Particles.main;
+        ParticleSystem.EmissionModule Emission = Particles.emission;
+
+        //if it wont effect it badly and we actually want the particles to go up
+        if(-(CurrentTime / TimeBeforeUse) < 0 && ParticleGravityIncrease != 1)
+        {
+            //Up the gravity to increase wall height
+            main.gravityModifier = -(CurrentTime / 100) * ParticleGravityIncrease;
+
+            //Increase amount of particles if the increase is above 1
+            if (((CurrentTime * ParticleGravityIncrease) / TimeBeforeUse > 1))
+            {
+                Emission.rateOverTime = 2000 * ((CurrentTime * ParticleGravityIncrease) / TimeBeforeUse);
+            }
+            else
+            {
+                Emission.rateOverTime = 2000;
+            }
+        }
+        else
+        {
+            //Default values
+            main.gravityModifier = 0;
+            Emission.rateOverTime = 2000;
+        }
 
         //Changes its color to current color
         main.startColor = CurrentColor;
