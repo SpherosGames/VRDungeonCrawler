@@ -5,7 +5,9 @@ using UnityEngine.InputSystem;
 
 public class VRPlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float sprintSpeed;
+    [SerializeField] private InputActionProperty sprintButton;
     [SerializeField] private float turnSpeed;
     [SerializeField] private bool snapTurn;
     [SerializeField] private float snapTurnAngle;
@@ -16,10 +18,17 @@ public class VRPlayerMovement : MonoBehaviour
     [SerializeField] private Transform directionSource;
     [SerializeField] private Transform pivotPoint;
 
+    [Header("Body Collider")]
+    [SerializeField] private Transform playerHead;
+    [SerializeField] private CapsuleCollider bodyCollider;
+    [SerializeField] private Vector2 bodyHeightLimits = new Vector2(0.5f, 2f);
+
     private Vector2 moveInputAxis;
     private float inputTurnAxis;
 
     private float snapTurnTimer;
+
+    private float moveSpeed;
 
     private void Awake()
     {
@@ -36,6 +45,59 @@ public class VRPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Crouching();
+
+        Sprinting();
+
+        Movement();
+
+        SnapTurn();
+
+        if (snapTurn) return;
+
+        SmoothRotation();
+    }
+
+    private void Crouching()
+    {
+        bodyCollider.height = Mathf.Clamp(playerHead.position.y, bodyHeightLimits.x, bodyHeightLimits.y);
+        bodyCollider.center = new Vector3(playerHead.localPosition.x, bodyCollider.height / 2, playerHead.localPosition.z);
+    }
+
+    private void Sprinting()
+    {
+        bool isSprinting = sprintButton.action.ReadValue<float>() > 0.5f;
+
+        moveSpeed = isSprinting ? sprintSpeed : walkSpeed;
+    }
+
+    private void SmoothRotation()
+    {
+        //Smooth rotation
+        Quaternion rotation = Quaternion.AngleAxis(turnSpeed * Time.fixedDeltaTime * inputTurnAxis, Vector3.up);
+
+        rb.MoveRotation(rb.rotation * rotation);
+
+        //Correct position so that the player can move away from middle of the playspace
+        Vector3 newPos = rotation * (rb.position - pivotPoint.position) + pivotPoint.position;
+
+        rb.MovePosition(newPos);
+    }
+
+    private void SnapTurn()
+    {
+        if (snapTurn)
+        {
+            if (snapTurnTimer <= 0)
+            {
+                if (inputTurnAxis > 0.5f) SnapTurn(snapTurnAngle);
+                else if (inputTurnAxis < -0.5f) SnapTurn(-snapTurnAngle);
+            }
+        }
+    }
+
+    private void Movement()
+    {
         Quaternion yaw = Quaternion.Euler(0, directionSource.eulerAngles.y, 0);
 
         Vector3 dir = Vector3.zero;
@@ -46,27 +108,6 @@ public class VRPlayerMovement : MonoBehaviour
         }
 
         rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * dir);
-
-        if (snapTurn)
-        {
-            if (snapTurnTimer <= 0)
-            {
-                if (inputTurnAxis > 0.5f) SnapTurn(snapTurnAngle);
-                else if (inputTurnAxis < -0.5f) SnapTurn(-snapTurnAngle);
-            }
-
-            return;
-        }
-
-        //Smooth rotation
-        Quaternion rotation = Quaternion.AngleAxis(turnSpeed * Time.fixedDeltaTime * inputTurnAxis, Vector3.up);
-
-        rb.MoveRotation(rb.rotation * rotation);
-
-        //Correct position so that the player can move away from middle of the playspace
-        Vector3 newPos = rotation * (rb.position - pivotPoint.position) + pivotPoint.position;
-
-        rb.MovePosition(newPos);
     }
 
     private void SnapTurn(float angle)

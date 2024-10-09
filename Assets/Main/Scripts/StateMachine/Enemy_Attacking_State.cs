@@ -9,7 +9,7 @@ public class Enemy_Attacking_State : EnemyMoveBaseState
     {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
        Animator animator = enemy.GetComponent<Animator>();
-        animator.SetBool("IsWalking", true);
+        animator.SetBool("IsMoving", true);
 
     }
     public override void UpdateState(EnemyMoveStateManager enemy)
