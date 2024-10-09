@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,7 +26,7 @@ public class EnemyAttack : MonoBehaviour
         AttackinAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         lastAttackTime = -AttackDelay;
-        SetIdleState();
+        //SetIdleState();
     }
 
     public void GoToTarget(Transform target)
@@ -44,21 +45,24 @@ public class EnemyAttack : MonoBehaviour
         if (isFollowing && currentTarget != null)
         {
             float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
+
+            // If out of attack range, move towards the target
             if (distanceToTarget > attackRange)
             {
                 AttackinAgent.isStopped = false;
                 AttackinAgent.SetDestination(currentTarget.position);
-                SetWalkingState();
+                SetWalkingState();  // Should set IsMoving to true
             }
             else
             {
+                // If within attack range, check for attacking
                 AttackinAgent.isStopped = true;
-                Attacking();
+                Attacking();  // Handles attack state
             }
         }
         else
         {
-            SetIdleState();
+            SetIdleState();  // If not following, go to idle
         }
     }
 
@@ -115,20 +119,23 @@ public class EnemyAttack : MonoBehaviour
 
     void SetAttackingState()
     {
-        animator.SetBool(IsAttacking, true);
+        animator.SetBool(IsAttacking, true);  // Set to attacking
         animator.SetBool(IsMoving, false);
-        animator.SetTrigger(TriggerAttack);
+        animator.SetTrigger(TriggerAttack);  // Trigger attack
+        Debug.Log("Setting Attacking State");
     }
 
     void SetWalkingState()
     {
         animator.SetBool(IsAttacking, false);
-        animator.SetBool(IsMoving, true);
+        animator.SetBool(IsMoving, true);  // Set to walking
+        Debug.Log("Setting Walking State");
     }
 
     void SetIdleState()
     {
         animator.SetBool(IsAttacking, false);
-        animator.SetBool(IsMoving, false);
+        animator.SetBool(IsMoving, false);  // Set to idle
+        Debug.Log("Setting Idle State");
     }
 }

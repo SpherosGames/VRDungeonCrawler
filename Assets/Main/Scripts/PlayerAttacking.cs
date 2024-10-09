@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class PlayerAttacking : MonoBehaviour
 {
-  
+
+    private void Start()
+    {
+        
+    }
+
     void Update()
     {
                 
