@@ -63,6 +63,9 @@ public class StandInArea : MonoBehaviour
             {
                 if (hitColliders[i].gameObject.layer == 12)
                 {
+                    //It cant enter unless it wasnt activated, to avoid a spam bug
+                    WasActivated = false;
+
                     //If yes, OnPlayerEnter.
                     OnPlayerEnter();
                 }
