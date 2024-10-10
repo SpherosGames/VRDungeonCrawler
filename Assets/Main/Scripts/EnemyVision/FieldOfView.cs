@@ -10,7 +10,7 @@ public class FieldOfView : MonoBehaviour
     public float VisionAngle = 90f;
     public LayerMask VisionObstructingLayer;
     public LayerMask TargetLayer;
-    public int RadialResolution = 20;  // Number of segments around the cone
+    public int RadialResolution = 20;
     public Mesh VisionConeMesh;
     public MeshFilter MeshFilter_;
     public bool HasTarget;
@@ -19,9 +19,38 @@ public class FieldOfView : MonoBehaviour
     private List<GameObject> enteredTargets = new List<GameObject>();
     public List<GameObject> potentialTargets = new List<GameObject>();
 
+    [Header("Visual Settings")]
+    public Color MainColor = new Color(1f, 0.5f, 0f, 0.5f); // Orange with transparency
+    public Color PulseColor = new Color(1f, 0f, 0f, 0.5f);  // Red with transparency
+    public float PulseSpeed = 2f;
+    public float EdgeGlowIntensity = 2f;
+
+    private Material instancedMaterial;
+    private float pulseTime;
+
     private void Start()
     {
-        transform.AddComponent<MeshRenderer>().material = VisionConeMaterial;
+        // Create an instanced material so we can modify it without affecting other objects
+        instancedMaterial = new Material(VisionConeMaterial);
+        instancedMaterial.shader = Shader.Find("Universal Render Pipeline/Unlit");
+
+        // Set up the material properties
+        instancedMaterial.SetColor("_BaseColor", MainColor);
+        instancedMaterial.SetColor("_PulseColor", PulseColor);
+        instancedMaterial.SetFloat("_PulseSpeed", PulseSpeed);
+        instancedMaterial.SetFloat("_EdgeGlow", EdgeGlowIntensity);
+
+        // Enable transparency
+        instancedMaterial.SetFloat("_Surface", 1); // 0 = Opaque, 1 = Transparent
+        instancedMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        instancedMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        instancedMaterial.SetInt("_ZWrite", 0);
+        instancedMaterial.EnableKeyword("_ALPHABLEND_ON");
+
+        // Set material to be double-sided
+        instancedMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
+
+        transform.AddComponent<MeshRenderer>().material = instancedMaterial;
         MeshFilter_ = transform.AddComponent<MeshFilter>();
         VisionConeMesh = new Mesh();
     }
@@ -34,6 +63,14 @@ public class FieldOfView : MonoBehaviour
 
         DrawVisionCone();
         CheckTargets();
+
+        // Update pulse effect
+        pulseTime += Time.deltaTime;
+        instancedMaterial.SetFloat("_PulseTime", pulseTime);
+
+        // Intensify glow when target is detected
+        float targetIntensity = HasTarget ? 2f : 1f;
+        instancedMaterial.SetFloat("_EdgeGlow", EdgeGlowIntensity * targetIntensity);
     }
 
     private void DrawVisionCone()
@@ -41,8 +78,7 @@ public class FieldOfView : MonoBehaviour
         List<Vector3> vertices = new List<Vector3>();
         List<int> triangles = new List<int>();
 
-        // Add center vertex (cone apex)
-        vertices.Add(Vector3.zero);
+        vertices.Add(Vector3.zero); // Apex
 
         float angleStep = 2f * Mathf.PI / RadialResolution;
         float coneRadius = Mathf.Tan(VisionAngle * 0.5f * Mathf.Deg2Rad) * VisionRange;
@@ -51,20 +87,15 @@ public class FieldOfView : MonoBehaviour
         for (int i = 0; i < RadialResolution; i++)
         {
             float angle = i * angleStep;
-
-            // Calculate the point on the circle at the base of the cone
             float x = Mathf.Cos(angle) * coneRadius;
             float y = Mathf.Sin(angle) * coneRadius;
 
             Vector3 basePoint = transform.forward * VisionRange + transform.right * x + transform.up * y;
             Vector3 rayDirection = (basePoint - transform.position).normalized;
 
-            // Raycast to check for obstacles
             if (Physics.Raycast(transform.position, rayDirection, out RaycastHit hit, VisionRange, VisionObstructingLayer))
             {
                 vertices.Add(transform.InverseTransformPoint(hit.point));
-
-                // Check if hit object is a potential target
                 if (((1 << hit.collider.gameObject.layer) & TargetLayer) != 0)
                 {
                     potentialTargets.Add(hit.collider.gameObject);
@@ -72,20 +103,24 @@ public class FieldOfView : MonoBehaviour
             }
             else
             {
-                // If no hit, use the point on the cone base
                 vertices.Add(transform.InverseTransformDirection(basePoint));
             }
         }
 
-        // Generate triangles
+        // Generate triangles (front-facing)
         for (int i = 0; i < RadialResolution; i++)
         {
             int nextIndex = (i + 1) % RadialResolution;
 
-            // Triangle from apex to base segment
-            triangles.Add(0); // apex
+            // Front face
+            triangles.Add(0);
             triangles.Add(i + 1);
             triangles.Add(nextIndex + 1);
+
+            // Back face
+            triangles.Add(0);
+            triangles.Add(nextIndex + 1);
+            triangles.Add(i + 1);
         }
 
         VisionConeMesh.Clear();
@@ -95,12 +130,11 @@ public class FieldOfView : MonoBehaviour
         MeshFilter_.mesh = VisionConeMesh;
     }
 
+    // Rest of the methods remain the same
     private void CheckTargets()
     {
-        // Remove targets that are no longer in view
         currentTargets.RemoveAll(target => target == null || !IsInView(target.transform.position));
 
-        // Check for new targets
         Collider[] potentialColliders = Physics.OverlapSphere(transform.position, VisionRange, TargetLayer);
         foreach (Collider collider in potentialColliders)
         {
@@ -123,7 +157,6 @@ public class FieldOfView : MonoBehaviour
 
         if (directionToTarget.magnitude <= VisionRange && angleToTarget <= VisionAngle * 0.5f)
         {
-            // Check if there are obstacles between
             if (Physics.Raycast(transform.position, directionToTarget, out RaycastHit hit, VisionRange, VisionObstructingLayer | TargetLayer))
             {
                 return ((1 << hit.collider.gameObject.layer) & TargetLayer) != 0;
@@ -134,7 +167,6 @@ public class FieldOfView : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        // Visualize the cone in the editor
         Gizmos.color = Color.yellow;
         Vector3 forward = transform.forward * VisionRange;
         float radius = Mathf.Tan(VisionAngle * 0.5f * Mathf.Deg2Rad) * VisionRange;
