@@ -275,6 +275,10 @@ MonoBehaviour:
   twoHanded: 0
   isGrabbed: 0
   setCOM: 0
+  keepAwake: 0
+  velocityThreshold: 0.01
+  sleepDelay: 2
+  optimizePhysics: 0
 --- !u!1001 &216078742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -414,6 +418,10 @@ MonoBehaviour:
   twoHanded: 1
   isGrabbed: 0
   setCOM: 0
+  keepAwake: 0
+  velocityThreshold: 0.01
+  sleepDelay: 2
+  optimizePhysics: 0
 --- !u!54 &323753108
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -680,6 +688,10 @@ MonoBehaviour:
   twoHanded: 0
   isGrabbed: 0
   setCOM: 0
+  keepAwake: 0
+  velocityThreshold: 0.01
+  sleepDelay: 2
+  optimizePhysics: 0
 --- !u!1 &488740310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,6 +1136,10 @@ MonoBehaviour:
   twoHanded: 0
   isGrabbed: 0
   setCOM: 0
+  keepAwake: 0
+  velocityThreshold: 0.01
+  sleepDelay: 2
+  optimizePhysics: 0
 --- !u!1 &952258544
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,6 +1180,10 @@ MonoBehaviour:
   twoHanded: 0
   isGrabbed: 0
   setCOM: 0
+  keepAwake: 0
+  velocityThreshold: 0.01
+  sleepDelay: 2
+  optimizePhysics: 0
 --- !u!54 &952258546
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1280,6 +1300,12 @@ Transform:
 --- !u!4 &1128754140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8671179065624590336, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3932177587843424715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1166988457 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 572520673027607909, guid: f144e2e3cd05f3a41838e58b81f32ea2,
     type: 3}
   m_PrefabInstance: {fileID: 3932177587843424715}
   m_PrefabAsset: {fileID: 0}
@@ -1467,6 +1493,10 @@ MonoBehaviour:
   twoHanded: 0
   isGrabbed: 0
   setCOM: 0
+  keepAwake: 0
+  velocityThreshold: 0.01
+  sleepDelay: 2
+  optimizePhysics: 0
 --- !u!1001 &1378021114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1703,7 +1733,7 @@ GameObject:
   - component: {fileID: 1861686012}
   - component: {fileID: 1861686011}
   - component: {fileID: 1861686014}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1949,6 +1979,10 @@ MonoBehaviour:
   twoHanded: 0
   isGrabbed: 0
   setCOM: 0
+  keepAwake: 0
+  velocityThreshold: 0.01
+  sleepDelay: 2
+  optimizePhysics: 0
 --- !u!1 &1945313322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,12 +2563,12 @@ PrefabInstance:
     - target: {fileID: 572520673027607909, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.89
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 572520673027607909, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.32
+      value: -0.35
       objectReference: {fileID: 0}
     - target: {fileID: 697043533033433889, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
@@ -2590,6 +2624,37 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Interaction Setup
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: feetPos
+      value: 
+      objectReference: {fileID: 1166988457}
+    - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: jumpForce
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: jumpButton.m_Reference
+      value: 
+      objectReference: {fileID: 3435820145794850905, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}
+    - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: jumpButton.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: jumpButton.m_Action.m_Name
+      value: Jump Button
       objectReference: {fileID: 0}
     - target: {fileID: 8114538837139019700, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
@@ -2808,6 +2873,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1959593630111883693, guid: 94c55a9a96ead1e429e55ba50edb481a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2335856841702694247, guid: 94c55a9a96ead1e429e55ba50edb481a,
         type: 3}
       propertyPath: m_LocalPosition.x

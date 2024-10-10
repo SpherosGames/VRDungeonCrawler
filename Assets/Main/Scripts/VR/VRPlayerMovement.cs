@@ -18,6 +18,13 @@ public class VRPlayerMovement : MonoBehaviour
     [SerializeField] private Transform directionSource;
     [SerializeField] private Transform pivotPoint;
 
+    [Header("Jumping")]
+    [SerializeField] private float jumpForce;
+    [SerializeField] private Transform feetPos;
+    [SerializeField] private float groundCheckRadius = 0.1f;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private InputActionProperty jumpButton;
+
     [Header("Body Collider")]
     [SerializeField] private Transform playerHead;
     [SerializeField] private CapsuleCollider bodyCollider;
@@ -26,9 +33,14 @@ public class VRPlayerMovement : MonoBehaviour
     private Vector2 moveInputAxis;
     private float inputTurnAxis;
 
+    private bool sprintButtonState;
+    private bool jumpButtonState;
+
     private float snapTurnTimer;
 
     private float moveSpeed;
+
+    private bool isGrounded;
 
     private void Awake()
     {
@@ -39,6 +51,8 @@ public class VRPlayerMovement : MonoBehaviour
     {
         moveInputAxis = moveInput.action.ReadValue<Vector2>();
         inputTurnAxis = turnInput.action.ReadValue<Vector2>().x;
+        sprintButtonState = sprintButton.action.ReadValue<float>() > 0.5f;
+        jumpButtonState = jumpButton.action.ReadValue<float>() > 0.5f;
 
         if (snapTurn) snapTurnTimer -= Time.deltaTime;
     }
@@ -46,6 +60,10 @@ public class VRPlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Crouching();
+
+        CheckGrounded();
+
+        Jumping();
 
         Sprinting();
 
@@ -58,6 +76,16 @@ public class VRPlayerMovement : MonoBehaviour
         SmoothRotation();
     }
 
+    private void CheckGrounded()
+    {
+        isGrounded = Physics.CheckSphere(feetPos.position, groundCheckRadius, groundLayer);
+    }
+
+    private void Jumping()
+    {
+        if (jumpButtonState && isGrounded) rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
     private void Crouching()
     {
         bodyCollider.height = Mathf.Clamp(playerHead.position.y, bodyHeightLimits.x, bodyHeightLimits.y);
@@ -66,9 +94,7 @@ public class VRPlayerMovement : MonoBehaviour
 
     private void Sprinting()
     {
-        bool isSprinting = sprintButton.action.ReadValue<float>() > 0.5f;
-
-        moveSpeed = isSprinting ? sprintSpeed : walkSpeed;
+        moveSpeed = sprintButtonState ? sprintSpeed : walkSpeed;
     }
 
     private void SmoothRotation()
