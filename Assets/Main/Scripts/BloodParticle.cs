@@ -5,25 +5,69 @@ using UnityEngine.Rendering.Universal;
 public class BloodParticle : MonoBehaviour
 {
     [SerializeField] private DecalProjector projector;
+    [SerializeField] private LayerMask environmentLayer;
 
     private IEnumerator Start()
     {
-        projector.fadeFactor = Mathf.MoveTowards(1, 0, 0.001f * Time.deltaTime);
+        Vector3 scale = projector.size;
+        Vector3 pivot = projector.pivot;
 
-        if (projector.fadeFactor < 1)
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 100, environmentLayer))
         {
-            print("fading in");
-            yield return null;
+            print("Hit");
+            Debug.DrawRay(hit.point, Vector3.up, Color.red, 10);
+            scale.z = hit.distance + 0.1f;
+            pivot.z = scale.z / 2;
+        }
+        else
+        {
+            scale.z = 10;
+            pivot.z = scale.z / 2;
         }
 
-        yield return new WaitForSeconds(1);
-        print("fading out");
+        projector.size = scale;
+        projector.pivot = pivot;
 
-        projector.fadeFactor = Mathf.MoveTowards(0, 1, 0.001f * Time.deltaTime);
+        projector.fadeFactor = 0;
+
+        yield return Fade(0, 1, 10);
+
+        //if (projector.fadeFactor < 1)
+        //{
+        //    //print("fading in");
+        //    yield return null;
+        //}
+
+        yield return new WaitForSeconds(0.1f);
+        //print("fading out");
+
+        yield return Fade(1, 0, 0.1f);
+
+        Destroy(gameObject);
     }
 
-    private void Update()
+    private IEnumerator Fade(float from, float to, float speed)
     {
-        //timer -= Time.deltaTime;
+        // Set initial fadeFactor
+        projector.fadeFactor = from;
+
+        while (!Mathf.Approximately(projector.fadeFactor, to))
+        {
+            // Move fadeFactor towards target value (either fade in or fade out)
+            projector.fadeFactor = Mathf.MoveTowards(projector.fadeFactor, to, speed * Time.deltaTime);
+
+            // Print the current fading state
+            if (to == 0)
+            {
+                print("fading in");
+            }
+            else if (to == 1)
+            {
+                print("fading out");
+            }
+
+            // Wait for the next frame
+            yield return null;
+        }
     }
 }
