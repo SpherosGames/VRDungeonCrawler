@@ -14,6 +14,13 @@ public class Grabbable : MonoBehaviour
     public bool keepAwake;
     public float velocityThreshold = 0.01f;
     public float sleepDelay = 2f;
+    public bool optimizePhysics = false;
+
+    private float checkTimer;
+    private float checkTime = 0.5f;
+    private float acceptDistance = 1;
+
+    private Transform player;
 
     private bool isSleeping = false;
     private float sleepTimer;
@@ -26,29 +33,56 @@ public class Grabbable : MonoBehaviour
     private void OnEnable()
     {
         if (setCOM) rb.centerOfMass = transform.TransformPoint(grabPoint.position);
+
+        if (optimizePhysics)
+        {
+            rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+            checkTimer = checkTime;
+            //player = FindObjectOfType<Player>().transform;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (isSleeping || isGrabbed || keepAwake) return;
+        //if (checkTimer > 0)
+        //{
+        //    checkTimer -= Time.deltaTime;
 
-        print("Update go brr");
-        print(rb.velocity.magnitude);
+        //    if (checkTimer <= 0)
+        //    {
+        //        float dist = Vector3.Distance(player.transform.position, transform.position);
 
-        if (rb.velocity.magnitude < velocityThreshold)
-        {
-            sleepTimer += Time.fixedDeltaTime;
-            if (sleepTimer >= sleepDelay)
-            {
-                print("Sleep");
-                rb.Sleep();
-                isSleeping = true;
-            }
-        }
-        else
-        {
-            sleepTimer = 0f;
-        }
+        //        if (dist < acceptDistance)
+        //        {
+        //            rb.isKinematic = false;
+        //        }
+        //        else
+        //        {
+        //            rb.isKinematic = true;
+        //        }
+
+        //        checkTimer = checkTime;
+        //    }
+        //}
+
+        //if (isSleeping || isGrabbed || keepAwake) return;
+
+        ////print("Update go brr");
+        ////print(rb.velocity.magnitude);
+        //if (rb.velocity.magnitude < velocityThreshold)
+        //{
+        //    sleepTimer += Time.fixedDeltaTime;
+        //    if (sleepTimer >= sleepDelay)
+        //    {
+        //        //print("Sleep");
+        //        rb.Sleep();
+        //        isSleeping = true;
+        //    }
+        //}
+        //else
+        //{
+        //    sleepTimer = 0f;
+        //}
     }
 
     public void WakeUp()

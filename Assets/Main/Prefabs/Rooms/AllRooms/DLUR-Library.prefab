@@ -1398,7 +1398,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1410671625099030226}
-  - component: {fileID: 1622342376660710398}
   m_Layer: 0
   m_Name: DLUR-Library
   m_TagString: Untagged
@@ -1417,7 +1416,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5507636240941868774}
   - {fileID: 3606131111599027117}
@@ -1436,29 +1435,6 @@ Transform:
   - {fileID: 4903059285025104868}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1622342376660710398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7171245776851702860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 942e16026f781a64e833f8471d51831c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RoomsLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  _DungeonPartType: 0
-  FillerWall: {fileID: 0}
-  EntryPoints:
-  - {fileID: 5082574497488974945}
-  - {fileID: 3703589905773734381}
-  - {fileID: 3144476210479455371}
-  - {fileID: 499883385680087503}
-  _Collider: {fileID: 0}
 --- !u!1 &7313625374128756367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1726,6 +1702,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BookshelfWBooks
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2850,6 +2856,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: BookshelfWBooks (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2938,6 +2974,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BookshelfWBooks (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3983,6 +4049,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: BookshelfWBooks (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4259,6 +4355,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BookshelfWBooks (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5131,6 +5257,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: BookshelfWBooks (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5789,6 +5945,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: BookshelfWBooks (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5971,6 +6157,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BookshelfWBooks (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6531,6 +6747,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: BookshelfWBooks (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6619,6 +6865,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BookshelfWBooks (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6896,6 +7172,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BookshelfWBooks (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7550,6 +7856,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: BookshelfWBooks (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8015,6 +8351,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: BookshelfWBooks (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8306,6 +8672,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BookshelfWBooks
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9054,6 +9450,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: BookshelfWBooks (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9142,6 +9568,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BookshelfWBooks (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9325,6 +9781,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BookshelfWBooks (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9602,6 +10088,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BookshelfWBooks (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9984,6 +10500,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: BookshelfWBooks (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10166,6 +10712,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BookshelfWBooks (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: defaultScale
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookShelfMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: distanceBetweenShelfs
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: scaleRandomDifference
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
