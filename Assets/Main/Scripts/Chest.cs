@@ -28,7 +28,6 @@ public class Chest : MonoBehaviour
 
     public bool HasBeenOpened = false;
     private bool Opening = false; 
-    float ine = 0;
 
     private void Update()
     {
