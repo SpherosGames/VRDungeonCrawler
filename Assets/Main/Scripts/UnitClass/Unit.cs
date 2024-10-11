@@ -13,7 +13,6 @@ public class Unit : MonoBehaviour
             Die();
         }
     }
-
     public virtual void Die()
     {
         Debug.Log($"{Name} has died");

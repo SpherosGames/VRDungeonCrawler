@@ -26,7 +26,6 @@ public class Sword : MonoBehaviour
         currentVelocityMagnitude = currentVelocity.magnitude;
         previousPosition = transform.position;
     }
-
     private void OnCollisionEnter(Collision other)
     {
 

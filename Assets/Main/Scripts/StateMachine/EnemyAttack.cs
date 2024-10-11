@@ -6,13 +6,13 @@ public class EnemyAttack : MonoBehaviour
 {
     [Header("Attack Settings")]
     public Transform currentTarget;
-    public float AttackDelay = 3f;
-    public float attackRange = 5f;
-    public int attackDamage = 10;
+    float AttackDelay = 0.8f;
+    float attackRange = 5f;
+    int attackDamage = 10;
 
     [Header("Animation")]
-    public float attackAnimationDuration = 1.0f; // Should match your actual animation length
-    public float damageDelay = 0.5f; // Time into attack animation when damage is dealt
+    float attackAnimationDuration = 1.0f; 
+    float damageDelay = 0.5f; 
 
     private NavMeshAgent AttackingAgent;
     private Animator animator;
@@ -31,7 +31,6 @@ public class EnemyAttack : MonoBehaviour
         animator = GetComponent<Animator>();
         lastAttackTime = -AttackDelay;
     }
-
     public void GoToTarget(Transform target)
     {
         currentTarget = target;
@@ -49,7 +48,6 @@ public class EnemyAttack : MonoBehaviour
         {
             float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
 
-            // If out of attack range, move towards the target
             if (distanceToTarget > attackRange)
             {
                 AttackingAgent.isStopped = false;
@@ -58,7 +56,6 @@ public class EnemyAttack : MonoBehaviour
             }
             else
             {
-                // If within attack range, check for attacking
                 AttackingAgent.isStopped = true;
                 Attacking();
             }
@@ -80,7 +77,6 @@ public class EnemyAttack : MonoBehaviour
             SetIdleState();
         }
     }
-
     bool CanAttack()
     {
         if (currentTarget == null) return false;
@@ -89,7 +85,6 @@ public class EnemyAttack : MonoBehaviour
         float timeSinceLastAttack = Time.time - lastAttackTime;
         return distanceToTarget <= attackRange && timeSinceLastAttack >= AttackDelay && !isAttacking;
     }
-
     void StartAttack()
     {
         isAttacking = true;
@@ -101,26 +96,19 @@ public class EnemyAttack : MonoBehaviour
 
     IEnumerator AttackSequence()
     {
-        // Trigger attack animation
         animator.SetTrigger(TriggerAttack);
 
-        // Wait for damageDelay before dealing damage
         yield return new WaitForSeconds(damageDelay);
 
-        // Deal damage
         DealDamage();
-
-        // Wait for the remaining animation duration
+        
         float remainingDuration = attackAnimationDuration - damageDelay;
         if (remainingDuration > 0)
         {
             yield return new WaitForSeconds(remainingDuration);
         }
 
-        // End attack state
         isAttacking = false;
-
-        // Check if we should return to walking or idle
         if (currentTarget != null && Vector3.Distance(transform.position, currentTarget.position) > attackRange)
         {
             SetWalkingState();
@@ -147,7 +135,6 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    // This method can be called by an animation event if you prefer
     public void OnAnimationDamageFrame()
     {
         DealDamage();
@@ -160,14 +147,12 @@ public class EnemyAttack : MonoBehaviour
         animator.SetTrigger(TriggerAttack);
         Debug.Log("Setting Attacking State");
     }
-
     void SetWalkingState()
     {
         animator.SetBool(IsAttacking, false);
         animator.SetBool(IsMoving, true);
         Debug.Log("Setting Walking State");
     }
-
     void SetIdleState()
     {
         animator.SetBool(IsAttacking, false);

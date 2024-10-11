@@ -27,26 +27,22 @@ public class FieldOfView : MonoBehaviour
 
     private Material instancedMaterial;
     private float pulseTime;
-
     private void Start()
     {
         // Create an instanced material so we can modify it without affecting other objects
         instancedMaterial = new Material(VisionConeMaterial);
         instancedMaterial.shader = Shader.Find("Universal Render Pipeline/Unlit");
-
         // Set up the material properties
         instancedMaterial.SetColor("_BaseColor", MainColor);
         instancedMaterial.SetColor("_PulseColor", PulseColor);
         instancedMaterial.SetFloat("_PulseSpeed", PulseSpeed);
         instancedMaterial.SetFloat("_EdgeGlow", EdgeGlowIntensity);
-
         // Enable transparency
         instancedMaterial.SetFloat("_Surface", 1); // 0 = Opaque, 1 = Transparent
         instancedMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
         instancedMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
         instancedMaterial.SetInt("_ZWrite", 0);
         instancedMaterial.EnableKeyword("_ALPHABLEND_ON");
-
         // Set material to be double-sided
         instancedMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
 
@@ -54,16 +50,13 @@ public class FieldOfView : MonoBehaviour
         MeshFilter_ = transform.AddComponent<MeshFilter>();
         VisionConeMesh = new Mesh();
     }
-
     private void Update()
     {
         HasTarget = currentTargets.Count > 0;
         enteredTargets.Clear();
         potentialTargets.Clear();
-
         DrawVisionCone();
         CheckTargets();
-
         // Update pulse effect
         pulseTime += Time.deltaTime;
         instancedMaterial.SetFloat("_PulseTime", pulseTime);
@@ -72,12 +65,10 @@ public class FieldOfView : MonoBehaviour
         float targetIntensity = HasTarget ? 2f : 1f;
         instancedMaterial.SetFloat("_EdgeGlow", EdgeGlowIntensity * targetIntensity);
     }
-
     private void DrawVisionCone()
     {
         List<Vector3> vertices = new List<Vector3>();
         List<int> triangles = new List<int>();
-
         vertices.Add(Vector3.zero); // Apex
 
         float angleStep = 2f * Mathf.PI / RadialResolution;
@@ -106,7 +97,6 @@ public class FieldOfView : MonoBehaviour
                 vertices.Add(transform.InverseTransformDirection(basePoint));
             }
         }
-
         // Generate triangles (front-facing)
         for (int i = 0; i < RadialResolution; i++)
         {
@@ -122,7 +112,6 @@ public class FieldOfView : MonoBehaviour
             triangles.Add(nextIndex + 1);
             triangles.Add(i + 1);
         }
-
         VisionConeMesh.Clear();
         VisionConeMesh.SetVertices(vertices);
         VisionConeMesh.SetTriangles(triangles, 0);
@@ -130,7 +119,6 @@ public class FieldOfView : MonoBehaviour
         MeshFilter_.mesh = VisionConeMesh;
     }
 
-    // Rest of the methods remain the same
     private void CheckTargets()
     {
         currentTargets.RemoveAll(target => target == null || !IsInView(target.transform.position));
@@ -149,7 +137,6 @@ public class FieldOfView : MonoBehaviour
             }
         }
     }
-
     private bool IsInView(Vector3 targetPosition)
     {
         Vector3 directionToTarget = targetPosition - transform.position;
@@ -164,7 +151,6 @@ public class FieldOfView : MonoBehaviour
         }
         return false;
     }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

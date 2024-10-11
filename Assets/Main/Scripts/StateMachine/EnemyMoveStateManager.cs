@@ -9,7 +9,6 @@ public class EnemyMoveStateManager : MonoBehaviour
 
     public Animator animator;
     private EnemyAttack enemyAttack;
-
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -18,12 +17,10 @@ public class EnemyMoveStateManager : MonoBehaviour
         CurrentState = IdleState;
         CurrentState.EnterState(this);
     }
-
     void Update()
     {
         CurrentState.UpdateState(this);
     }
-
     public void SwitchState(EnemyMoveBaseState state)
     {
         Debug.Log($"Switching from {CurrentState.GetType().Name} to {state.GetType().Name}");
