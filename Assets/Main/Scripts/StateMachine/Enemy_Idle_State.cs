@@ -5,10 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy_Idle_State : EnemyMoveBaseState
-{
-    Animator animator;
-    NavMeshAgent agent;
-    
+{    
     public override void EnterState(EnemyMoveStateManager enemy)
     {
         animator = GetComponent<Animator>();
@@ -20,18 +17,10 @@ public class Enemy_Idle_State : EnemyMoveBaseState
         {
             animator.SetBool("IsIdle", false);
             enemy.SwitchState(enemy.AttackingState);
-            
         }
     }
-   
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
     }
-
-    private void Update()
-    {
-        
-    }
-
 }

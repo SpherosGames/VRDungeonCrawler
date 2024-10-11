@@ -4,41 +4,55 @@ using UnityEngine;
 
 public class CoolPotion : MonoBehaviour
 {
-    public ParticleSystem pourEffect; // Reference to the Particle System for the pouring effect
-    private float activationAngle = 60f; // The angle threshold to determine when to start pouring (closer to 0 means more upside down)
+    public ParticleSystem pourEffect; 
+    float activationAngle = 60f; 
     public GameObject Cork;
+    float FluidLevel;
+    public Renderer FluidMesh;
+    bool isPouring = false;
+    float pourSpeed = 0.1f;
+    private readonly string fillPropertyName = "_Fill";
+    public float healthAmount = 5f;
 
-    private bool isPouring = false;
-
+    private void Start()
+    {
+        StopPouring();
+        FluidLevel = FluidMesh.material.GetFloat(fillPropertyName);
+    }
     void Update()
     {
-
-        // Get the current angle of the object's rotation in world space.
         float angle = Vector3.Angle(Vector3.down, transform.up);
+        FluidLevel = FluidMesh.material.GetFloat(fillPropertyName);
 
-        // If the angle is less than the activationAngle, start the particle effect (meaning it's upside down).
-        if (angle < activationAngle && !isPouring && Cork == null)
+        if (FluidLevel <= 0 && isPouring)
+        {
+            FluidLevel = 0;
+            FluidMesh.material.SetFloat(fillPropertyName, 0);
+            StopPouring();
+            return; 
+        }
+        if (angle < activationAngle && !isPouring && FluidLevel > 0)
         {
             StartPouring();
         }
-        // If the angle is greater than the activationAngle, stop the particle effect (meaning it's upright).
-        else if (angle >= activationAngle && isPouring && Cork != null)
+        else if (angle >= activationAngle && isPouring)
         {
             StopPouring();
         }
+        if (isPouring && FluidLevel > 0)
+        {
+            FluidLevel = Mathf.Max(0, FluidLevel - (pourSpeed * Time.deltaTime));
+            FluidMesh.material.SetFloat(fillPropertyName, FluidLevel);
+        }
     }
-
-    // Function to start the particle effect
     void StartPouring()
     {
         isPouring = true;
-        pourEffect.Play(); // Start the particle system
+        pourEffect.Play();
     }
-
-    // Function to stop the particle effect
     void StopPouring()
     {
         isPouring = false;
-        pourEffect.Stop(); // Stop the particle system
+        pourEffect.Stop();
     }
 }
