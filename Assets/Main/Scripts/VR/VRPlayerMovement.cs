@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Timeline;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class VRPlayerMovement : MonoBehaviour
 {
@@ -24,6 +26,9 @@ public class VRPlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.1f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private InputActionProperty jumpButton;
+    [SerializeField] private float minHandVelocity;
+    [SerializeField] private Rigidbody leftHand;
+    [SerializeField] private Rigidbody rightHand;
 
     [Header("Body Collider")]
     [SerializeField] private Transform playerHead;
@@ -34,7 +39,6 @@ public class VRPlayerMovement : MonoBehaviour
     private float inputTurnAxis;
 
     private bool sprintButtonState;
-    private bool jumpButtonState;
 
     private float snapTurnTimer;
 
@@ -42,9 +46,20 @@ public class VRPlayerMovement : MonoBehaviour
 
     private bool isGrounded;
 
+    private float leftHandYVel;
+    private float rightHandYVel;
+
+    private Vector3 lastLeftHandPos;
+    private Vector3 lastRightHandPos;
+
     private void Awake()
     {
         if (!rb) rb = GetComponent<Rigidbody>();
+    }
+
+    private void OnEnable()
+    {
+        jumpButton.action.performed += (InputAction.CallbackContext context) => Jumping();
     }
 
     private void Update()
@@ -52,9 +67,19 @@ public class VRPlayerMovement : MonoBehaviour
         moveInputAxis = moveInput.action.ReadValue<Vector2>();
         inputTurnAxis = turnInput.action.ReadValue<Vector2>().x;
         sprintButtonState = sprintButton.action.ReadValue<float>() > 0.5f;
-        jumpButtonState = jumpButton.action.ReadValue<float>() > 0.5f;
 
         if (snapTurn) snapTurnTimer -= Time.deltaTime;
+
+        CalculateHandVelocities();
+    }
+
+    private void CalculateHandVelocities()
+    {
+        leftHandYVel = (leftHand.position.y - lastLeftHandPos.y) / Time.deltaTime;
+        rightHandYVel = (rightHand.position.y - lastRightHandPos.y) / Time.deltaTime;
+
+        lastLeftHandPos = leftHand.position;
+        lastRightHandPos = rightHand.position;
     }
 
     private void FixedUpdate()
@@ -62,8 +87,6 @@ public class VRPlayerMovement : MonoBehaviour
         Crouching();
 
         CheckGrounded();
-
-        Jumping();
 
         Sprinting();
 
@@ -83,7 +106,19 @@ public class VRPlayerMovement : MonoBehaviour
 
     private void Jumping()
     {
-        if (jumpButtonState && isGrounded) rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        bool handsJumping = false;
+
+        if (leftHandYVel > minHandVelocity && rightHandYVel > minHandVelocity)
+        {
+            handsJumping = true;
+        }
+
+        if (handsJumping&& isGrounded)
+        {
+            float extraJumpAmount = Mathf.Clamp(((leftHandYVel + rightHandYVel) / 4), 1, 2);
+
+            rb.AddForce(Vector3.up * (jumpForce * extraJumpAmount), ForceMode.Impulse);
+        }
     }
 
     private void Crouching()
@@ -122,18 +157,22 @@ public class VRPlayerMovement : MonoBehaviour
         }
     }
 
+    Vector3 moveDir;
+
     private void Movement()
     {
         Quaternion yaw = Quaternion.Euler(0, directionSource.eulerAngles.y, 0);
 
-        Vector3 dir = Vector3.zero;
-
-        if (moveInputAxis != Vector2.zero)
+        if (moveInputAxis != Vector2.zero && isGrounded)
         {
-            dir = yaw * new Vector3(moveInputAxis.x, 0, moveInputAxis.y);
+            moveDir = yaw * new Vector3(moveInputAxis.x, 0, moveInputAxis.y);
+        }
+        else if (moveInputAxis == Vector2.zero && isGrounded)
+        {
+            moveDir = Vector3.zero;
         }
 
-        rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * dir);
+        rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * moveDir);
     }
 
     private void SnapTurn(float angle)
@@ -148,5 +187,10 @@ public class VRPlayerMovement : MonoBehaviour
         rb.MovePosition(newPos);
 
         snapTurnTimer = snapTurnCooldown;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(feetPos.position, groundCheckRadius);
     }
 }

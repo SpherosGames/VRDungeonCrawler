@@ -1303,12 +1303,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3932177587843424715}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1166988457 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 572520673027607909, guid: f144e2e3cd05f3a41838e58b81f32ea2,
-    type: 3}
-  m_PrefabInstance: {fileID: 3932177587843424715}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1181988621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1721,6 +1715,12 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.2
   m_Center: {x: -0.58, y: 0, z: 0}
+--- !u!4 &1704666859 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3122931452460713117, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3932177587843424715}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1861686009
 GameObject:
   m_ObjectHideFlags: 0
@@ -2552,6 +2552,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3696510556284659155}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &3696510556284659163 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 729641582786643231, guid: 86cf4bbda3999844486a9c5251bb10e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3696510556284659155}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3932177587843424715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2629,11 +2635,26 @@ PrefabInstance:
         type: 3}
       propertyPath: feetPos
       value: 
-      objectReference: {fileID: 1166988457}
+      objectReference: {fileID: 1704666859}
+    - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 8425074129224542110}
     - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
       propertyPath: jumpForce
-      value: 0.1
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 3696510556284659163}
+    - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: minHandVelocity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
@@ -3036,6 +3057,12 @@ PrefabInstance:
 --- !u!4 &8425074129224542109 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2335856841702694247, guid: 94c55a9a96ead1e429e55ba50edb481a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8425074129224542102}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &8425074129224542110 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4987943211683047369, guid: 94c55a9a96ead1e429e55ba50edb481a,
     type: 3}
   m_PrefabInstance: {fileID: 8425074129224542102}
   m_PrefabAsset: {fileID: 0}
