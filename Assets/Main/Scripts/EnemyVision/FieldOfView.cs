@@ -6,124 +6,164 @@ using UnityEngine;
 public class FieldOfView : MonoBehaviour
 {
     public Material VisionConeMaterial;
-    public float VisionRange;
-    public float VisionAngle;
-    public LayerMask VisionObstructingLayer; // Layer with objects that obstruct the enemy view, like walls, for example
-    public LayerMask TargetLayer; // Layer for potential targets
-    public int VisionConeResolution = 120; // The vision cone will be made up of triangles, the higher this value is the prettier the vision cone will be
+    public float VisionRange = 10f;
+    public float VisionAngle = 90f;
+    public LayerMask VisionObstructingLayer;
+    public LayerMask TargetLayer;
+    public int RadialResolution = 20;
     public Mesh VisionConeMesh;
     public MeshFilter MeshFilter_;
     public bool HasTarget;
     public List<GameObject> currentTargets = new List<GameObject>();
     public GameObject CurrentTarget;
-    private List<GameObject> enteredTargets = new List<GameObject>(); 
-    public List<GameObject> potentialTargets = new List<GameObject>(); 
+    private List<GameObject> enteredTargets = new List<GameObject>();
+    public List<GameObject> potentialTargets = new List<GameObject>();
 
-    // Create all of these variables, most of them are self explanatory, but for the ones that aren't i've added a comment to clue you in on what they do
-    // for the ones that you dont understand dont worry, just follow along
-    void Start()
+    [Header("Visual Settings")]
+    public Color MainColor = new Color(1f, 0.5f, 0f, 0.5f); // Orange with transparency
+    public Color PulseColor = new Color(1f, 0f, 0f, 0.5f);  // Red with transparency
+    public float PulseSpeed = 2f;
+    public float EdgeGlowIntensity = 2f;
+
+    private Material instancedMaterial;
+    private float pulseTime;
+    private void Start()
     {
+        // Create an instanced material so we can modify it without affecting other objects
+        instancedMaterial = new Material(VisionConeMaterial);
+        instancedMaterial.shader = Shader.Find("Universal Render Pipeline/Unlit");
+        // Set up the material properties
+        instancedMaterial.SetColor("_BaseColor", MainColor);
+        instancedMaterial.SetColor("_PulseColor", PulseColor);
+        instancedMaterial.SetFloat("_PulseSpeed", PulseSpeed);
+        instancedMaterial.SetFloat("_EdgeGlow", EdgeGlowIntensity);
+        // Enable transparency
+        instancedMaterial.SetFloat("_Surface", 1); // 0 = Opaque, 1 = Transparent
+        instancedMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        instancedMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        instancedMaterial.SetInt("_ZWrite", 0);
+        instancedMaterial.EnableKeyword("_ALPHABLEND_ON");
+        // Set material to be double-sided
+        instancedMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
 
-        transform.AddComponent<MeshRenderer>().material = VisionConeMaterial;
+        transform.AddComponent<MeshRenderer>().material = instancedMaterial;
         MeshFilter_ = transform.AddComponent<MeshFilter>();
         VisionConeMesh = new Mesh();
-        VisionAngle = 1.24f;
     }
-
-    void Update()
+    private void Update()
     {
-       
-        if (currentTargets.Count > 0)
-        {
-            HasTarget = true;
-        }
-        else
-        {
-            HasTarget = false;
-        }
-        enteredTargets.Clear(); 
-        potentialTargets.Clear(); 
-
+        HasTarget = currentTargets.Count > 0;
+        enteredTargets.Clear();
+        potentialTargets.Clear();
         DrawVisionCone();
+        CheckTargets();
+        // Update pulse effect
+        pulseTime += Time.deltaTime;
+        instancedMaterial.SetFloat("_PulseTime", pulseTime);
 
-        
-        foreach (GameObject target in currentTargets)
-        {
-            if (!IsInView(target.transform.position, target))
-            {
-           
-                currentTargets.Remove(target);
-                Debug.Log("Target left: " + target.name);
-            }
-        }
-
-        foreach (GameObject target in potentialTargets)
-        {
-            if (!currentTargets.Contains(target) && IsInView(target.transform.position, target))
-            {
-      
-                currentTargets.Add(target);
-                enteredTargets.Add(target);
-                CurrentTarget = target;
-                GetComponentInParent<EnemyAttack>().GoToTarget(target.transform);
-                
-                Debug.Log("Target entered: " + target.name);
-            }
-        }
+        // Intensify glow when target is detected
+        float targetIntensity = HasTarget ? 2f : 1f;
+        instancedMaterial.SetFloat("_EdgeGlow", EdgeGlowIntensity * targetIntensity);
     }
-
-    void DrawVisionCone()
+    private void DrawVisionCone()
     {
-        int[] triangles = new int[(VisionConeResolution - 1) * 3];
-        Vector3[] Vertices = new Vector3[VisionConeResolution + 1];
-        Vertices[0] = Vector3.zero;
-        float Currentangle = -VisionAngle / 2;
-        float angleIcrement = VisionAngle / (VisionConeResolution - 1);
-        float Sine;
-        float Cosine;
+        List<Vector3> vertices = new List<Vector3>();
+        List<int> triangles = new List<int>();
+        vertices.Add(Vector3.zero); // Apex
 
-        for (int i = 0; i < VisionConeResolution; i++)
+        float angleStep = 2f * Mathf.PI / RadialResolution;
+        float coneRadius = Mathf.Tan(VisionAngle * 0.5f * Mathf.Deg2Rad) * VisionRange;
+
+        // Generate vertices for the base of the cone
+        for (int i = 0; i < RadialResolution; i++)
         {
-            Sine = Mathf.Sin(Currentangle);
-            Cosine = Mathf.Cos(Currentangle);
-            Vector3 RaycastDirection = (transform.forward * Cosine) + (transform.right * Sine);
-            Vector3 VertForward = (Vector3.forward * Cosine) + (Vector3.right * Sine);
+            float angle = i * angleStep;
+            float x = Mathf.Cos(angle) * coneRadius;
+            float y = Mathf.Sin(angle) * coneRadius;
 
-            if (Physics.Raycast(transform.position, RaycastDirection, out RaycastHit hit, VisionRange, TargetLayer))
+            Vector3 basePoint = transform.forward * VisionRange + transform.right * x + transform.up * y;
+            Vector3 rayDirection = (basePoint - transform.position).normalized;
+
+            if (Physics.Raycast(transform.position, rayDirection, out RaycastHit hit, VisionRange, VisionObstructingLayer))
             {
-     
-                potentialTargets.Add(hit.collider.gameObject);
-                Vertices[i + 1] = VertForward * hit.distance;
+                vertices.Add(transform.InverseTransformPoint(hit.point));
+                if (((1 << hit.collider.gameObject.layer) & TargetLayer) != 0)
+                {
+                    potentialTargets.Add(hit.collider.gameObject);
+                }
             }
             else
             {
-       
-                Vertices[i + 1] = VertForward * VisionRange;
+                vertices.Add(transform.InverseTransformDirection(basePoint));
             }
-
-            Currentangle += angleIcrement;
         }
-
-        for (int i = 0, j = 0; i < triangles.Length; i += 3, j++)
+        // Generate triangles (front-facing)
+        for (int i = 0; i < RadialResolution; i++)
         {
-            triangles[i] = 0;
-            triangles[i + 1] = j + 1;
-            triangles[i + 2] = j + 2;
-        }
+            int nextIndex = (i + 1) % RadialResolution;
 
+            // Front face
+            triangles.Add(0);
+            triangles.Add(i + 1);
+            triangles.Add(nextIndex + 1);
+
+            // Back face
+            triangles.Add(0);
+            triangles.Add(nextIndex + 1);
+            triangles.Add(i + 1);
+        }
         VisionConeMesh.Clear();
-        VisionConeMesh.vertices = Vertices;
-        VisionConeMesh.triangles = triangles;
+        VisionConeMesh.SetVertices(vertices);
+        VisionConeMesh.SetTriangles(triangles, 0);
+        VisionConeMesh.RecalculateNormals();
         MeshFilter_.mesh = VisionConeMesh;
     }
 
-    bool IsInView(Vector3 targetPosition, GameObject target)
+    private void CheckTargets()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit, VisionRange, TargetLayer))
+        currentTargets.RemoveAll(target => target == null || !IsInView(target.transform.position));
+
+        Collider[] potentialColliders = Physics.OverlapSphere(transform.position, VisionRange, TargetLayer);
+        foreach (Collider collider in potentialColliders)
         {
-            return hit.collider.gameObject == target; 
+            GameObject target = collider.gameObject;
+            if (!currentTargets.Contains(target) && IsInView(target.transform.position))
+            {
+                currentTargets.Add(target);
+                enteredTargets.Add(target);
+                CurrentTarget = target;
+                GetComponentInParent<EnemyAttack>()?.GoToTarget(target.transform);
+                Debug.Log($"Target entered: {target.name}");
+            }
+        }
+    }
+    private bool IsInView(Vector3 targetPosition)
+    {
+        Vector3 directionToTarget = targetPosition - transform.position;
+        float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
+
+        if (directionToTarget.magnitude <= VisionRange && angleToTarget <= VisionAngle * 0.5f)
+        {
+            if (Physics.Raycast(transform.position, directionToTarget, out RaycastHit hit, VisionRange, VisionObstructingLayer | TargetLayer))
+            {
+                return ((1 << hit.collider.gameObject.layer) & TargetLayer) != 0;
+            }
         }
         return false;
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Vector3 forward = transform.forward * VisionRange;
+        float radius = Mathf.Tan(VisionAngle * 0.5f * Mathf.Deg2Rad) * VisionRange;
+        Vector3 right = transform.right * radius;
+        Vector3 up = transform.up * radius;
+
+        for (int i = 0; i < 360; i += 30)
+        {
+            float angle = i * Mathf.Deg2Rad;
+            Vector3 point = forward + right * Mathf.Cos(angle) + up * Mathf.Sin(angle);
+            Gizmos.DrawLine(transform.position, transform.position + point);
+        }
     }
 }

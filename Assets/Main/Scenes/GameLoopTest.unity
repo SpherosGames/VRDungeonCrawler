@@ -190,6 +190,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Interaction Setup
       objectReference: {fileID: 0}
+    - target: {fileID: 4741988324052386136, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -217,39 +222,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 54256837833481470, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 54256837833481470, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookParent
       value: 
       objectReference: {fileID: 110202727}
     - target: {fileID: 54256837833481470, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 54256837833481470, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 54256837833481470, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 54256837833481470, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 262499781512093696, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 262499781512093696, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -257,29 +237,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 262499781512093696, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 262499781512093696, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 262499781512093696, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 262499781512093696, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 558371009192779841, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 558371009192779841, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -287,29 +247,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 558371009192779841, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 558371009192779841, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 558371009192779841, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 558371009192779841, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 887880335974237122, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 887880335974237122, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -317,29 +257,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 887880335974237122, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 887880335974237122, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 887880335974237122, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 887880335974237122, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1260249631572387081, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1260249631572387081, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -347,39 +267,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 1260249631572387081, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 1260249631572387081, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 1260249631572387081, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1260249631572387081, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1410671625099030226, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1410671625099030226, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1410671625099030226, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 1410671625099030226, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -430,16 +320,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1410671625099030226, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1756948078695311583, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1756948078695311583, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -447,29 +327,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 1756948078695311583, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 1756948078695311583, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 1756948078695311583, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1756948078695311583, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2625124098417204116, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2625124098417204116, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -477,29 +337,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 2625124098417204116, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 2625124098417204116, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 2625124098417204116, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2625124098417204116, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2902408818361597461, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2902408818361597461, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -507,29 +347,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 2902408818361597461, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 2902408818361597461, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 2902408818361597461, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2902408818361597461, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3007014470367609131, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3007014470367609131, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -537,29 +357,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 3007014470367609131, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 3007014470367609131, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 3007014470367609131, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3007014470367609131, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052111795441653704, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3052111795441653704, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -567,29 +367,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 3052111795441653704, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052111795441653704, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 3052111795441653704, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052111795441653704, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3589311140491847365, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3589311140491847365, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -597,29 +377,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 3589311140491847365, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 3589311140491847365, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 3589311140491847365, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3589311140491847365, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4350114076886066297, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4350114076886066297, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -627,29 +387,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 4350114076886066297, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 4350114076886066297, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 4350114076886066297, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4350114076886066297, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5012755452225625289, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5012755452225625289, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -657,29 +397,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 5012755452225625289, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 5012755452225625289, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 5012755452225625289, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5012755452225625289, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5374409361571122592, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5374409361571122592, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -687,29 +407,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 5374409361571122592, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 5374409361571122592, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 5374409361571122592, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5374409361571122592, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5817374279720492777, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5817374279720492777, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -717,29 +417,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 5817374279720492777, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 5817374279720492777, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 5817374279720492777, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5817374279720492777, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6721915886351670965, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6721915886351670965, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -747,24 +427,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 6721915886351670965, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 6721915886351670965, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 6721915886351670965, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6721915886351670965, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 7171245776851702860, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Name
@@ -772,39 +437,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7529688244889571875, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7529688244889571875, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookParent
       value: 
       objectReference: {fileID: 110202727}
     - target: {fileID: 7529688244889571875, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 7529688244889571875, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 7529688244889571875, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7529688244889571875, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8468239163338456888, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8468239163338456888, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -812,29 +452,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 8468239163338456888, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 8468239163338456888, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 8468239163338456888, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8468239163338456888, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 9000561455866487224, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9000561455866487224, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -842,29 +462,9 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 9000561455866487224, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 9000561455866487224, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 9000561455866487224, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9000561455866487224, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 9109876115777434736, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9109876115777434736, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: bookParent
@@ -872,26 +472,10 @@ PrefabInstance:
       objectReference: {fileID: 110202727}
     - target: {fileID: 9109876115777434736, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
-      propertyPath: defaultScale
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 9109876115777434736, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
       propertyPath: bookShelfMesh
       value: 
       objectReference: {fileID: 1227866096}
-    - target: {fileID: 9109876115777434736, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: distanceBetweenShelfs
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9109876115777434736, guid: 174908db1b78a594a89a50b6db290481,
-        type: 3}
-      propertyPath: scaleRandomDifference
-      value: 10
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1622342376660710398, guid: 174908db1b78a594a89a50b6db290481, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -990,6 +574,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightHandPhysicsRotationFix
       objectReference: {fileID: 0}
+    - target: {fileID: 3555387297057511711, guid: 86cf4bbda3999844486a9c5251bb10e7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4255691729451082507, guid: 86cf4bbda3999844486a9c5251bb10e7,
         type: 3}
       propertyPath: target
@@ -1048,6 +637,16 @@ PrefabInstance:
         type: 3}
       propertyPath: scaleRandomDifference
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 950736858846134350, guid: d4cba9b217420124fbd515fe27ad002c,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 950736858846134350, guid: d4cba9b217420124fbd515fe27ad002c,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1410671625099030226, guid: d4cba9b217420124fbd515fe27ad002c,
         type: 3}
@@ -1149,6 +748,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3240532367456988030, guid: d4cba9b217420124fbd515fe27ad002c,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240532367456988030, guid: d4cba9b217420124fbd515fe27ad002c,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7171245776851702860, guid: d4cba9b217420124fbd515fe27ad002c,
         type: 3}
       propertyPath: m_Name
@@ -1183,6 +792,16 @@ PrefabInstance:
         type: 3}
       propertyPath: scaleRandomDifference
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261126659442236985, guid: d4cba9b217420124fbd515fe27ad002c,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261126659442236985, guid: d4cba9b217420124fbd515fe27ad002c,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1748265101042548515, guid: d4cba9b217420124fbd515fe27ad002c, type: 3}
@@ -1228,6 +847,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 54256837833481470, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54256837833481470, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 262499781512093696, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1258,6 +887,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 262499781512093696, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 262499781512093696, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 558371009192779841, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1288,6 +927,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 558371009192779841, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 558371009192779841, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 887880335974237122, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1318,6 +967,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 887880335974237122, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 887880335974237122, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1260249631572387081, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1347,6 +1006,16 @@ PrefabInstance:
         type: 3}
       propertyPath: scaleRandomDifference
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1260249631572387081, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1260249631572387081, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1410671625099030226, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
@@ -1448,6 +1117,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1756948078695311583, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1756948078695311583, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2625124098417204116, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1477,6 +1156,16 @@ PrefabInstance:
         type: 3}
       propertyPath: scaleRandomDifference
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2625124098417204116, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2625124098417204116, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2902408818361597461, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
@@ -1508,6 +1197,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2902408818361597461, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2902408818361597461, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3007014470367609131, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1537,6 +1236,16 @@ PrefabInstance:
         type: 3}
       propertyPath: scaleRandomDifference
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007014470367609131, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007014470367609131, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3052111795441653704, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
@@ -1568,6 +1277,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3052111795441653704, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052111795441653704, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3589311140491847365, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1598,6 +1317,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3589311140491847365, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3589311140491847365, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4350114076886066297, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1627,6 +1356,16 @@ PrefabInstance:
         type: 3}
       propertyPath: scaleRandomDifference
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350114076886066297, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350114076886066297, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5012755452225625289, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
@@ -1658,6 +1397,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5012755452225625289, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5012755452225625289, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5374409361571122592, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1688,6 +1437,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5374409361571122592, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374409361571122592, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5817374279720492777, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1718,6 +1477,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5817374279720492777, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5817374279720492777, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6721915886351670965, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1747,6 +1516,16 @@ PrefabInstance:
         type: 3}
       propertyPath: scaleRandomDifference
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721915886351670965, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721915886351670965, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7171245776851702860, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
@@ -1783,6 +1562,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7529688244889571875, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529688244889571875, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8468239163338456888, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1813,6 +1602,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 8468239163338456888, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468239163338456888, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 9000561455866487224, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1843,6 +1642,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 9000561455866487224, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000561455866487224, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 9109876115777434736, guid: 174908db1b78a594a89a50b6db290481,
         type: 3}
       propertyPath: m_Enabled
@@ -1872,6 +1681,16 @@ PrefabInstance:
         type: 3}
       propertyPath: scaleRandomDifference
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9109876115777434736, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9109876115777434736, guid: 174908db1b78a594a89a50b6db290481,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1622342376660710398, guid: 174908db1b78a594a89a50b6db290481, type: 3}
@@ -2036,6 +1855,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Golem
       objectReference: {fileID: 0}
+    - target: {fileID: 2959668418988465452, guid: 1a30acfea8a6e3247854d82cbe67c46a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2978004094476727650, guid: 1a30acfea8a6e3247854d82cbe67c46a,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2159,6 +1983,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 950736858846134350, guid: d4cba9b217420124fbd515fe27ad002c,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 950736858846134350, guid: d4cba9b217420124fbd515fe27ad002c,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1410671625099030226, guid: d4cba9b217420124fbd515fe27ad002c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2259,6 +2093,16 @@ PrefabInstance:
       propertyPath: scaleRandomDifference
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3240532367456988030, guid: d4cba9b217420124fbd515fe27ad002c,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240532367456988030, guid: d4cba9b217420124fbd515fe27ad002c,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7171245776851702860, guid: d4cba9b217420124fbd515fe27ad002c,
         type: 3}
       propertyPath: m_Name
@@ -2293,6 +2137,16 @@ PrefabInstance:
         type: 3}
       propertyPath: scaleRandomDifference
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261126659442236985, guid: d4cba9b217420124fbd515fe27ad002c,
+        type: 3}
+      propertyPath: maxGapSizeBetweenBooks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261126659442236985, guid: d4cba9b217420124fbd515fe27ad002c,
+        type: 3}
+      propertyPath: minGapSizeBetweenBooks
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1748265101042548515, guid: d4cba9b217420124fbd515fe27ad002c, type: 3}
@@ -2440,6 +2294,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LeftHandPhysicsRotationFix
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294515892480960998, guid: 94c55a9a96ead1e429e55ba50edb481a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8973304355057579371, guid: 94c55a9a96ead1e429e55ba50edb481a,
         type: 3}

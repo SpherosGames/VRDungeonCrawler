@@ -6,16 +6,13 @@ public class Ragdoll : MonoBehaviour
     public Transform targetOrientation; // Desired upright orientation (e.g., Vector3.up)
     public float proportionalGain = 10f; // P (proportional) gain
     public float derivativeGain = 5f; // D (derivative) gain
-
     private Rigidbody torsoRb;
     private Quaternion previousRotation;
-
     void Start()
     {
         torsoRb = torso.GetComponent<Rigidbody>();
         previousRotation = torso.rotation;
     }
-
     void FixedUpdate()
     {
         // Calculate the rotational difference (error) between the current and target orientation
