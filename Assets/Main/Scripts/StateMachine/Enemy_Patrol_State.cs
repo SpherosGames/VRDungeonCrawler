@@ -6,7 +6,6 @@ using UnityEngine.PlayerLoop;
 
 public class Enemy_Patrol_State : EnemyMoveBaseState
 {
-    Animator animator;
     public override void EnterState(EnemyMoveStateManager enemy) 
     {
         animator = GetComponent<Animator>();
@@ -20,8 +19,6 @@ public class Enemy_Patrol_State : EnemyMoveBaseState
             enemy.GetComponent<EnemyAttack>().enabled = true;
             enemy.GetComponent<EnemyWander>().enabled = false;
             enemy.SwitchState(enemy.AttackingState);
-            
-
         }
         
     }

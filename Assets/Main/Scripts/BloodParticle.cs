@@ -12,16 +12,15 @@ public class BloodParticle : MonoBehaviour
         Vector3 scale = projector.size;
         Vector3 pivot = projector.pivot;
 
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 100, environmentLayer))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 2, environmentLayer))
         {
-            print("Hit");
-            Debug.DrawRay(hit.point, Vector3.up, Color.red, 10);
-            scale.z = hit.distance + 0.1f;
+            //Debug.DrawRay(hit.point, Vector3.up, Color.red, 10);
+            scale.z = hit.distance + 0.5f;
             pivot.z = scale.z / 2;
         }
         else
         {
-            scale.z = 10;
+            scale.z = 0;
             pivot.z = scale.z / 2;
         }
 
@@ -32,14 +31,8 @@ public class BloodParticle : MonoBehaviour
 
         yield return Fade(0, 1, 10);
 
-        //if (projector.fadeFactor < 1)
-        //{
-        //    //print("fading in");
-        //    yield return null;
-        //}
 
         yield return new WaitForSeconds(0.1f);
-        //print("fading out");
 
         yield return Fade(1, 0, 0.1f);
 
