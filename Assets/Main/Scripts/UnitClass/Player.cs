@@ -11,14 +11,14 @@ public class Player : Unit
 
     private void OnEnable()
     {
-        healthSlider.maxValue = MaxHealth;
+        if (healthSlider) healthSlider.maxValue = MaxHealth;
     }
 
     public override void Update()
     {
         base.Update();
 
-        healthSlider.value = Health;
+        if (healthSlider) healthSlider.value = Health;
     }
 
     public override void Die()

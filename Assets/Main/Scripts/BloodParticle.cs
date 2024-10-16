@@ -50,14 +50,14 @@ public class BloodParticle : MonoBehaviour
             projector.fadeFactor = Mathf.MoveTowards(projector.fadeFactor, to, speed * Time.deltaTime);
 
             // Print the current fading state
-            if (to == 0)
-            {
-                print("fading in");
-            }
-            else if (to == 1)
-            {
-                print("fading out");
-            }
+            //if (to == 0)
+            //{
+            //    print("fading in");
+            //}
+            //else if (to == 1)
+            //{
+            //    print("fading out");
+            //}
 
             // Wait for the next frame
             yield return null;
