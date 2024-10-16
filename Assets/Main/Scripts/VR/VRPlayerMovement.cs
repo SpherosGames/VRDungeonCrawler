@@ -113,7 +113,7 @@ public class VRPlayerMovement : MonoBehaviour
             handsJumping = true;
         }
 
-        if (handsJumping&& isGrounded)
+        if (handsJumping && isGrounded)
         {
             float extraJumpAmount = Mathf.Clamp(((leftHandYVel + rightHandYVel) / 4), 1, 2);
 
