@@ -709,6 +709,39 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.35, y: 3, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &4973602386473099747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6194236234714142967}
+  m_Layer: 0
+  m_Name: U-Plant
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6194236234714142967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4973602386473099747}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8126873829629946636}
+  - {fileID: 6666914951076636656}
+  m_Father: {fileID: 270033672248372209}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5105065239043807358
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,6 +787,39 @@ Transform:
   - {fileID: 6593574950313690190}
   m_Father: {fileID: 3061231688870525608}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &7024403165579600091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2275864589167013877}
+  m_Layer: 0
+  m_Name: R-Plant
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2275864589167013877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7024403165579600091}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7918456937275710434}
+  - {fileID: 7628475506114883818}
+  m_Father: {fileID: 270033672248372209}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7171245776851702860
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +934,39 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.35, y: 3, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7896351913149969883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7726424806112078168}
+  m_Layer: 0
+  m_Name: B-Plant
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7726424806112078168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7896351913149969883}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 874850446514074576}
+  - {fileID: 24161958776927433}
+  m_Father: {fileID: 270033672248372209}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8408062528510620964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,12 +1182,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7918456937275710434}
-  - {fileID: 7628475506114883818}
-  - {fileID: 24161958776927433}
-  - {fileID: 6666914951076636656}
-  - {fileID: 874850446514074576}
-  - {fileID: 8126873829629946636}
+  - {fileID: 2275864589167013877}
+  - {fileID: 6194236234714142967}
+  - {fileID: 7726424806112078168}
   m_Father: {fileID: 1410671625099030226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &12143733319070250
@@ -1191,12 +1287,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 270033672248372209}
+    m_TransformParent: {fileID: 2275864589167013877}
     m_Modifications:
     - target: {fileID: 7427641840338554168, guid: e0f8e97a1b5757444924b3025a13f259,
         type: 3}
       propertyPath: m_Name
-      value: PottedPlant
+      value: R-B-Plant
       objectReference: {fileID: 0}
     - target: {fileID: 7809127722990770050, guid: e0f8e97a1b5757444924b3025a13f259,
         type: 3}
@@ -1280,12 +1376,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 270033672248372209}
+    m_TransformParent: {fileID: 2275864589167013877}
     m_Modifications:
     - target: {fileID: 7427641840338554168, guid: e0f8e97a1b5757444924b3025a13f259,
         type: 3}
       propertyPath: m_Name
-      value: PottedPlant (1)
+      value: R-U-Plant
       objectReference: {fileID: 0}
     - target: {fileID: 7809127722990770050, guid: e0f8e97a1b5757444924b3025a13f259,
         type: 3}
@@ -2027,12 +2123,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 270033672248372209}
+    m_TransformParent: {fileID: 6194236234714142967}
     m_Modifications:
     - target: {fileID: 7427641840338554168, guid: e0f8e97a1b5757444924b3025a13f259,
         type: 3}
       propertyPath: m_Name
-      value: PottedPlant (5)
+      value: U-R-Plant
       objectReference: {fileID: 0}
     - target: {fileID: 7809127722990770050, guid: e0f8e97a1b5757444924b3025a13f259,
         type: 3}
@@ -3338,12 +3434,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 270033672248372209}
+    m_TransformParent: {fileID: 6194236234714142967}
     m_Modifications:
     - target: {fileID: 7427641840338554168, guid: e0f8e97a1b5757444924b3025a13f259,
         type: 3}
       propertyPath: m_Name
-      value: PottedPlant (4)
+      value: U-L-Plant
       objectReference: {fileID: 0}
     - target: {fileID: 7809127722990770050, guid: e0f8e97a1b5757444924b3025a13f259,
         type: 3}
@@ -4778,17 +4874,17 @@ PrefabInstance:
     - target: {fileID: 5239272197777735519, guid: e348e7143b6247b488737e4be26fb038,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 13
+      value: 13.299999
       objectReference: {fileID: 0}
     - target: {fileID: 5239272197777735519, guid: e348e7143b6247b488737e4be26fb038,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 13
+      value: 13.299999
       objectReference: {fileID: 0}
     - target: {fileID: 5239272197777735519, guid: e348e7143b6247b488737e4be26fb038,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 13
+      value: 13.299999
       objectReference: {fileID: 0}
     - target: {fileID: 5239272197777735519, guid: e348e7143b6247b488737e4be26fb038,
         type: 3}
@@ -5248,12 +5344,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 270033672248372209}
+    m_TransformParent: {fileID: 7726424806112078168}
     m_Modifications:
     - target: {fileID: 7427641840338554168, guid: e0f8e97a1b5757444924b3025a13f259,
         type: 3}
       propertyPath: m_Name
-      value: PottedPlant (3)
+      value: B-R-Plant
       objectReference: {fileID: 0}
     - target: {fileID: 7809127722990770050, guid: e0f8e97a1b5757444924b3025a13f259,
         type: 3}
@@ -5822,12 +5918,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 270033672248372209}
+    m_TransformParent: {fileID: 7726424806112078168}
     m_Modifications:
     - target: {fileID: 7427641840338554168, guid: e0f8e97a1b5757444924b3025a13f259,
         type: 3}
       propertyPath: m_Name
-      value: PottedPlant (2)
+      value: B-L-Plant
       objectReference: {fileID: 0}
     - target: {fileID: 7809127722990770050, guid: e0f8e97a1b5757444924b3025a13f259,
         type: 3}
