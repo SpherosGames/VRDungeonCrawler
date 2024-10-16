@@ -126,7 +126,7 @@ public class HandPhysics : MonoBehaviour
                 {
                     currentGrabbable = socketedObject;
                     currentGrabbable.hand = this;
-                    currentGrabbable.socket.UnSocketObject();
+                    currentGrabbable.socket.UnSocketObject(socketedObject.gameObject);
                     socketedObject = null;
                     return;
                 }

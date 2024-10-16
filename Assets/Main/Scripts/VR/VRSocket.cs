@@ -15,7 +15,8 @@ public class VRSocket : MonoBehaviour
     [SerializeField] private RigidbodyConstraints contraintsp2;
     [SerializeField] private RigidbodyConstraints contraintsp3;
 
-    [SerializeField] private UnityEvent OnOpenChest;
+    [SerializeField] private UnityEvent<GameObject> OnSocket = new();
+    [SerializeField] private UnityEvent<GameObject> OnUnsocket = new();
 
     public float ReleaseDistance => releaseDistance;
 
@@ -57,9 +58,11 @@ public class VRSocket : MonoBehaviour
         }
     }
 
-    public void UnSocketObject()
+    public void UnSocketObject(GameObject UnSocketObject)
     {
         if (!maySocket) return;
+
+        OnUnsocket.Invoke(UnSocketObject);
 
         reSocketTimer = reSocketDelay;
         maySocket = false;
@@ -82,11 +85,14 @@ public class VRSocket : MonoBehaviour
 
     private void SocketObject(GameObject _socketedObject)
     {
+        print(_socketedObject);
+        OnSocket.Invoke(_socketedObject);
+
         //sockettimer to make sure the object doenst get immmediatly resocketed;
         reSocketTimer = reSocketDelay;
         maySocket = false;
 
-        socketedObject = _socketedObject.gameObject;
+        socketedObject = _socketedObject;
         socketedGrabbable = socketedObject.GetComponent<Grabbable>();
         //Release the socketable from the hand
         if (socketedGrabbable.hand)
