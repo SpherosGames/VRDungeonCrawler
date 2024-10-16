@@ -264,6 +264,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 73255505}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &123440002 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 572520673027607909, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+    type: 3}
+  m_PrefabInstance: {fileID: 742687375}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &189813627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,6 +1479,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Interaction Setup
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: feetPos
+      value: 
+      objectReference: {fileID: 123440002}
+    - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: jumpButton.m_Action.m_Name
+      value: Jump Button
       objectReference: {fileID: 0}
     - target: {fileID: 8114538837139019700, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
@@ -3066,7 +3082,10 @@ MonoBehaviour:
   contraintsp1: 0
   contraintsp2: 0
   contraintsp3: 0
-  OnOpenChest:
+  OnSocket:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnsocket:
     m_PersistentCalls:
       m_Calls: []
   socketedObject: {fileID: 0}
