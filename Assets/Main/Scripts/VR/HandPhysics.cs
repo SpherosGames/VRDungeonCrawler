@@ -122,8 +122,10 @@ public class HandPhysics : MonoBehaviour
         {
             if (socketedObject)
             {
+                print(Vector3.Distance(transform.TransformPoint(palmPosTarget.position), socketedObject.transform.position));
                 if (Vector3.Distance(transform.TransformPoint(palmPosTarget.position), socketedObject.transform.position) >= socketedObject.socket.ReleaseDistance)
                 {
+                    print("Socketed go brr");
                     currentGrabbable = socketedObject;
                     currentGrabbable.hand = this;
                     currentGrabbable.socket.UnSocketObject(socketedObject.gameObject);

@@ -30,22 +30,10 @@ public class ChestLock : MonoBehaviour
             limits.min = -135;
             ChestLid.GetComponent<HingeJoint>().limits = limits;
 
-            //Makes the lock do gravity
-            //Destroy(LockModel.GetComponent<HingeJoint>());
-            LockModel.gameObject.layer = LayerMask.NameToLayer("Chest");
-
             //Makes the key unusable
             Other.GetComponent<Item>().ItemType = "UsedKey";
 
-            //Sets it to the locks position, turns off its own gravity and changes its parent
-            //GameObject key = Other.gameObject;
-            //key.GetComponent<Rigidbody>().isKinematic = true;
-            //key.transform.parent = LockModel.transform;
-            //key.GetComponent<BoxCollider>().enabled = false;
-            //key.transform.localPosition = new Vector3(0, 0, -1);
-            //key.transform.localEulerAngles = new Vector3(0, 90, 0);
-            //LockModel.transform.parent = null;
-            BeenUnlocked = true;
+            //BeenUnlocked = true;
         }
     }
 }
