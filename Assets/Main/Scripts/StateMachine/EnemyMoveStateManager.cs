@@ -11,11 +11,15 @@ public class EnemyMoveStateManager : MonoBehaviour
     private EnemyAttack enemyAttack;
     void Start()
     {
-        animator = GetComponent<Animator>();
+       
         enemyAttack = GetComponent<EnemyAttack>();
-
         CurrentState = IdleState;
         CurrentState.EnterState(this);
+    }
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        Debug.Log(animator);
     }
     void Update()
     {
@@ -23,7 +27,7 @@ public class EnemyMoveStateManager : MonoBehaviour
     }
     public void SwitchState(EnemyMoveBaseState state)
     {
-        Debug.Log($"Switching from {CurrentState.GetType().Name} to {state.GetType().Name}");
+        //Debug.Log($"Switching from {CurrentState.GetType().Name} to {state.GetType().Name}");
         CurrentState = state;
         state.EnterState(this);
     }
