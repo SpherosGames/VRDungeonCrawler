@@ -19,13 +19,15 @@ public class NewDungeonGenerator : MonoBehaviour {
     [Header("Variables")]
     [SerializeField] private int NumOfRooms = 10;
     [SerializeField] private LayerMask RoomsLayerMask;
+    [SerializeField] private List<DungeonPart> GeneratedRooms;
 
-    private List<DungeonPart> GeneratedRooms;
     private bool IsGenerated;
 
-    private void Start() {
+    private void Awake() {
         Instance = this;
+    }
 
+    private void Start() {
         _Generate();
         _GenerateAlternateEntrances();
         _FillEmptyEntrances();
@@ -38,7 +40,6 @@ public class NewDungeonGenerator : MonoBehaviour {
         for (int i = 0; i < NumOfRooms - AlternateEntrances.Count; i++) {
             if (GeneratedRooms.Count < 1) {
                 GameObject GeneratedRoom = Instantiate(Entrance, transform.position, transform.rotation);
-                GeneratedRoom.transform.SetParent(null);
 
                 if (GeneratedRoom.TryGetComponent<DungeonPart>(out DungeonPart _DungeonPart)) {
                     GeneratedRooms.Add(_DungeonPart);
@@ -63,16 +64,17 @@ public class NewDungeonGenerator : MonoBehaviour {
                 }
 
                 GameObject DoorToAlign = Instantiate(Door, transform.position, transform.rotation);
-                DoorToAlign.transform.SetParent(null);
 
                 if (ShouldPlaceHallway) {
                     int RandomIndex = Random.Range(0, Hallways.Count);
                     GameObject GeneratedHallway = Instantiate(Hallways[RandomIndex], transform.position, transform.rotation);
-                    GeneratedHallway.transform.SetParent(null);
                     
                     if (GeneratedHallway.TryGetComponent<DungeonPart>(out DungeonPart _DungeonPart)) {
                         if (_DungeonPart.HasAvailableEntryPoint(out Transform _Room2EntryPoint)) {
                             GeneratedRooms.Add(_DungeonPart);
+
+                            Debug.Log("DoorToPlace: " + DoorToAlign);
+                            Debug.Log("RandomGeneratedRoom: " + RandomGeneratedRoom);
 
                             DoorToAlign.transform.position = Room1EntryPoint.transform.position;
                             DoorToAlign.transform.rotation = Room1EntryPoint.transform.rotation;
@@ -104,14 +106,12 @@ public class NewDungeonGenerator : MonoBehaviour {
                         GeneratedRoom = Instantiate(Rooms[RandomIndex], transform.position, transform.rotation);
                     }
 
-                    GeneratedRoom.transform.SetParent(null);
                     if (GeneratedRoom.TryGetComponent<DungeonPart>(out DungeonPart _DungeonPart)) { 
                         if (_DungeonPart.HasAvailableEntryPoint(out Transform Room2EntryPoint)) { 
                             GeneratedRooms.Add(_DungeonPart);
 
                             DoorToAlign.transform.position = Room1EntryPoint.transform.position;
                             DoorToAlign.transform.rotation = Room1EntryPoint.transform.rotation;
-
                             AlignRooms(RandomGeneratedRoom.transform, GeneratedRoom.transform, Room1EntryPoint, Room2EntryPoint);
 
                             if (HandleIntersection(_DungeonPart)) {
@@ -126,45 +126,14 @@ public class NewDungeonGenerator : MonoBehaviour {
             }
         }
     }
-    private void _GenerateAlternateEntrances() {
-        if (AlternateEntrances.Count < 1) return;
-    }
 
     private void _FillEmptyEntrances() {
         GeneratedRooms.ForEach(Room => Room.FillEmptyDoors());
     }
 
-    private void RetryPlacement(GameObject ItemToPlace, GameObject DoorToPlace) {
-        DungeonPart RandomGeneratedRoom = null;
-        Transform Room1EntryPoint = null;
-        int TotalRetries = 100;
-        int RetryIndex = 0;
-
-        while (RandomGeneratedRoom == null && RetryIndex < TotalRetries) {
-            int RandomLinkRoomIndex = Random.Range(0, GeneratedRooms.Count - 1);
-            DungeonPart RoomToTest = GeneratedRooms[RandomLinkRoomIndex];
-
-            if (RoomToTest.HasAvailableEntryPoint(out Room1EntryPoint)) {
-                RandomGeneratedRoom = RoomToTest;
-                break;
-            }
-            RetryIndex++;
-        }
-
-        if (ItemToPlace.TryGetComponent<DungeonPart>(out DungeonPart _DungeonPart)) {
-            if (_DungeonPart.HasAvailableEntryPoint(out Transform Room2EntryPoint)) {
-                DoorToPlace.transform.position = Room1EntryPoint.transform.position;
-                DoorToPlace.transform.rotation = Room1EntryPoint.transform.rotation;
-
-                AlignRooms(RandomGeneratedRoom.transform, ItemToPlace.transform, Room1EntryPoint, Room2EntryPoint);
-
-                if (HandleIntersection(_DungeonPart)) {
-                    _DungeonPart.UnuseEntrypoint(Room2EntryPoint);
-                    RandomGeneratedRoom.UnuseEntrypoint(Room1EntryPoint);
-                    RetryPlacement(ItemToPlace, DoorToPlace);
-                }
-            }
-        }
+    private void _GenerateAlternateEntrances()
+    {
+        if (AlternateEntrances.Count < 1) return;
     }
 
     private bool HandleIntersection(DungeonPart _DungeonPart) {
@@ -181,7 +150,51 @@ public class NewDungeonGenerator : MonoBehaviour {
         return DidIntersect;
     }
 
-    private void AlignRooms(Transform Room1, Transform Room2, Transform Room1Entry, Transform Room2Entry) {
+    private void RetryPlacement(GameObject ItemToPlace, GameObject DoorToPlace)
+    {
+        DungeonPart RandomGeneratedRoom = null;
+        Transform Room1EntryPoint = null;
+        int TotalRetries = 100;
+        int RetryIndex = 0;
+
+        while (RandomGeneratedRoom == null && RetryIndex < TotalRetries)
+        {
+            int RandomLinkRoomIndex = Random.Range(0, GeneratedRooms.Count);
+            DungeonPart RoomToTest = GeneratedRooms[RandomLinkRoomIndex];
+
+            if (RoomToTest.HasAvailableEntryPoint(out Room1EntryPoint))
+            {
+                RandomGeneratedRoom = RoomToTest;
+                break;
+            }
+            RetryIndex++;
+        }
+
+        if (ItemToPlace.TryGetComponent<DungeonPart>(out DungeonPart _DungeonPart))
+        {
+            if (_DungeonPart.HasAvailableEntryPoint(out Transform Room2EntryPoint))
+            {
+                Debug.Log("ItemToPlace: " + ItemToPlace);
+                Debug.Log("DoorToPlace: " + DoorToPlace);
+                Debug.Log("RandomGeneratedRoom: " + RandomGeneratedRoom);
+
+                DoorToPlace.transform.position = Room1EntryPoint.transform.position;
+                DoorToPlace.transform.rotation = Room1EntryPoint.transform.rotation;
+
+                AlignRooms(RandomGeneratedRoom.transform, ItemToPlace.transform, Room1EntryPoint, Room2EntryPoint);
+
+                if (HandleIntersection(_DungeonPart))
+                {
+                    _DungeonPart.UnuseEntrypoint(Room2EntryPoint);
+                    RandomGeneratedRoom.UnuseEntrypoint(Room1EntryPoint);
+                    RetryPlacement(ItemToPlace, DoorToPlace);
+                }
+            }
+        }
+    }
+
+    private void AlignRooms(Transform Room1, Transform Room2, Transform Room1Entry, Transform Room2Entry)
+    {
         float angle = Vector3.Angle(Room1Entry.forward, Room2Entry.forward);
 
         Room2.TransformPoint(Room2Entry.position);
