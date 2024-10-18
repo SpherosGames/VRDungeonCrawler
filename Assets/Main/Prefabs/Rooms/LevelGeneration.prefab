@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3249625662156457296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8892177446420296449}
+  - component: {fileID: 4541781874029533944}
+  m_Layer: 0
+  m_Name: LevelGeneration
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8892177446420296449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3249625662156457296}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4541781874029533944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3249625662156457296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -766443767, guid: f560063dff201ed49a415a8d58f2aae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generateOnStart: 1
+  randomizeSeed: 1
+  seed: 719439886
+  sectionContainer: {fileID: 8892177446420296449}
+  maxLevelSize: 100
+  maxAllowedOrder: 15
+  sectionPrefabs:
+  - {fileID: 490034232628518970, guid: c6d8126c2d1ea8547af9454e3bc32286, type: 3}
+  - {fileID: 8538362406132586150, guid: fd142b7c015d22d48b3343ab7e697f2a, type: 3}
+  - {fileID: 5505084658988753896, guid: 4c6bbfb746d7b08479d08e5b3afc7175, type: 3}
+  - {fileID: 1247101452112554306, guid: 917a6b819e3803a418b92ad06a45e385, type: 3}
+  - {fileID: 4003691251319733495, guid: 0f74ec28ca692a347b7a39e9e214cad3, type: 3}
+  - {fileID: 2846573428508913365, guid: f1575bf87b212b349b6da6ebfc7c0691, type: 3}
+  - {fileID: 440607717775956263, guid: 981f894e5fd690243ba35c197e2f8c11, type: 3}
+  - {fileID: 6860546022402455435, guid: f065894f23656194db76fc45151731ac, type: 3}
+  endPrefabs:
+  - {fileID: 3825504082388877026, guid: 1612a121ba1d70b45b5dd509ec20a848, type: 3}
+  initialSectionTags:
+  - seed
+  specialRules:
+  - Tag: treasure
+    MinAmount: 1
+    MaxAmount: 3
+  - Tag: spawn
+    MinAmount: 1
+    MaxAmount: 1
