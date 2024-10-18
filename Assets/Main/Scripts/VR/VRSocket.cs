@@ -54,7 +54,7 @@ public class VRSocket : MonoBehaviour
 
         if(socketedObject)
         {
-            //print(socketedObject.transform.eulerAngles);
+            print(socketedObject.transform.eulerAngles);
         }
     }
 
@@ -85,7 +85,7 @@ public class VRSocket : MonoBehaviour
 
     private void SocketObject(GameObject _socketedObject)
     {
-        //print(_socketedObject);
+        print(_socketedObject);
         OnSocket.Invoke(_socketedObject);
 
         //sockettimer to make sure the object doenst get immmediatly resocketed;
