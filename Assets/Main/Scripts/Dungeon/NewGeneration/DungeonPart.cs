@@ -28,7 +28,9 @@ public class DungeonPart: MonoBehaviour {
                 if (res.IsOccupied()) {
                     result = false;
                     ResultingEntry = null;
-                } else {
+                } 
+                else 
+                {
                     result = true;
                     ResultingEntry = Entry;
                     res.SetOccupied();
@@ -57,10 +59,10 @@ public class DungeonPart: MonoBehaviour {
         return result;
     }
 
-    public void UnuseEntrypoint(Transform EntryPoint) {
-        if (EntryPoint.TryGetComponent<EntryPoint>(out EntryPoint entry)) {
-            entry.SetOccupied();
-        }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(_Collider.bounds.center, _Collider.bounds.size);
     }
 
     public void FillEmptyDoors() {
@@ -75,8 +77,11 @@ public class DungeonPart: MonoBehaviour {
         });
     }
 
-    void OnDrawGizmos() {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(_Collider.bounds.center, _Collider.bounds.size);
+    public void UnuseEntrypoint(Transform EntryPoint)
+    {
+        if (EntryPoint.TryGetComponent<EntryPoint>(out EntryPoint entry))
+        {
+            entry.SetOccupied();
+        }
     }
 }
