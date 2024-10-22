@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Grabbable : MonoBehaviour
 {
-    public HandPhysics hand;
+    public NewPhysicsHand hand;
     public Rigidbody rb;
     public VRSocket socket;
     public Transform grabPoint;
