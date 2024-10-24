@@ -27,8 +27,8 @@ public class VRPlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private InputActionProperty jumpButton;
     [SerializeField] private float minHandVelocity;
-    [SerializeField] private Rigidbody leftHand;
-    [SerializeField] private Rigidbody rightHand;
+    [SerializeField] private Transform leftHand;
+    [SerializeField] private Transform rightHand;
 
     [Header("Body Collider")]
     [SerializeField] private Transform playerHead;
