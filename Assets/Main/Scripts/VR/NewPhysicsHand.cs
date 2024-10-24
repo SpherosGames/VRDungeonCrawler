@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class NewPhysicsHand : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class NewPhysicsHand : MonoBehaviour
     [SerializeField] private Vector3 rotationOffset;
     [SerializeField] private float followSpeed;
     [SerializeField] private float rotationSpeed;
-
+    [SerializeField] private int nonInteractLayer;
+   
     private void OnEnable()
     {
         //Set rigidbody
@@ -40,5 +42,17 @@ public class NewPhysicsHand : MonoBehaviour
             if (angle > 180.0f) { angle -= 360.0f; }
             rb.angularVelocity = angle * Mathf.Deg2Rad * rotationSpeed * Time.deltaTime * axis;
         }
+    }
+
+    public void TurnCollisionOff(SelectEnterEventArgs args)
+    {
+        print("Collision off");
+        args.interactableObject.transform.gameObject.layer = nonInteractLayer;
+    }
+
+    public void TurnCollisionOn(SelectExitEventArgs args)
+    {
+        print("Collision on");
+        args.interactableObject.transform.gameObject.layer = 10;
     }
 }
