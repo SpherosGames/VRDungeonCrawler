@@ -145,19 +145,16 @@ public class EnemyAttack : MonoBehaviour
         animator.SetBool(IsAttacking, true);
         animator.SetBool(IsMoving, false);
         animator.SetTrigger(TriggerAttack);
-        Debug.Log("Setting Attacking State");
     }
     void SetWalkingState()
     {
         animator.SetBool(IsAttacking, false);
         animator.SetBool(IsMoving, true);
-        Debug.Log("Setting Walking State");
     }
     void SetIdleState()
     {
         animator.SetBool(IsAttacking, false);
         animator.SetBool(IsMoving, false);
-        Debug.Log("Setting Idle State");
     }
 
     // Visualization for attack range in editor

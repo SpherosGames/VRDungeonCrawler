@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 8118175836125429116}
   - component: {fileID: 6770217039488987794}
   - component: {fileID: 2285830695010482872}
+  - component: {fileID: 6798633196560605630}
   m_Layer: 12
   m_Name: XR Origin (XR Rig)
   m_TagString: Target
@@ -400,7 +401,7 @@ Transform:
   m_GameObject: {fileID: 2964208623171399835}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.463, z: 0}
+  m_LocalPosition: {x: -9.89, y: 0.463, z: 3.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -424,7 +425,7 @@ MonoBehaviour:
   m_OriginBaseGameObject: {fileID: 4741988324052386136}
   m_CameraFloorOffsetObject: {fileID: 3311258874411185050}
   m_RequestedTrackingOriginMode: 1
-  m_CameraYOffset: 2
+  m_CameraYOffset: 3
 --- !u!114 &8118175836125429116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,6 +485,27 @@ MonoBehaviour:
   Speed: 5
   loseSceneName: LoseRoom
   healthSlider: {fileID: 0}
+--- !u!65 &6798633196560605630
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2964208623171399835}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.91, z: 1}
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!1 &3311258874411185050
 GameObject:
   m_ObjectHideFlags: 0

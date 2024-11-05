@@ -5,7 +5,8 @@ using UnityEngine;
 public enum SocketableType
 {
     keyLock,
-    Test
+    Test,
+    Cork
 }
 
 [RequireComponent(typeof(Grabbable))]
