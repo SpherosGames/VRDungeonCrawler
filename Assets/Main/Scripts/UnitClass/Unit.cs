@@ -23,6 +23,11 @@ public class Unit : MonoBehaviour
     public virtual void TakeDamage(float damage)
     {
         Health = Mathf.Max(0, Health - damage);
-        Debug.Log($"{Name} took {damage} damage. Current health: {Health}");
+        //Debug.Log($"{name} took {damage} damage. Current health: {Health}");
     }
+    public virtual void DoDamage(float damage)
+    {
+
+    }
+
 }
