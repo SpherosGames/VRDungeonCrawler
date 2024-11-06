@@ -125,7 +125,7 @@ public class HandPhysics : MonoBehaviour
                 if (Vector3.Distance(transform.TransformPoint(palmPosTarget.position), socketedObject.transform.position) >= socketedObject.socket.ReleaseDistance)
                 {
                     currentGrabbable = socketedObject;
-                    currentGrabbable.hand = this;
+                    //currentGrabbable.hand = this;
                     currentGrabbable.socket.UnSocketObject(socketedObject.gameObject);
                     socketedObject = null;
                     return;
@@ -151,7 +151,7 @@ public class HandPhysics : MonoBehaviour
                 {
                     //Set grabble hand
                     currentGrabbable = grabbable;
-                    currentGrabbable.hand = this;
+                    //currentGrabbable.hand = this;
                 }
 
                 StartCoroutine(SetColliders(false, 0));

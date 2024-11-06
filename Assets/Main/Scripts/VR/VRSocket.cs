@@ -97,7 +97,7 @@ public class VRSocket : MonoBehaviour
         //Release the socketable from the hand
         if (socketedGrabbable.hand)
         {
-            socketedGrabbable.hand.ForceRelease();
+            //socketedGrabbable.hand.ForceRelease();
         }
 
         //Set gravity of socketable off
