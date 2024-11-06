@@ -46,27 +46,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   generateOnStart: 1
   randomizeSeed: 1
-  seed: 719439886
+  seed: 0
   sectionContainer: {fileID: 8892177446420296449}
-  maxLevelSize: 100
-  maxAllowedOrder: 15
+  maxLevelSize: 50
+  maxAllowedOrder: 40
   sectionPrefabs:
-  - {fileID: 490034232628518970, guid: c6d8126c2d1ea8547af9454e3bc32286, type: 3}
-  - {fileID: 8538362406132586150, guid: fd142b7c015d22d48b3343ab7e697f2a, type: 3}
-  - {fileID: 5505084658988753896, guid: 4c6bbfb746d7b08479d08e5b3afc7175, type: 3}
-  - {fileID: 1247101452112554306, guid: 917a6b819e3803a418b92ad06a45e385, type: 3}
-  - {fileID: 4003691251319733495, guid: 0f74ec28ca692a347b7a39e9e214cad3, type: 3}
-  - {fileID: 2846573428508913365, guid: f1575bf87b212b349b6da6ebfc7c0691, type: 3}
-  - {fileID: 440607717775956263, guid: 981f894e5fd690243ba35c197e2f8c11, type: 3}
-  - {fileID: 6860546022402455435, guid: f065894f23656194db76fc45151731ac, type: 3}
+  - {fileID: 4935666609049339358, guid: 2ca0fc40e16d9524dac5a6361f78424d, type: 3}
+  - {fileID: 1412563945307152470, guid: 647c052c72cbe554d8df1ecce62f968b, type: 3}
+  - {fileID: 1004131907374809603, guid: 0585808dc113dad41873257a02c056b8, type: 3}
+  - {fileID: 7401020228311539364, guid: 01b115ebeb616ff468efed808303b91b, type: 3}
+  - {fileID: 2584850120834321736, guid: 7a56b5de3a741d946a5f64e49cd4d371, type: 3}
+  - {fileID: 2309806959903965747, guid: 6e283b5b849d07442973aa62ba83a8d9, type: 3}
+  - {fileID: 4512857700026574905, guid: 8347f4124d2efa243bf8a04cc91c7cc4, type: 3}
+  - {fileID: 3394833010936843200, guid: c916cc608b57ddb4e9bfef38c083364c, type: 3}
   endPrefabs:
-  - {fileID: 3825504082388877026, guid: 1612a121ba1d70b45b5dd509ec20a848, type: 3}
+  - {fileID: 3950324273931901374, guid: 1eb17db26adbe4b4aa40d7dbdb466165, type: 3}
   initialSectionTags:
-  - seed
-  specialRules:
-  - Tag: treasure
-    MinAmount: 1
-    MaxAmount: 3
-  - Tag: spawn
-    MinAmount: 1
-    MaxAmount: 1
+  - spawn
+  specialRules: []
