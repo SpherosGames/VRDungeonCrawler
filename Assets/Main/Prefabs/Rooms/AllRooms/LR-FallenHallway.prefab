@@ -2442,7 +2442,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1410671625099030226}
-  - component: {fileID: 690234758277603726}
   m_Layer: 0
   m_Name: LR-FallenHallway
   m_TagString: Untagged
@@ -2475,27 +2474,6 @@ Transform:
   - {fileID: 7488098079723671432}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &690234758277603726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7171245776851702860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 942e16026f781a64e833f8471d51831c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RoomsLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  _DungeonPartType: 0
-  FillerWall: {fileID: 0}
-  EntryPoints:
-  - {fileID: 7486289798159569343}
-  - {fileID: 4908952636276803643}
-  _Collider: {fileID: 0}
 --- !u!1 &7207584662241388250
 GameObject:
   m_ObjectHideFlags: 0
