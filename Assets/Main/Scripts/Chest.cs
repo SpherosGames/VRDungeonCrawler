@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
+    [SerializeField] private ChestLock chestLock;
     [SerializeField] private Transform SpawnSpot;
 
     [Header("Item chances")]
@@ -39,8 +40,8 @@ public class Chest : MonoBehaviour
         }
         #endif
 
-        //If the chest hasnt been opened and above 60 degress or is opening, force teh chest fully open and start OpenChest()
-        if (ChestLid.transform.localEulerAngles.x > 60 && LidJoint.useMotor == false && HasBeenOpened == false || Opening == true)
+        //If the chest hasnt been opened and above 60 degress or is opening, force the chest fully open and start OpenChest()
+        if (ChestLid.transform.localEulerAngles.x > 60 && LidJoint.useMotor == false && HasBeenOpened == false && chestLock.BeenUnlocked || Opening == true)
         {
             LidJoint.useMotor = true;
             StartCoroutine(OpenChest());
