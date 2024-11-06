@@ -84,18 +84,4 @@ public class CoolPotion : MonoBehaviour
             player.Health = Mathf.Min(player.MaxHealth, player.Health + healthAmount);
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log($"collided with {collision.gameObject.name}");
-        if (collision.gameObject.CompareTag("Body"))
-        {
-            Debug.Log("collided with body");
-            float angle = Vector3.Angle(Vector3.down, transform.up);
-            if (angle > headPourAngle)
-            {
-                AddHealth();
-                Debug.Log("doing the stuff");
-            }
-        }
-    }
 }
