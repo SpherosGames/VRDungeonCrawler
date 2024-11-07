@@ -10,7 +10,7 @@ public class Enemy_Attacking_State : EnemyMoveBaseState
         // The EnemyAttack component will handle the attack logic and animations
         if (!enemy.GetComponentInChildren<FieldOfView>().HasTarget)
         {
-            enemy.GetComponent<EnemyAttack>().enabled = false;
+            //enemy.GetComponent<EnemyAttack>().enabled = false;
             enemy.SwitchState(enemy.PatrolState);
         }
     }
