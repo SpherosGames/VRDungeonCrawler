@@ -27,7 +27,7 @@ public class StrengthPotion : MonoBehaviour
         if (player != null && player.Health < player.MaxHealth && potionDrinkCollider.isColliding)
         {
             print("Actually heal");
-            player.Health = Mathf.Min(player.MaxHealth, player.Health + healthAmount);
+            //player.AddStrength();
         }
     }
 }
