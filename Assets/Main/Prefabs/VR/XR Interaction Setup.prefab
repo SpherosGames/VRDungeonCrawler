@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5516555723110111486}
   m_Layer: 0
   m_Name: Left Controller
-  m_TagString: Untagged
+  m_TagString: LeftController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -625,11 +625,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Player
-  Health: 100
+  Health: 50
   MaxHealth: 100
   Speed: 5
   loseSceneName: LoseRoom
   healthSlider: {fileID: 0}
+  strengthBuffs: []
 --- !u!65 &6798633196560605630
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -696,7 +697,7 @@ GameObject:
   - component: {fileID: 3997947943648101277}
   - component: {fileID: 2973191662420489677}
   - component: {fileID: 2065563553563351544}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: ShoulderSocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +713,7 @@ Transform:
   m_GameObject: {fileID: 3391417032757969734}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.339}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -735,7 +736,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 2
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
@@ -798,7 +799,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 0.29863715, z: 0.39141107}
-  m_Center: {x: 0, y: 0.35068142, z: -0.30429447}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3873390912586535818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,7 +1058,7 @@ GameObject:
   - component: {fileID: 9130950380426983038}
   m_Layer: 0
   m_Name: Right Controller
-  m_TagString: Untagged
+  m_TagString: RightController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1512,6 +1513,73 @@ CapsuleCollider:
   m_Height: 1.9379952
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &6821482112378746234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7218537071203432808}
+  - component: {fileID: 1125152416253412165}
+  - component: {fileID: 5187772688964157608}
+  m_Layer: 0
+  m_Name: PotionDrinkCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7218537071203432808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6821482112378746234}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 132388940681249107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1125152416253412165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6821482112378746234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e280590e0c61eb44d90848d1a538847c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isColliding: 0
+--- !u!65 &5187772688964157608
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6821482112378746234}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3, y: 0.5878769, z: 0.3}
+  m_Center: {x: 0, y: 0.14393848, z: 0}
 --- !u!1 &7913383739277536534
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,6 +1614,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3997947943648101277}
+  - {fileID: 7218537071203432808}
   m_Father: {fileID: 3808199904261798872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2857648575618757635
