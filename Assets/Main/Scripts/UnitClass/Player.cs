@@ -47,9 +47,9 @@ public class Player : Unit
 
         strength = 1;
         if (hasTempStrengthPotion) strength *= tempStrengAmount;
-        for (int i = 0; i < length; i++)
-        {
+        //for (int i = 0; i < length; i++)
+        //{
 
-        }
+        //}
     }
 }
