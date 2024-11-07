@@ -1962,7 +1962,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1410671625099030226}
-  - component: {fileID: 6927648122527568878}
   m_Layer: 0
   m_Name: DLR-Exit
   m_TagString: Untagged
@@ -1993,28 +1992,6 @@ Transform:
   - {fileID: 717921608290887770}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6927648122527568878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7171245776851702860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 942e16026f781a64e833f8471d51831c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RoomsLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  _DungeonPartType: 0
-  FillerWall: {fileID: 0}
-  EntryPoints:
-  - {fileID: 820902286577590493}
-  - {fileID: 936609959801782135}
-  - {fileID: 8474730147904285608}
-  _Collider: {fileID: 0}
 --- !u!1 &7854687116498782774
 GameObject:
   m_ObjectHideFlags: 0

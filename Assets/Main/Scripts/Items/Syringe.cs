@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Syringe : MonoBehaviour
 {
-    //I dont think its worth it to make a scriptableobject for a small amount of items.
+    //To check if it touches the player
     [SerializeField] LayerMask PlayerLayer;
 
     public SyringeScriptableobject Scriptable;
@@ -22,24 +22,25 @@ public class Syringe : MonoBehaviour
     {
         if (!BeenUsed)
         {
-            if(collision.gameObject.layer == PlayerLayer || collision.gameObject.GetComponent<Player>())
+            print(collision.gameObject.layer);
+            if(collision.gameObject.layer == 12)
             {
                 if(RigidB.velocity.magnitude > 0.3f)
                 {
                     transform.parent = collision.transform;
                     RigidB.isKinematic = true;
-                    StartCoroutine(UseSyringe(collision.gameObject));
+                    StartCoroutine(UseSyringe());
                 }
             }
         }
     }
 
-    private IEnumerator UseSyringe(GameObject Player)
+    private IEnumerator UseSyringe()
     {
         yield return new WaitForSeconds(Scriptable.TimeToUse);
         transform.parent = null;
         RigidB.isKinematic = false;
-        Player.GetComponent<Player>().TakeDamage(-Scriptable.InstantHealing);
+        FindObjectOfType<Player>().TakeDamage(-Scriptable.InstantHealing);
         BeenUsed = true;
     }
 }
