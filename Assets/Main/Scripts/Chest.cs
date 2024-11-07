@@ -130,6 +130,12 @@ public class Chest : MonoBehaviour
                 {
                     item.AddComponent(typeof(Rigidbody));
                 }
+
+                if (item.GetComponent<Syringe>())
+                {
+                    item.GetComponent<Syringe>().Scriptable = PossibleItems[j].SyringeType;
+                }
+
                 Rigidbody RigidB = item.GetComponent<Rigidbody>();
 
                 //Chooses its velocity and adds that force
