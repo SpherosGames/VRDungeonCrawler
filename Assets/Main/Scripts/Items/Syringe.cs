@@ -37,6 +37,7 @@ public class Syringe : MonoBehaviour
 
     private IEnumerator UseSyringe()
     {
+        print("Used Syringe");
         yield return new WaitForSeconds(Scriptable.TimeToUse);
         transform.parent = null;
         RigidB.isKinematic = false;
