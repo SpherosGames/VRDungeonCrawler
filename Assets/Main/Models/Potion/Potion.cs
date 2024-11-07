@@ -8,8 +8,6 @@ public class Potion : MonoBehaviour
     [SerializeField] private ParticleSystem pourEffect;
     [SerializeField] private GameObject Cork;
     [SerializeField] private Renderer FluidMesh;
-    [SerializeField] private float healthAmount = 5f; // Amount of health to add when pouring
-    [SerializeField] private Player player; // Reference to the player
     [SerializeField] private float effectCoolDownTimer;
     [SerializeField] private bool isSingleUse;
 
@@ -22,19 +20,11 @@ public class Potion : MonoBehaviour
     private readonly string fillPropertyName = "_Fill";
 
     private float effectTimer;
-    private PotionDrinkCollider potionDrinkCollider;
-
-    private void Awake()
-    {
-        potionDrinkCollider = FindObjectOfType<PotionDrinkCollider>();
-    }
 
     private void Start()
     {
         StopPouring();
         FluidLevel = FluidMesh.material.GetFloat(fillPropertyName);
-
-        player = FindObjectOfType<Player>();
     }
 
     void Update()

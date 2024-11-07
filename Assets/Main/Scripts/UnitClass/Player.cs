@@ -12,7 +12,7 @@ public class Player : Unit
     [SerializeField] private List<float> strengthBuffs = new();
 
     private bool hasTempStrengthPotion;
-    private float tempStrengAmount = 1.1f;
+    //private float 
     private float strength;
 
     private void OnEnable()
@@ -26,7 +26,7 @@ public class Player : Unit
 
         if (healthSlider) healthSlider.value = Health;
 
-        //if (hasTempStrengthPotion) 
+        if (hasTempStrengthPotion)
     }
 
     public override void Die()
@@ -46,10 +46,10 @@ public class Player : Unit
         }
 
         strength = 1;
-        if (hasTempStrengthPotion) strength *= tempStrengAmount;
-        //for (int i = 0; i < length; i++)
-        //{
-
-        //}
+        if (hasTempStrengthPotion) strength *= amount;
+        for (int i = 0; i < strengthBuffs.Count; i++)
+        {
+            strength *= strengthBuffs[i];
+        }
     }
 }
