@@ -509,6 +509,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 3e88dcef5a3eceb4ab393e3d9da515bd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a05df285934f95448f739236e392c85, type: 2}
     - target: {fileID: 919132149155446097, guid: 3e88dcef5a3eceb4ab393e3d9da515bd,
         type: 3}
       propertyPath: m_Name
@@ -769,7 +774,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0000000023841864, y: 0.0030088518, z: 0.0049999994}
+  m_ConnectedAnchor: {x: 0, y: 0.003008852, z: 0.0050000013}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
