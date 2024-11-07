@@ -19,7 +19,7 @@ public class EnemyMoveStateManager : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        Debug.Log(animator);
+        //Debug.Log(animator);
     }
     void Update()
     {

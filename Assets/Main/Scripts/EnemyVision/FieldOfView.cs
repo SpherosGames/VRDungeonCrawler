@@ -133,7 +133,7 @@ public class FieldOfView : MonoBehaviour
                 enteredTargets.Add(target);
                 CurrentTarget = target;
                 GetComponentInParent<EnemyAttack>()?.GoToTarget(target.transform);
-                Debug.Log($"Target : {target.name}");
+               // Debug.Log($"Target : {target.name}");
             }
         }
     }

@@ -8,7 +8,7 @@ public class Enemy_Patrol_State : EnemyMoveBaseState
 {
     public override void EnterState(EnemyMoveStateManager enemy) 
     {
-        Debug.Log(enemy.animator);
+      //  Debug.Log(enemy.animator);
         enemy.GetComponent<EnemyWander>().enabled = true;
         enemy.animator.SetBool("IsMoving", true);
     }
@@ -19,9 +19,6 @@ public class Enemy_Patrol_State : EnemyMoveBaseState
             enemy.GetComponent<EnemyAttack>().enabled = true;
             enemy.GetComponent<EnemyWander>().enabled = false;
             enemy.SwitchState(enemy.AttackingState);
-        }
-        
-        
+        } 
     }
-    
 }
