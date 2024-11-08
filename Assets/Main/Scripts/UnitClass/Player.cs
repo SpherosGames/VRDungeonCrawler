@@ -8,16 +8,26 @@ public class Player : Unit
 {
     [SerializeField] private string loseSceneName;
     [SerializeField] private Slider healthSlider;
+    [SerializeField] private float strengthPotionTime = 30;
 
     [SerializeField] private List<float> strengthBuffs = new();
 
     private bool hasTempStrengthPotion;
-    //private float 
-    private float strength;
+    private float strengthPotionTimer;
+    [SerializeField] private float strength;
+
+    private Sword sword;
+
+    private void Awake()
+    {
+        sword = FindObjectOfType<Sword>();
+    }
 
     private void OnEnable()
     {
         if (healthSlider) healthSlider.maxValue = MaxHealth;
+
+        strength = 1;
     }
 
     public override void Update()
@@ -27,6 +37,16 @@ public class Player : Unit
         if (healthSlider) healthSlider.value = Health;
 
         if (hasTempStrengthPotion)
+        {
+            strengthPotionTimer -= Time.deltaTime;
+
+            if (strengthPotionTimer <= 0)
+            {
+                strengthPotionTimer = strengthPotionTime;
+                hasTempStrengthPotion = false;
+                CalculateStrength(0);
+            }
+        }
     }
 
     public override void Die()
@@ -45,11 +65,19 @@ public class Player : Unit
             hasTempStrengthPotion = true;
         }
 
+        CalculateStrength(amount);
+    }
+
+    private void CalculateStrength(float amount)
+    {
         strength = 1;
         if (hasTempStrengthPotion) strength *= amount;
         for (int i = 0; i < strengthBuffs.Count; i++)
         {
             strength *= strengthBuffs[i];
         }
+
+        if (sword) sword.SetDamageMultiplier(strength);
+        else print("Didn't find sword, coulnd't set strength...");
     }
 }

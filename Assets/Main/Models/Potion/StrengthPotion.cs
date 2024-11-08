@@ -14,10 +14,12 @@ public class StrengthPotion : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         potion = GetComponent<Potion>();
+        potionDrinkCollider = FindObjectOfType<PotionDrinkCollider>();
     }
 
     private void OnEnable()
     {
+        potion.effectEvent.RemoveAllListeners();
         potion.effectEvent.AddListener(AddStrength);
     }
 

@@ -11,7 +11,7 @@ public class Potion : MonoBehaviour
     [SerializeField] private float effectCoolDownTimer;
     [SerializeField] private bool isSingleUse;
 
-    public UnityEvent effectEvent;
+    public UnityEvent effectEvent = new();
     
     private float activationAngle = 60f; // Angle for starting the pour
     private float headPourAngle = 60f; // Angle for adding health
