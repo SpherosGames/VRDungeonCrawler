@@ -30,8 +30,8 @@ public class EnemyAttack : MonoBehaviour
 
     void Start()
     {
-        NavMesh.SamplePosition(.transform.position, out NavMeshHit hit, Mathf.Infinity, NavMesh.AllAreas);
-        transform.position = hit.position;
+        //NavMesh.SamplePosition(.transform.position, out NavMeshHit hit, Mathf.Infinity, NavMesh.AllAreas);
+        //transform.position = hit.position;
 
 
         AttackingAgent = GetComponent<NavMeshAgent>();
