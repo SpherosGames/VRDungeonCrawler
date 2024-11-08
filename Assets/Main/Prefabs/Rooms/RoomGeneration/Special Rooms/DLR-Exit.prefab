@@ -52,6 +52,59 @@ MonoBehaviour:
   createsTags:
   - corridor
   deadEndChance: 0
+--- !u!1 &842417833538875433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3509033862699253614}
+  - component: {fileID: 6217375617854678134}
+  m_Layer: 4
+  m_Name: U-Stairs (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3509033862699253614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842417833538875433}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.12, y: 12.49, z: -4.01}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3939674347001683582}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6217375617854678134
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842417833538875433}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0306082, y: 0.08291036, z: 5.85434}
+  m_Center: {x: -0.15167579, y: -1.6258396, z: -1.8885968}
 --- !u!1 &1026820817600943656
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,6 +449,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8300654454615532960, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
+        type: 3}
+      propertyPath: TimeBeforeUse
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4686798716636879060, guid: 950f0ba0854fb14488aed25cb7f1f3a6, type: 3}
     - {fileID: 6690310665707520193, guid: 950f0ba0854fb14488aed25cb7f1f3a6, type: 3}
@@ -505,7 +563,11 @@ PrefabInstance:
     - {fileID: 5209007947027658373, guid: 950f0ba0854fb14488aed25cb7f1f3a6, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1922155969928817613, guid: 950f0ba0854fb14488aed25cb7f1f3a6, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5507636240941868774, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
+        type: 3}
+      insertIndex: 22
+      addedObject: {fileID: 3509033862699253614}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1063632917051725390, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
         type: 3}
@@ -570,6 +632,12 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.1603538, y: 1.510465, z: -0.00000002783183}
   m_TimeToStationary: 0.5
+--- !u!4 &3939674347001683582 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5507636240941868774, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 8846060375421581464}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5366518893460893033 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3511173333221758449, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
