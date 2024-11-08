@@ -46,4 +46,9 @@ public class Sword : MonoBehaviour
             }
         }
     }
+
+    public void SetDamageMultiplier(float value)
+    {
+        damageMultiplier = value;
+    }
 }
