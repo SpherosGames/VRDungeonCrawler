@@ -60,12 +60,18 @@ public class EnemyAttack : MonoBehaviour
     {
         if (isBlocked)
         {
-            //gameObject.GetComponent<Animator>().enabled = false;
             animator.Play("Idle");
         }
         if (!isBlocked)
         {
-            //gameObject.GetComponent<Animator>().enabled = true;
+            if (AttackingAgent.velocity.magnitude > 0.5f)
+            {
+                SetWalkingState();
+            }
+            else
+            {
+                SetIdleState();
+            }
         }
         if (isFollowing && currentTarget != null)
         {
@@ -75,17 +81,12 @@ public class EnemyAttack : MonoBehaviour
             {
                 AttackingAgent.isStopped = false;
                 AttackingAgent.SetDestination(currentTarget.position);
-                SetWalkingState();
             }
             else
             {
                 AttackingAgent.isStopped = true;
                 Attacking();
             }
-        }
-        else
-        {
-            SetIdleState();
         }
     }
 
@@ -94,10 +95,6 @@ public class EnemyAttack : MonoBehaviour
         if (CanAttack())
         {
             StartAttack();
-        }
-        else if (!isAttacking)
-        {
-            SetIdleState();
         }
     }
 
