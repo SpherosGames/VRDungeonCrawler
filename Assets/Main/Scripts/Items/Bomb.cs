@@ -15,14 +15,26 @@ public class Bomb : MonoBehaviour {
     private bool BombThrown = false;
     private bool Held = false;
 
+    private float DamageRange = 20f;
+    private float AmountOfDamage = 200f;
+
     private IEnumerator ActivateBomb() {
         BombThrown = true;
         SparksParticle.Play();
         yield return new WaitForSeconds(TimeUntilExplosion);
         ExplosionParticle.Play();
         SparksParticle.Stop();
+        Damage();
         yield return new WaitForSeconds(0.4f);
         Destroy(gameObject);
+    }
+
+    private void Damage() {
+        foreach (GameObject EnemyGameObject in GameObject.FindGameObjectsWithTag("Enemy")) {
+            float Distance = Vector3.Distance(gameObject.transform.position, EnemyGameObject.transform.position);
+            if (Distance > DamageRange) return;
+            EnemyGameObject.GetComponent<Enemy>().TakeDamage(AmountOfDamage);
+        }
     }
 
     public void Select(SelectEnterEventArgs Args) {
