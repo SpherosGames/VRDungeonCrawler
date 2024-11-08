@@ -482,7 +482,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -672759902433637412, guid: 3ad7a1cffb2556547a8b7e60fd320431, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -684,6 +685,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3000435805484663157}
+    - targetCorrespondingSourceObject: {fileID: 9100508158649072905, guid: e348e7143b6247b488737e4be26fb038,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3687657115020059274}
   m_SourcePrefab: {fileID: 100100000, guid: e348e7143b6247b488737e4be26fb038, type: 3}
 --- !u!4 &1496413112322196010 stripped
 Transform:
@@ -718,6 +723,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.46376994, y: 6.14348, z: 8.133803}
   m_Center: {x: 0.14289384, y: 3.07174, z: 0.41016307}
+--- !u!208 &3687657115020059274
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466440384150945916}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.23188496, y: 3.07174, z: 4.0669017}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.1428938, y: 3.07174, z: 0.4101631}
+  m_TimeToStationary: 0.5
 --- !u!1001 &6913750919438301252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -806,7 +827,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -672759902433637412, guid: 3ad7a1cffb2556547a8b7e60fd320431, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1031,7 +1053,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -672759902433637412, guid: 3ad7a1cffb2556547a8b7e60fd320431, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1229,7 +1252,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -672759902433637412, guid: 3ad7a1cffb2556547a8b7e60fd320431, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
