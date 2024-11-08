@@ -103,11 +103,11 @@ public class VRPlayerMovement : MonoBehaviour
     private void CheckGrounded()
     {
         isGrounded = Physics.CheckSphere(feetPos.position, groundCheckRadius, groundLayer);
-        Physics.Raycast(feetPos.position, Vector3.down, out RaycastHit hit, groundCheckRadius, groundLayer);
-        if (hit.collider != null) print("Colliding with: " + hit.collider.name);
-        print("Grounded: " + isGrounded);
-        print("Colliding with 2: " + hit.collider);
-        Debug.DrawRay(feetPos.position, Vector3.down * groundCheckRadius, Color.red);
+        //Physics.Raycast(feetPos.position, Vector3.down, out RaycastHit hit, groundCheckRadius, groundLayer);
+        //if (hit.collider != null) print("Colliding with: " + hit.collider.name);
+        //print("Grounded: " + isGrounded);
+        //print("Colliding with 2: " + hit.collider);
+        //Debug.DrawRay(feetPos.position, Vector3.down * groundCheckRadius, Color.red);
     }
 
     private void Jumping()
