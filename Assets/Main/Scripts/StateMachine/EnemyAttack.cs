@@ -58,6 +58,15 @@ public class EnemyAttack : MonoBehaviour
 
     void Update()
     {
+        if (isBlocked)
+        {
+            //gameObject.GetComponent<Animator>().enabled = false;
+            animator.Play("Idle");
+        }
+        if (!isBlocked)
+        {
+            //gameObject.GetComponent<Animator>().enabled = true;
+        }
         if (isFollowing && currentTarget != null)
         {
             float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);

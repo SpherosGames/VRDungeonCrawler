@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StrengthPotion : MonoBehaviour
 {
-    [SerializeField] private float healthAmount;
+    [SerializeField] private float strengthMultiplier;
 
     private Potion potion;
     private Player player;
@@ -14,10 +14,12 @@ public class StrengthPotion : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         potion = GetComponent<Potion>();
+        potionDrinkCollider = FindObjectOfType<PotionDrinkCollider>();
     }
 
     private void OnEnable()
     {
+        potion.effectEvent.RemoveAllListeners();
         potion.effectEvent.AddListener(AddStrength);
     }
 
@@ -27,7 +29,7 @@ public class StrengthPotion : MonoBehaviour
         if (player != null && player.Health < player.MaxHealth && potionDrinkCollider.isColliding)
         {
             print("Actually heal");
-            //player.AddStrength();
+            player.AddStrength(strengthMultiplier, false);
         }
     }
 }
