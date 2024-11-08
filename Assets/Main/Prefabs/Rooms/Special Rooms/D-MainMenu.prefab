@@ -4922,7 +4922,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1e-45, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.7001727, y: 3.3624039, z: 1, w: 0.00000011920929}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -9980,7 +9980,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 6.73e-43, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 3.2e-44, z: 6.6803e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -15702,7 +15702,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0.000000059604645, y: 0.000000059604645, z: 0, w: -1.3612671}
+  m_BoundingSphereOverride: {x: 0, y: 6e-44, z: 1e-43, w: 1.8967e-41}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -22345,7 +22345,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0.000000059604645, y: 0.000000059604645, z: 0, w: -1.3012695}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -27348,7 +27348,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 6.73e-43, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 6e-44, z: 1e-43, w: 1.8967e-41}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -32521,7 +32521,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 6.73e-43, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 1.839e-42, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -37471,7 +37471,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 6e-44, z: 4.8e-44, w: 5.0901e-41}
+  m_BoundingSphereOverride: {x: 0, y: 1.839e-42, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -41759,32 +41759,32 @@ PrefabInstance:
     - target: {fileID: 697043533033433889, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 697043533033433889, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 697043533033433889, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 697043533033433889, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.15
+      value: 2.43
       objectReference: {fileID: 0}
     - target: {fileID: 697043533033433889, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000023841858
+      value: 3.62
       objectReference: {fileID: 0}
     - target: {fileID: 697043533033433889, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.11
+      value: 13.81
       objectReference: {fileID: 0}
     - target: {fileID: 697043533033433889, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
@@ -41820,6 +41820,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 697043533033433889, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4741988324052386136, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
