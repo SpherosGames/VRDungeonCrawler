@@ -495,7 +495,7 @@ PrefabInstance:
         type: 3}
       propertyPath: VisionConeMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 4bef1efa4144960478867d913cc0d895, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 2886713987056221014, guid: 3f6b48afb17e3d2409ce83b996c1d813,
         type: 3}
       propertyPath: currentTargets.Array.size
@@ -809,17 +809,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3e0dd63c3e693b045bda3fdb0d9747b7,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.8
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e0dd63c3e693b045bda3fdb0d9747b7,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.8
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e0dd63c3e693b045bda3fdb0d9747b7,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.8
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e0dd63c3e693b045bda3fdb0d9747b7,
         type: 3}
@@ -870,6 +870,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e0dd63c3e693b045bda3fdb0d9747b7,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8183481454299698827, guid: 3e0dd63c3e693b045bda3fdb0d9747b7,
         type: 3}
