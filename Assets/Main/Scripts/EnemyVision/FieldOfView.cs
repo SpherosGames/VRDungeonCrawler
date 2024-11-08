@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -18,6 +19,9 @@ public class FieldOfView : MonoBehaviour
     public GameObject CurrentTarget;
     private List<GameObject> enteredTargets = new List<GameObject>();
     public List<GameObject> potentialTargets = new List<GameObject>();
+    public bool showVisionCone;
+
+    private float timer;
 
     [Header("Visual Settings")]
     public Color MainColor = new Color(1f, 0.5f, 0f, 0.5f); // Orange with transparency
@@ -55,15 +59,23 @@ public class FieldOfView : MonoBehaviour
         HasTarget = currentTargets.Count > 0;
         enteredTargets.Clear();
         potentialTargets.Clear();
-        DrawVisionCone();
-        CheckTargets();
+        if (showVisionCone) DrawVisionCone();
+
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            CheckTargets();
+            timer = 1;
+        }
+
         // Update pulse effect
         pulseTime += Time.deltaTime;
-        instancedMaterial.SetFloat("_PulseTime", pulseTime);
+        if (showVisionCone) instancedMaterial.SetFloat("_PulseTime", pulseTime);
 
         // Intensify glow when target is detected
         float targetIntensity = HasTarget ? 2f : 1f;
-        instancedMaterial.SetFloat("_EdgeGlow", EdgeGlowIntensity * targetIntensity);
+        if (showVisionCone) instancedMaterial.SetFloat("_EdgeGlow", EdgeGlowIntensity * targetIntensity);
     }
     private void DrawVisionCone()
     {
