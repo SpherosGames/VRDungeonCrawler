@@ -19,7 +19,7 @@ public class Enemy_Idle_State : EnemyMoveBaseState
             enemy.SwitchState(enemy.AttackingState);
         }
     }
-    private void Start()
+    private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
     }
