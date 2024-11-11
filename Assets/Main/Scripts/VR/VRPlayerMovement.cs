@@ -178,7 +178,7 @@ public class VRPlayerMovement : MonoBehaviour
             moveDir = Vector3.zero;
         }
 
-        rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * moveDir);
+        rb.velocity = moveSpeed * moveDir;
     }
 
     private void SnapTurn(float angle)
