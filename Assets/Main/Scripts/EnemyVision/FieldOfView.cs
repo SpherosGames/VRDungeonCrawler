@@ -33,26 +33,30 @@ public class FieldOfView : MonoBehaviour
     private float pulseTime;
     private void Start()
     {
-        // Create an instanced material so we can modify it without affecting other objects
-        instancedMaterial = new Material(VisionConeMaterial);
-        instancedMaterial.shader = Shader.Find("Universal Render Pipeline/Unlit");
-        // Set up the material properties
-        instancedMaterial.SetColor("_BaseColor", MainColor);
-        instancedMaterial.SetColor("_PulseColor", PulseColor);
-        instancedMaterial.SetFloat("_PulseSpeed", PulseSpeed);
-        instancedMaterial.SetFloat("_EdgeGlow", EdgeGlowIntensity);
-        // Enable transparency
-        instancedMaterial.SetFloat("_Surface", 1); // 0 = Opaque, 1 = Transparent
-        instancedMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        instancedMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        instancedMaterial.SetInt("_ZWrite", 0);
-        instancedMaterial.EnableKeyword("_ALPHABLEND_ON");
-        // Set material to be double-sided
-        instancedMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
+        if (showVisionCone)
+        {
+            // Create an instanced material so we can modify it without affecting other objects
+            instancedMaterial = new Material(VisionConeMaterial);
+            instancedMaterial.shader = Shader.Find("Universal Render Pipeline/Unlit");
+            // Set up the material properties
+            instancedMaterial.SetColor("_BaseColor", MainColor);
+            instancedMaterial.SetColor("_PulseColor", PulseColor);
+            instancedMaterial.SetFloat("_PulseSpeed", PulseSpeed);
+            instancedMaterial.SetFloat("_EdgeGlow", EdgeGlowIntensity);
+            // Enable transparency
+            instancedMaterial.SetFloat("_Surface", 1); // 0 = Opaque, 1 = Transparent
+            instancedMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            instancedMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            instancedMaterial.SetInt("_ZWrite", 0);
+            instancedMaterial.EnableKeyword("_ALPHABLEND_ON");
+            // Set material to be double-sided
+            instancedMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
 
-        transform.AddComponent<MeshRenderer>().material = instancedMaterial;
-        MeshFilter_ = transform.AddComponent<MeshFilter>();
-        VisionConeMesh = new Mesh();
+            transform.AddComponent<MeshRenderer>().material = instancedMaterial;
+            MeshFilter_ = transform.AddComponent<MeshFilter>();
+            VisionConeMesh = new Mesh();
+        }
+       
     }
     private void Update()
     {
