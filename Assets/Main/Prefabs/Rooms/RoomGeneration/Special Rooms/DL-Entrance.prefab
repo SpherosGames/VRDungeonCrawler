@@ -1583,7 +1583,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2271341731437416734}
   - {fileID: 5176739385536539518}
@@ -15897,6 +15897,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 697043533033433889, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 697043533033433889, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 697043533033433889, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 697043533033433889, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.96
       objectReference: {fileID: 0}
@@ -15950,10 +15965,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Interaction Setup
       objectReference: {fileID: 0}
+    - target: {fileID: 6770217039488987794, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
       propertyPath: jumping
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: walkSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: sprintSpeed
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 7436552425713670592, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}

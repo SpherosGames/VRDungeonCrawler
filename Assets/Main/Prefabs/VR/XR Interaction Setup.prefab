@@ -570,7 +570,7 @@ MonoBehaviour:
   m_OriginBaseGameObject: {fileID: 4741988324052386136}
   m_CameraFloorOffsetObject: {fileID: 3311258874411185050}
   m_RequestedTrackingOriginMode: 1
-  m_CameraYOffset: 1.2
+  m_CameraYOffset: 1.73
 --- !u!114 &8118175836125429116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,7 +630,7 @@ MonoBehaviour:
   Speed: 5
   loseSceneName: LoseRoom
   healthSlider: {fileID: 0}
-  strengthPotionTime: 30
+  strengthPotionTime: 3
   strengthBuffs: []
   strength: 0
 --- !u!65 &6798633196560605630
@@ -879,6 +879,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8671179065624590336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4177856477691559632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2597721774046218667}
+  - component: {fileID: 4870271428592677011}
+  - component: {fileID: 4503305463002705344}
+  m_Layer: 0
+  m_Name: PotionDrinkCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2597721774046218667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177856477691559632}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 132388940681249107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4870271428592677011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177856477691559632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e280590e0c61eb44d90848d1a538847c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isColliding: 0
+--- !u!65 &4503305463002705344
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177856477691559632}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3, y: 0.5878769, z: 0.3}
+  m_Center: {x: 0, y: 0.14393848, z: 0}
 --- !u!1 &4741988324052386136
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,7 +973,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1553402403155546930}
@@ -975,6 +1042,7 @@ MonoBehaviour:
   rb: {fileID: 6770217039488987794}
   directionSource: {fileID: 132388940681249107}
   pivotPoint: {fileID: 132388940681249107}
+  jumping: 1
   jumpForce: 20
   feetPos: {fileID: 3122931452460713117}
   groundCheckRadius: 0.1
@@ -1499,7 +1567,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6585313206182117131}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 686ce14378a4c304ba8475dfb84b7217, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1617,6 +1685,7 @@ Transform:
   m_Children:
   - {fileID: 3997947943648101277}
   - {fileID: 7218537071203432808}
+  - {fileID: 2597721774046218667}
   m_Father: {fileID: 3808199904261798872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2857648575618757635
