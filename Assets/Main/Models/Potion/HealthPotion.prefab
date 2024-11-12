@@ -78,6 +78,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6018114522727594500, guid: 030064d8d7577fd43a82705071579375,
+        type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7261979162160252349, guid: 030064d8d7577fd43a82705071579375,
         type: 3}
       propertyPath: m_IsActive
@@ -86,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 8812481663653801008, guid: 030064d8d7577fd43a82705071579375,
         type: 3}
       propertyPath: m_Name
-      value: Potion Variant
+      value: HealthPotion
       objectReference: {fileID: 0}
     - target: {fileID: 8812481663653801008, guid: 030064d8d7577fd43a82705071579375,
         type: 3}
@@ -96,5 +101,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8812481663653801008, guid: 030064d8d7577fd43a82705071579375,
+        type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 6450746270807519193}
   m_SourcePrefab: {fileID: 100100000, guid: 030064d8d7577fd43a82705071579375, type: 3}
+--- !u!1 &1504049041748870933 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8812481663653801008, guid: 030064d8d7577fd43a82705071579375,
+    type: 3}
+  m_PrefabInstance: {fileID: 7967797668171688741}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6450746270807519193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504049041748870933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36417451b9ad45c4b88366f9da37f5cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthAmount: 5
