@@ -53,6 +53,6 @@ public class Syringe : MonoBehaviour
         RigidB.isKinematic = false;
 
         //Heal
-        FindObjectOfType<Player>().TakeDamage(-Scriptable.InstantHealing);
+        FindObjectOfType<Player>().MaxHealth += Scriptable.InstantHealing;
     }
 }

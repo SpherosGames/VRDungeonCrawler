@@ -801,7 +801,7 @@ PrefabInstance:
     - target: {fileID: 4541781874029533944, guid: 298fc7c2a4223564e96d20b4820e4fd6,
         type: 3}
       propertyPath: endPrefabs.Array.size
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4541781874029533944, guid: 298fc7c2a4223564e96d20b4820e4fd6,
         type: 3}
@@ -867,6 +867,12 @@ PrefabInstance:
       propertyPath: endPrefabs.Array.data[10]
       value: 
       objectReference: {fileID: 3950324273931901374, guid: d45ff7d513910ea4ba799bae57b261d5,
+        type: 3}
+    - target: {fileID: 4541781874029533944, guid: 298fc7c2a4223564e96d20b4820e4fd6,
+        type: 3}
+      propertyPath: endPrefabs.Array.data[11]
+      value: 
+      objectReference: {fileID: 3950324273931901374, guid: 642256a168dc8b94897ff2965030c65d,
         type: 3}
     - target: {fileID: 4541781874029533944, guid: 298fc7c2a4223564e96d20b4820e4fd6,
         type: 3}
@@ -2663,6 +2669,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2935003465242887737, guid: 90fbadf21c236374a8cc3a00c48746bd,
+        type: 3}
+      propertyPath: MaxMinPossibleItems.x
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 4237584932624013015, guid: 90fbadf21c236374a8cc3a00c48746bd,
         type: 3}
       propertyPath: m_Name
@@ -2835,6 +2846,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SockChest
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237584932624013015, guid: b9c74c94919123445bd9160acaaf519d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
