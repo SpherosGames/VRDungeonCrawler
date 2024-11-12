@@ -452,6 +452,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MenuButton",
+                    "type": "Button",
+                    "id": "b9bf61b8-05fc-410b-8080-6d4dea58e146",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -694,6 +703,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "JoyStickClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c67cda1-b942-43c6-80d3-e7c456b019eb",
+                    "path": "<OculusTouchController>{LeftHand}/menu",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
