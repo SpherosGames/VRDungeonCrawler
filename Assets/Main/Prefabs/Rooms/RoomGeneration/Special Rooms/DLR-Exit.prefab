@@ -28,7 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3048750482594870778}
   - {fileID: 3904571812098945048}
@@ -389,6 +389,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2313961935796547124, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.861002
+      objectReference: {fileID: 0}
     - target: {fileID: 3430473082722714635, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
         type: 3}
       propertyPath: m_Layer
@@ -397,7 +402,7 @@ PrefabInstance:
     - target: {fileID: 3940313413901990687, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
         type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 0.2
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3940313413901990687, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
         type: 3}
@@ -407,17 +412,17 @@ PrefabInstance:
     - target: {fileID: 3940313413901990687, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 500
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3940313413901990687, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3940313413901990687, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
         type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5637855916234649046, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
         type: 3}
@@ -448,6 +453,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760182379271585392, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.56
       objectReference: {fileID: 0}
     - target: {fileID: 8300654454615532960, guid: 950f0ba0854fb14488aed25cb7f1f3a6,
         type: 3}
