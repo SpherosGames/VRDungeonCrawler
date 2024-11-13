@@ -35,7 +35,7 @@ public class Sword : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.gameObject.name);
+        //Debug.Log(other.gameObject.name);
         //if (currentVelocityMagnitude >= minForceThreshold)
         //{
         //DamageUnit(other);
@@ -46,6 +46,8 @@ public class Sword : MonoBehaviour
     {
         if (hitObject.gameObject.GetComponentInParent<Unit>())
         {
+            print("Trying to damage: " + hitObject.name);
+
             Unit unit = hitObject.gameObject.GetComponentInParent<Unit>();
 
             float damage = Mathf.Min((currentVelocityMagnitude - minForceThreshold) * damageMultiplier, maxDamage);
