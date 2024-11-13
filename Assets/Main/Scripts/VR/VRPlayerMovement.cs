@@ -20,7 +20,6 @@ public class VRPlayerMovement : MonoBehaviour
     [SerializeField] private float extraGravity = 50;
 
     [Header("Jumping")]
-    //[SerializeField] private bool jumping = true;
     [SerializeField] private float jumpForce;
     [SerializeField] private Transform feetPos;
     [SerializeField] private float groundCheckRadius = 0.1f;
@@ -66,11 +65,6 @@ public class VRPlayerMovement : MonoBehaviour
 
         mayMove = true;
         mayTurn = true;
-
-        if (Physics.Raycast(playerHead.transform.position, Vector3.down, out RaycastHit hit, 100, groundLayer))
-        {
-            rb.transform.position = hit.transform.position;
-        }
     }
 
     private void Update()
@@ -116,11 +110,6 @@ public class VRPlayerMovement : MonoBehaviour
     private void CheckGrounded()
     {
         isGrounded = Physics.CheckSphere(feetPos.position, groundCheckRadius, groundLayer);
-        //Physics.Raycast(feetPos.position, Vector3.down, out RaycastHit hit, groundCheckRadius, groundLayer);
-        //if (hit.collider != null) print("Colliding with: " + hit.collider.name);
-        //print("Grounded: " + isGrounded);
-        //print("Colliding with 2: " + hit.collider);
-        //Debug.DrawRay(feetPos.position, Vector3.down * groundCheckRadius, Color.red);
     }
 
     private void Jumping()
