@@ -7,40 +7,60 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private InputActionProperty menuButton;
     [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private Vector3 spawnOffset;
+    [SerializeField] private Transform playerCamera;
+    [SerializeField] private float pauseMenuDistance = 2;
+    [SerializeField] private Player player;
+    [SerializeField] private VRPlayerMovement playerMovement;
 
     private GameObject spawnPauseMenu;
 
     private bool isOpen;
 
-    private void Update()
+    private void OnEnable()
     {
-        //When the menu button is pressed
-        if (menuButton.action.ReadValue<float>() > 0.5f)
+        menuButton.action.performed += (InputAction.CallbackContext callBackContext) => MenuButtonPressed(callBackContext);
+    }
+
+    private void MenuButtonPressed(InputAction.CallbackContext callBackContext)
+    {
+        if (isOpen)
         {
-            if (isOpen)
-            {
-                ClosePauseMenu();
-            }
-            else
-            {
-                OpenPauseMenu();
-            }
+            ClosePauseMenu(true);
+        }
+        else
+        {
+            OpenPauseMenu();
         }
     }
 
     private void OpenPauseMenu()
     {
+        ClosePauseMenu(false);
+
         isOpen = true;
 
-        ClosePauseMenu();
+        playerMovement.mayTurn = false;
+        playerMovement.mayMove = false;
 
-        spawnPauseMenu = Instantiate(pauseMenu, transform.position + spawnOffset, Quaternion.identity);
+        spawnPauseMenu = Instantiate(pauseMenu, playerCamera.position + playerCamera.forward * pauseMenuDistance, Quaternion.identity);
+        PauseMenuUI spawnPauseMenuUI = spawnPauseMenu.GetComponentInChildren<PauseMenuUI>();
+
+        string statsText = "Stats: \n";
+        statsText += "Strength: " + player.strength + "\n";
+        if (player.hasTempStrengthPotion) statsText += "Strength potion time remaining: " + player.strengthPotionTimer + "\n";
+        statsText += "Max health: " + player.MaxHealth + "\n";
+        statsText += "Health: " + player.Health + "\n";
+
+        spawnPauseMenuUI.Setup(this, statsText);
     }
 
-    private void ClosePauseMenu()
+    public void ClosePauseMenu(bool open)
     {
         isOpen = false;
+
+        playerMovement.mayTurn = true;
+        playerMovement.mayMove = true;
+
         if (spawnPauseMenu) Destroy(spawnPauseMenu);
     }
 }
