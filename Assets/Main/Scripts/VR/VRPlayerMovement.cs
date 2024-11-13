@@ -53,6 +53,9 @@ public class VRPlayerMovement : MonoBehaviour
     private Vector3 lastLeftHandPos;
     private Vector3 lastRightHandPos;
 
+    public bool mayMove;
+    public bool mayTurn;
+
     private void Awake()
     {
         if (!rb) rb = GetComponent<Rigidbody>();
@@ -61,6 +64,9 @@ public class VRPlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         jumpButton.action.performed += (InputAction.CallbackContext context) => Jumping();
+
+        mayMove = true;
+        mayTurn = true;
     }
 
     private void Update()
@@ -91,9 +97,9 @@ public class VRPlayerMovement : MonoBehaviour
 
         Sprinting();
 
-        Movement();
+        if (mayMove) Movement();
 
-        SnapTurn();
+        if (mayTurn) SnapTurn();
 
         if (snapTurn) return;
 

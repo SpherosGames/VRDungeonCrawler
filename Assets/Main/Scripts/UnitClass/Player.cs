@@ -12,9 +12,9 @@ public class Player : Unit
 
     [SerializeField] private List<float> strengthBuffs = new();
 
-    private bool hasTempStrengthPotion;
-    private float strengthPotionTimer;
-    [SerializeField] private float strength;
+    public bool hasTempStrengthPotion;
+    public float strengthPotionTimer;
+    public float strength;
 
     private Sword sword;
 
