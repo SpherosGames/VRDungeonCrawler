@@ -14,6 +14,11 @@ public class Syringe : MonoBehaviour
     private void Start()
     {
         RigidB = GetComponent<Rigidbody>();
+        Material[] OldMats = gameObject.GetComponent<MeshRenderer>().materials;
+        Material[] NewMats = new Material[2];
+        NewMats[0] = OldMats[0];
+        NewMats[1] = Scriptable.SyringeMaterial;
+        gameObject.GetComponent<MeshRenderer>().materials = NewMats;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -53,6 +58,9 @@ public class Syringe : MonoBehaviour
         RigidB.isKinematic = false;
 
         //Heal
-        FindObjectOfType<Player>().TakeDamage(-Scriptable.InstantHealing);
+        Player Plr = FindObjectOfType<Player>();
+        Plr.MaxHealth += Scriptable.MaxHpIncrease;
+        Plr.TakeDamage(Scriptable.InstantHealing);
+        Plr.AddStrength(Scriptable.PermaDamageBoost, true);
     }
 }
