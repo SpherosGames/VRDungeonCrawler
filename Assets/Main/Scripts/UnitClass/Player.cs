@@ -77,7 +77,7 @@ public class Player : Unit
             strength *= strengthBuffs[i];
         }
 
-        if (sword) sword.SetDamageMultiplier(strength);
-        else print("Didn't find sword, coulnd't set strength...");
+        //if (sword) sword.SetDamageMultiplier(strength);
+        //else print("Didn't find sword, coulnd't set strength...");
     }
 }

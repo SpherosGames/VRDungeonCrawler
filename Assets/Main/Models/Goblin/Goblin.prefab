@@ -463,7 +463,7 @@ PrefabInstance:
     - target: {fileID: 2886713987056221014, guid: 3f6b48afb17e3d2409ce83b996c1d813,
         type: 3}
       propertyPath: showVisionCone
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2886713987056221014, guid: 3f6b48afb17e3d2409ce83b996c1d813,
         type: 3}
@@ -957,6 +957,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2383637727927503808}
+    - targetCorrespondingSourceObject: {fileID: -290750445479886849, guid: e0f487fff37b84843bd6ffcb8719fcdd,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1636904254018206409}
+    - targetCorrespondingSourceObject: {fileID: -290750445479886849, guid: e0f487fff37b84843bd6ffcb8719fcdd,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7650814025300932420}
   m_SourcePrefab: {fileID: 100100000, guid: e0f487fff37b84843bd6ffcb8719fcdd, type: 3}
 --- !u!4 &1006665775680558992 stripped
 Transform:
@@ -992,6 +1000,39 @@ BoxCollider:
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2383637727927503808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058360884813535721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61d2741b42f86c946bd6385294c7ef8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1636904254018206409
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058360884813535721}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7650814025300932420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
