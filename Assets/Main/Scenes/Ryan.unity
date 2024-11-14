@@ -185,6 +185,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Interaction Setup
       objectReference: {fileID: 0}
+    - target: {fileID: 4741988324052386136, guid: f144e2e3cd05f3a41838e58b81f32ea2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7072096583862972683, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
       propertyPath: groundCheckRadius
@@ -193,7 +198,7 @@ PrefabInstance:
     - target: {fileID: 7436552425713670592, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8114538837139019700, guid: f144e2e3cd05f3a41838e58b81f32ea2,
         type: 3}
@@ -225,7 +230,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &428523263
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -377,6 +382,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177029310780064684, guid: 81b98c9cec5a4dd46a0e38ff8e8943e5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4752812320569808629, guid: 81b98c9cec5a4dd46a0e38ff8e8943e5,
         type: 3}
@@ -581,6 +591,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2959668418988465452, guid: 1a30acfea8a6e3247854d82cbe67c46a,
         type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2959668418988465452, guid: 1a30acfea8a6e3247854d82cbe67c46a,
+        type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -637,7 +652,7 @@ PrefabInstance:
     - target: {fileID: 3044894037015108949, guid: 1a30acfea8a6e3247854d82cbe67c46a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7548789760577353205, guid: 1a30acfea8a6e3247854d82cbe67c46a,
         type: 3}
@@ -688,7 +703,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053914406}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -766443767, guid: f560063dff201ed49a415a8d58f2aae2, type: 3}
   m_Name: 
