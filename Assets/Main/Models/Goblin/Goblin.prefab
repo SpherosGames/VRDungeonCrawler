@@ -949,6 +949,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 534177124324898941}
+    - targetCorrespondingSourceObject: {fileID: -290750445479886849, guid: e0f487fff37b84843bd6ffcb8719fcdd,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 901120176785676688}
+    - targetCorrespondingSourceObject: {fileID: -290750445479886849, guid: e0f487fff37b84843bd6ffcb8719fcdd,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2383637727927503808}
   m_SourcePrefab: {fileID: 100100000, guid: e0f487fff37b84843bd6ffcb8719fcdd, type: 3}
 --- !u!4 &1006665775680558992 stripped
 Transform:
@@ -956,6 +964,45 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8450724998088812054}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1058360884813535721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -290750445479886849, guid: e0f487fff37b84843bd6ffcb8719fcdd,
+    type: 3}
+  m_PrefabInstance: {fileID: 8450724998088812054}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &901120176785676688
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058360884813535721}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2383637727927503808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058360884813535721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61d2741b42f86c946bd6385294c7ef8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4119134223334530339 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5507088001858714421, guid: e0f487fff37b84843bd6ffcb8719fcdd,
@@ -8909,7 +8956,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8756801206490618695}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.17
+  m_Radius: 0.32
   m_Speed: 3
   m_Acceleration: 12
   avoidancePriority: 50
