@@ -10,7 +10,7 @@ public class AttackCollision : MonoBehaviour
 
         if (other.gameObject.layer == 12)
         {
-            other.gameObject.GetComponent<Unit>().TakeDamage(10);
+            other.gameObject.GetComponentInParent<Unit>().TakeDamage(10);
         }
         if (other.gameObject.name == "Shield")
         {
