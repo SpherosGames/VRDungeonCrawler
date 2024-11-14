@@ -8,7 +8,7 @@ public class AttackCollision : MonoBehaviour
     {
         Debug.Log(other.gameObject.name);
 
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.layer == 12)
         {
             other.gameObject.GetComponent<Unit>().TakeDamage(10);
         }

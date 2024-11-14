@@ -21,12 +21,12 @@ public class Sword : MonoBehaviour
 
     void Update()
     {
-        //Collider[] colliders = Physics.OverlapSphere(transform.position, 1, enemyLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1, enemyLayer);
 
-        //if (colliders.Length > 0)
-        //{
-        //    DamageUnit(colliders[0].gameObject);
-        //}
+        if (colliders.Length > 0)
+        {
+            DamageUnit(colliders[0].gameObject);
+        }
 
         Vector3 currentVelocity = (transform.position - previousPosition) / Time.deltaTime;
         currentVelocityMagnitude = currentVelocity.magnitude;
@@ -35,11 +35,11 @@ public class Sword : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.gameObject.name);
-        if (currentVelocityMagnitude >= minForceThreshold)
-        {
-            DamageUnit(other.gameObject);
-        }
+        //Debug.Log(other.gameObject.name);
+        //if (currentVelocityMagnitude >= minForceThreshold)
+        //{
+        //DamageUnit(other);
+        //}
     }
 
     private void DamageUnit(GameObject hitObject)
