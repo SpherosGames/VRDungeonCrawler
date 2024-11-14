@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Timeline;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class VRPlayerMovement : MonoBehaviour
 {
@@ -19,9 +17,9 @@ public class VRPlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform directionSource;
     [SerializeField] private Transform pivotPoint;
+    [SerializeField] private float extraGravity = 50;
 
     [Header("Jumping")]
-    [SerializeField] private bool jumping = true;
     [SerializeField] private float jumpForce;
     [SerializeField] private Transform feetPos;
     [SerializeField] private float groundCheckRadius = 0.1f;
@@ -91,6 +89,9 @@ public class VRPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Extra gravity
+        rb.AddForce(extraGravity * rb.mass * Vector3.down);
+
         Crouching();
 
         CheckGrounded();
@@ -109,11 +110,6 @@ public class VRPlayerMovement : MonoBehaviour
     private void CheckGrounded()
     {
         isGrounded = Physics.CheckSphere(feetPos.position, groundCheckRadius, groundLayer);
-        //Physics.Raycast(feetPos.position, Vector3.down, out RaycastHit hit, groundCheckRadius, groundLayer);
-        //if (hit.collider != null) print("Colliding with: " + hit.collider.name);
-        //print("Grounded: " + isGrounded);
-        //print("Colliding with 2: " + hit.collider);
-        //Debug.DrawRay(feetPos.position, Vector3.down * groundCheckRadius, Color.red);
     }
 
     private void Jumping()
@@ -125,7 +121,7 @@ public class VRPlayerMovement : MonoBehaviour
             handsJumping = true;
         }
 
-        if (handsJumping && (isGrounded && jumping))
+        if (handsJumping && isGrounded)
         {
             float extraJumpAmount = Mathf.Clamp(((leftHandYVel + rightHandYVel) / 4), 1, 2);
 
@@ -175,11 +171,11 @@ public class VRPlayerMovement : MonoBehaviour
     {
         Quaternion yaw = Quaternion.Euler(0, directionSource.eulerAngles.y, 0);
 
-        if (moveInputAxis != Vector2.zero && (isGrounded || !jumping))
+        if (moveInputAxis != Vector2.zero && isGrounded)
         {
             moveDir = yaw * new Vector3(moveInputAxis.x, 0, moveInputAxis.y);
         }
-        else if (moveInputAxis == Vector2.zero && (isGrounded || !jumping))
+        else if (moveInputAxis == Vector2.zero && isGrounded)
         {
             moveDir = Vector3.zero;
         }

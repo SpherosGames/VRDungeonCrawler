@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.XR.CoreUtils;
 using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
     [SerializeField] private float minForceThreshold = 3f; 
     [SerializeField] private float damageMultiplier = 0.5f;
-    [SerializeField] private float maxDamage = 10f; 
+    [SerializeField] private float maxDamage = 10f;
+    [SerializeField] private LayerMask enemyLayer;
 
     private Rigidbody rb;
     private Vector3 previousPosition;
@@ -21,29 +21,43 @@ public class Sword : MonoBehaviour
 
     void Update()
     {
-        
+        //Collider[] colliders = Physics.OverlapSphere(transform.position, 1, enemyLayer);
+
+        //if (colliders.Length > 0)
+        //{
+        //    DamageUnit(colliders[0].gameObject);
+        //}
+
         Vector3 currentVelocity = (transform.position - previousPosition) / Time.deltaTime;
         currentVelocityMagnitude = currentVelocity.magnitude;
         previousPosition = transform.position;
     }
+
     private void OnCollisionEnter(Collision other)
     {
-
+        Debug.Log(other.gameObject.name);
         if (currentVelocityMagnitude >= minForceThreshold)
         {
-            if (other.gameObject.GetComponentInParent<Unit>())
-            {
-                Unit unit = other.gameObject.GetComponentInParent<Unit>();
+            DamageUnit(other.gameObject);
+        }
+    }
 
-                float damage = Mathf.Min((currentVelocityMagnitude - minForceThreshold) * damageMultiplier, maxDamage);
-                int roundedDamage = Mathf.RoundToInt(damage);
+    private void DamageUnit(GameObject hitObject)
+    {
+        if (hitObject.gameObject.GetComponentInParent<Unit>())
+        {
+            print("Trying to damage: " + hitObject.name);
 
-                // Ensure minimum damage of 1 if threshold is met
-                roundedDamage = Mathf.Max(1, roundedDamage);
+            Unit unit = hitObject.gameObject.GetComponentInParent<Unit>();
 
-                Debug.Log($"Dealing {roundedDamage} damage to {other.gameObject.name}");
-                unit.TakeDamage(roundedDamage);
-            }
+            float damage = Mathf.Min((currentVelocityMagnitude - minForceThreshold) * damageMultiplier, maxDamage);
+            int roundedDamage = Mathf.RoundToInt(damage);
+
+            // Ensure minimum damage of 1 if threshold is met
+            roundedDamage = Mathf.Max(1, roundedDamage);
+
+            Debug.Log($"Dealing {roundedDamage} damage to {unit.gameObject.name}");
+            unit.TakeDamage(roundedDamage);
         }
     }
 

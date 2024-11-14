@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4850139432811911132}
   - component: {fileID: 4934042552859566655}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1890,7 +1890,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 04a40fe5f53f55347a5a6e828fc372ff,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8515045505978737705}
+      addedObject: {fileID: 4992864532267766940}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 04a40fe5f53f55347a5a6e828fc372ff,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3445744337429470183}
   m_SourcePrefab: {fileID: 100100000, guid: 04a40fe5f53f55347a5a6e828fc372ff, type: 3}
 --- !u!4 &1259591659686905258 stripped
 Transform:
@@ -1904,8 +1908,8 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1652907433478300225}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &8515045505978737705
-MeshCollider:
+--- !u!65 &4992864532267766940
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1922,10 +1926,25 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3764589354758518623, guid: 04a40fe5f53f55347a5a6e828fc372ff, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.02237526, y: 0.024214003, z: 0.039325565}
+  m_Center: {x: 0.0024601365, y: 0.00022443236, z: 0.012485335}
+--- !u!208 &3445744337429470183
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887332996128612112}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.015, y: 0.01, z: 0.020000001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.001, y: 0.001, z: 0.012}
+  m_TimeToStationary: 0.5
 --- !u!1001 &1712983028892561020
 PrefabInstance:
   m_ObjectHideFlags: 0
