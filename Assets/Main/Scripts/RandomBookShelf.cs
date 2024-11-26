@@ -7,16 +7,13 @@ public class RandomBookShelf : MonoBehaviour
     [SerializeField] private Material[] materials;
     [SerializeField] private Transform topLeftShelfPoint;
     [SerializeField] private GameObject bookPrefab;
-    [SerializeField] private BoxCollider bookShelfCol;
+    [SerializeField] private MeshRenderer bookPrefabRenderer;
     [SerializeField] private MeshRenderer bookShelfMesh;
     [SerializeField] private Transform bookParent;
 
     [Header("Settings")]
     [SerializeField] private LayerMask bookLayer;
     [SerializeField] private Quaternion defaultRotation;
-    [SerializeField] private Quaternion layingRotation;
-    [SerializeField] private Quaternion leftRotation;
-    [SerializeField] private Quaternion rightRotation;
     [SerializeField] private int amountOfShelfs;
     [SerializeField] private float distanceBetweenShelfs;
     [SerializeField] private float defaultScale;
@@ -29,7 +26,6 @@ public class RandomBookShelf : MonoBehaviour
     private int bookCount;
 
     private Bounds bookShelfBounds;
-    private Bounds bookShelfLocalBounds;
 
     private bool shelfDone;
     private int shelfCount;
@@ -38,8 +34,7 @@ public class RandomBookShelf : MonoBehaviour
 
     private void OnEnable()
     {
-        bookShelfBounds = bookShelfCol.bounds;
-        bookShelfLocalBounds = bookShelfMesh.localBounds;
+        bookShelfBounds = bookShelfMesh.localBounds;
 
         currentY = topLeftShelfPoint.position.y;
 
@@ -52,98 +47,71 @@ public class RandomBookShelf : MonoBehaviour
         {
             tries++;
 
+            //Move on to shelf below current shelf
             if (shelfDone)
             {
-                //print("Calculate new y pos");
                 currentY -= distanceBetweenShelfs;
                 shelfDone = false;
 
                 if (shelfCount >= amountOfShelfs) return;
             }
 
+            //Generate random scale
             float scale = Random.Range(-scaleRandomDifference, scaleRandomDifference) + defaultScale;
 
             Vector3 localScale = new(scale, scale, scale);
 
             bookPrefab.transform.localScale = localScale;
 
-            //Improve this to make sure that the prefab size isn't changed
-            Renderer bookPrefabRenderer = bookPrefab.GetComponent<Renderer>();
-
             Vector3 worldScale = bookPrefabRenderer.bounds.size;
 
             float gapSize = Random.Range(minGapSizeBetweenBooks, maxGapSizeBetweenBooks);
 
-            Vector3 gapPosition = new Vector3(((bookCount == 0 ? 0 : worldScale.x) + 0.001f + gapSize) * (bookCount + 1), 0, 0);
+            //Generate the position where the book is supposed to be based on the last position of the book with a random distance (gapSize)
+            Vector3 gapPosition = new(((bookCount == 0 ? 0 : worldScale.x) + 0.001f + gapSize) * (bookCount + 1), 0, 0);
 
+            //Adjust for rotation
             Vector3 rotatedGapPosition = topLeftShelfPoint.TransformDirection(gapPosition);
 
             Vector3 position = topLeftShelfPoint.position + rotatedGapPosition;
             position.y = currentY;
-
-            Debug.DrawRay(position, Vector3.up, Color.blue, 30);
-
-            int randomRot = Random.Range(0, 4);
-
-            Quaternion rotation = randomRot switch
+            
+            //Check if you can spawn a book here
+            if (MaySpawn(position, worldScale))
             {
-                0 => defaultRotation,
-                1 => layingRotation,
-                2 => leftRotation,
-                3 => rightRotation,
-                _ => defaultRotation,
-            };
-
-            Quaternion rot = transform.rotation;
-
-            if (MaySpawn(position, rot, worldScale))
-            {
-                //print("Spawned book");
+                //Actually spawn the book
                 bookCount++;
-                GenerateBook(position, rot, localScale);
-            }
-            else
-            {
-                //print("Failed to spawn book...");
+                GenerateBook(position, localScale);
             }
 
-            if (tries >= maxTries)
-            {
-                //print("Timeout");
-                return;
-            }
+            //Timeout: the program to spawn too many times
+            if (tries >= maxTries) return;
         }
     }
 
-    private void GenerateBook(Vector3 pos, Quaternion rot, Vector3 scale)
+    private void GenerateBook(Vector3 pos, Vector3 scale)
     {
+        //Generate random color/material
         Material material = new(materials[Random.Range(0, materials.Length)]);
 
-        GameObject spawnedBook = Instantiate(bookPrefab, pos, rot, bookParent);
+        GameObject spawnedBook = Instantiate(bookPrefab, pos, defaultRotation, bookParent);
         spawnedBook.transform.localScale = scale;
-        //Rigidbody rb = spawnedBook.GetComponent<Rigidbody>();
-        //rb.isKinematic = true;
         MeshRenderer mesh = spawnedBook.GetComponent<MeshRenderer>();
         mesh.material = material;
     }
 
-    List<Matrix4x4> bookShelfsGoBrr = new();
-
-    private bool MaySpawn(Vector3 pos, Quaternion rotation, Vector3 scale)
+    private bool MaySpawn(Vector3 pos, Vector3 scale)
     {
-        pos.y -= scale.y / 2;
-
-        bool foundAnotherBook = Physics.CheckBox(pos, scale / 4, Quaternion.identity, bookLayer);
-
-        bookShelfsGoBrr.Add(Matrix4x4.TRS(pos, rotation, scale));
-
-        //print("Found another book: " + foundAnotherBook);
+        //Check if current book collides with another book
+        bool foundAnotherBook = Physics.CheckBox(pos, scale / 4, defaultRotation, bookLayer);
 
         if (foundAnotherBook) return false;
 
         Vector3 localPos = transform.InverseTransformPoint(pos);
 
-        if (localPos.x >= bookShelfLocalBounds.max.x)
+        //Check if the right most side of the bounds of the bookshelf has been reached, if so, start spawning on a layer below this one
+        //The 0.0005f, is because this check isn't perfect and will sometimes spawn a book outside of the bookshelf anyway
+        if (localPos.x >= bookShelfBounds.max.x - 0.0005f)
         {
             shelfDone = true;
             bookCount = 0;
@@ -152,14 +120,5 @@ public class RandomBookShelf : MonoBehaviour
         }
 
         return true;
-    }
-
-    private void OnDrawGizmos()
-    {
-        for (int i = 0; i < bookShelfsGoBrr.Count; i++)
-        {
-            Gizmos.matrix = bookShelfsGoBrr[i];
-            Gizmos.DrawCube(Vector3.zero, Vector3.one);
-        }
     }
 }

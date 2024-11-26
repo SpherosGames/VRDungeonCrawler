@@ -305,10 +305,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
       propertyPath: bookParent
       value: 
       objectReference: {fileID: 446908230}
-    m_RemovedComponents: []
+    - target: {fileID: 7763491106347861795, guid: 225dd16acd01b8b4698916e6e416a0cd,
+        type: 3}
+      propertyPath: bookPrefabRenderer
+      value: 
+      objectReference: {fileID: 3248950822037199061, guid: c14b6e9b509ae8142afa46b313cdd0e7,
+        type: 3}
+    m_RemovedComponents:
+    - {fileID: 995385109241469479, guid: 225dd16acd01b8b4698916e6e416a0cd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
