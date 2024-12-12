@@ -39,7 +39,7 @@
 
 ## 🌟 Bijdragers
 
-- [SpherosGames](https://github.com/SpherosGames) - Maker en beheerder
+- [SpherosGames](https://github.com/SpherosGames) - Developer en Beheerder
 - [Joost Kraan](https://github.com/JoostKraan) - Developer
 - [AnimatorBear](https://github.com/AnimatorBear) - Developer
 - [Tempy](https://github.com/UsedTempy) - Developer
