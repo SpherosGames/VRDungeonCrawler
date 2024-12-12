@@ -1,11 +1,11 @@
 
 # VR Dungeon Crawler 🕶️🏰
 
-**VR Dungeon Crawler** is een meeslepende virtual reality-game die spelers onderdompelt in een dynamische, procedureel gegenereerde kerker. Verken, vecht tegen vijanden, los puzzels op en ontdek geheimen—allemaal in een intense VR-omgeving die is ontworpen voor avonturiers en liefhebbers van spanning!
+**VR Dungeon Crawler** is een meeslepende virtual reality-game die spelers onderdompelt in een dynamische, procedureel gegenereerde dungeons. Verken, vecht tegen vijanden, los puzzels op en ontdek geheimen—allemaal in een intense VR-omgeving die is ontworpen voor avonturiers en liefhebbers van spanning!
 
 ## 📝 Functies
 
-- **Procedureel Gegenereerde Kerker**: Elke speelsessie biedt een unieke indeling en ervaring.
+- **Procedureel Gegenereerde Dungeon**: Elke speelsessie biedt een unieke indeling en ervaring.
 - **Meeslepende VR Gameplay**: Speciaal ontworpen voor virtual reality-platforms voor een echt interactieve avontuur.
 - **Uitdagende Gevechten**: Neem het op tegen een verscheidenheid aan vijanden met unieke mechanismen en strategieën.
 - **Puzzels en Geheimen**: Los ingewikkelde puzzels op en ontdek verborgen schatten terwijl je vordert.
