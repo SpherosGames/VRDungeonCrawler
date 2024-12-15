@@ -41,7 +41,7 @@
 
 - [SpherosGames](https://github.com/SpherosGames) - Developer en Beheerder
 - [Joost Kraan](https://github.com/JoostKraan) - Developer
-- [AnimatorBear](https://github.com/AnimatorBear) - Developer
+- [Spinning Spectre](https://github.com/SpinningSpectre) - Developer
 - [Tempy](https://github.com/UsedTempy) - Developer
 
 ---

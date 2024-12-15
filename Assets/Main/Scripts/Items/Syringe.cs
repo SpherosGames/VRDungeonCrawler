@@ -60,7 +60,7 @@ public class Syringe : MonoBehaviour
         //Heal
         Player Plr = FindObjectOfType<Player>();
         Plr.MaxHealth += Scriptable.MaxHpIncrease;
-        Plr.TakeDamage(Scriptable.InstantHealing);
+        Plr.TakeDamage(-Scriptable.InstantHealing);
         Plr.AddStrength(Scriptable.PermaDamageBoost, true);
     }
 }
