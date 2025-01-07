@@ -3,22 +3,24 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class NewPhysicsHand : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private PhysicMaterial handMaterial;
-    [SerializeField] private Transform palmPos;
-    [SerializeField] private Vector3 positionOffset;
-    [SerializeField] private Vector3 rotationOffset;
-    [SerializeField] private float followSpeed;
-    [SerializeField] private float rotationSpeed;
-    [SerializeField] private int nonInteractLayer;
+    [SerializeField] private Transform Target;
+    [SerializeField] private Rigidbody Rb;
+    [SerializeField] private PhysicMaterial HandMaterial;
+    [SerializeField] private Transform PalmPos;
+    [SerializeField] private Vector3 PositionOffset;
+    [SerializeField] private Vector3 RotationOffset;
+    [SerializeField] private float FollowSpeed;
+    [SerializeField] private float RotationSpeed;
+    [SerializeField] private int NonInteractLayer;
    
     private void OnEnable()
     {
-        //Set rigidbody
-        if (rb == null) rb = GetComponent<Rigidbody>();
+        //Set rigidbody.
+        if (Rb == null) Rb = GetComponent<Rigidbody>();
 
-        transform.position = target.transform.position;
+        //Teleport the physics hands towards the controllers so that they start at the correct position.
+        //Otherwise the hands can get stuck somewhere trying to get to the controllers.
+        transform.position = Target.transform.position;
     }
 
     private void FixedUpdate()
@@ -28,31 +30,32 @@ public class NewPhysicsHand : MonoBehaviour
 
     private void MovementAndRotation()
     {
-        // Position
-        var positionWithOffset = target.TransformPoint(positionOffset);
-        var distance = Vector3.Distance(positionWithOffset, transform.position);
-        rb.velocity = (positionWithOffset - transform.position).normalized * followSpeed * distance * Time.deltaTime;
+        //Move the physics hands towards the controllers with "Rb.velocity" so that the physics hands can collide with the world.
+        var PositionWithOffset = Target.TransformPoint(PositionOffset);
+        var Distance = Vector3.Distance(PositionWithOffset, transform.position);
+        Rb.velocity = (PositionWithOffset - transform.position).normalized * FollowSpeed * Distance * Time.deltaTime;
 
-        // Rotation
-        var rotationWithOffset = target.rotation * Quaternion.Euler(rotationOffset);
-        var q = rotationWithOffset * Quaternion.Inverse(rb.rotation);
-        q.ToAngleAxis(out float angle, out Vector3 axis);
-        if (Mathf.Abs(axis.magnitude) != Mathf.Infinity)
+        //Rotate the physics hand towards the controllers with "Rb.angularVelocity" so that the physics hands can collide with the world.
+        var RotationWithOffset = Target.rotation * Quaternion.Euler(RotationOffset);
+        var Q = RotationWithOffset * Quaternion.Inverse(Rb.rotation);
+        Q.ToAngleAxis(out float Angle, out Vector3 Axis);
+        if (Mathf.Abs(Axis.magnitude) != Mathf.Infinity)
         {
-            if (angle > 180.0f) { angle -= 360.0f; }
-            rb.angularVelocity = angle * Mathf.Deg2Rad * rotationSpeed * Time.deltaTime * axis;
+            if (Angle > 180.0f) { Angle -= 360.0f; }
+            Rb.angularVelocity = Angle * Mathf.Deg2Rad * RotationSpeed * Time.deltaTime * Axis;
         }
     }
 
-    public void TurnCollisionOff(SelectEnterEventArgs args)
+    //Turn collision off so that the held object does not collide with the hand.
+    public void TurnCollisionOff(SelectEnterEventArgs Args)
     {
-        print("Collision off");
-        args.interactableObject.transform.gameObject.layer = nonInteractLayer;
+        Args.interactableObject.transform.gameObject.layer = NonInteractLayer;
     }
 
-    public void TurnCollisionOn(SelectExitEventArgs args)
+    //Turn collision on so that the hand can collide with the world again.
+    public void TurnCollisionOn(SelectExitEventArgs Args)
     {
-        print("Collision on");
-        args.interactableObject.transform.gameObject.layer = 10;
+        //Hardcoding the layer to the interactable layer.
+        Args.interactableObject.transform.gameObject.layer = 10;
     }
 }

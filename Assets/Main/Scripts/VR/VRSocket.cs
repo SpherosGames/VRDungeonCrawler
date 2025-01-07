@@ -3,129 +3,128 @@ using UnityEngine.Events;
 
 public class VRSocket : MonoBehaviour
 {
-    [SerializeField] private SocketableType allowedSocketType;
-    [SerializeField] private Transform socketPoint;
-    [SerializeField] private float reSocketDelay = 1f;
-    [SerializeField] private bool makeKinematic;
-    [SerializeField] private float releaseDistance;
-    [SerializeField] private RigidbodyConstraints contraintsr1;
-    [SerializeField] private RigidbodyConstraints contraintsr2;
-    [SerializeField] private RigidbodyConstraints contraintsr3;
-    [SerializeField] private RigidbodyConstraints contraintsp1;
-    [SerializeField] private RigidbodyConstraints contraintsp2;
-    [SerializeField] private RigidbodyConstraints contraintsp3;
+    [SerializeField] private SocketableType AllowedSocketType;
+    [SerializeField] private Transform SocketPoint;
+    [SerializeField] private float ReSocketDelay = 1f;
+    [SerializeField] private bool MakeKinematic;
+    [SerializeField] private float ReleaseDistance;
+    [SerializeField] private RigidbodyConstraints Contraintsr1;
+    [SerializeField] private RigidbodyConstraints Contraintsr2;
+    [SerializeField] private RigidbodyConstraints Contraintsr3;
+    [SerializeField] private RigidbodyConstraints Contraintsp1;
+    [SerializeField] private RigidbodyConstraints Contraintsp2;
+    [SerializeField] private RigidbodyConstraints Contraintsp3;
 
     [SerializeField] private UnityEvent<GameObject> OnSocket = new();
     [SerializeField] private UnityEvent<GameObject> OnUnsocket = new();
 
-    public float ReleaseDistance => releaseDistance;
+    public float GetReleaseDistance => ReleaseDistance;
 
-    private bool maySocket;
-    private float reSocketTimer;
+    private bool MaySocket;
+    private float ReSocketTimer;
 
-    public GameObject socketedObject;
-    private Grabbable socketedGrabbable;
+    public GameObject SocketedObject;
+    private Grabbable SocketedGrabbable;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider Other)
     {
-        if (!maySocket || socketedObject) return;
+        if (!MaySocket || SocketedObject) return;
 
-        if (other.TryGetComponent(out Socketable socket))
+        //Socket when the object hits the socket's trigger collider.
+        if (Other.TryGetComponent(out Socketable Socket))
         {
-            if (socket.GetSocketableType() == allowedSocketType)
+            if (Socket.GetSocketableType() == AllowedSocketType)
             {
-                SocketObject(other.gameObject);
+                SocketObject(Other.gameObject);
             }
         }
     }
 
     private void Update()
     {
-        if (!maySocket)
+        //Reallow socketing when its been "ReSocketDelay" seconds.
+        if (!MaySocket)
         {
-            reSocketTimer -= Time.deltaTime;
+            ReSocketTimer -= Time.deltaTime;
 
-            if (reSocketTimer <= 0)
+            if (ReSocketTimer <= 0)
             {
-                maySocket = true;
-                reSocketTimer = reSocketDelay;
+                MaySocket = true;
+                ReSocketTimer = ReSocketDelay;
             }
-        }
-
-        if(socketedObject)
-        {
-            print(socketedObject.transform.eulerAngles);
         }
     }
 
+    /// <summary>
+    /// If there is a socketable in this socket, it will unsocket it.
+    /// </summary>
+    /// <param name="UnSocketObject">The object it will unsocket.</param>
     public void UnSocketObject(GameObject UnSocketObject)
     {
-        if (!maySocket) return;
+        if (!MaySocket) return;
 
         OnUnsocket.Invoke(UnSocketObject);
 
-        reSocketTimer = reSocketDelay;
-        maySocket = false;
+        //Add a delay for resocketing, so that it doesn't immediatly resocket it.
+        ReSocketTimer = ReSocketDelay;
+        MaySocket = false;
 
-        if (socketedGrabbable.rb)
+        //Change the rigidbody so that it can be moved again.
+        if (SocketedGrabbable.Rb)
         {
-            socketedGrabbable.rb.isKinematic = false;
+            SocketedGrabbable.Rb.isKinematic = false;
 
-            if (!socketedGrabbable.rb.isKinematic)
+            if (!SocketedGrabbable.Rb.isKinematic)
             {
-                socketedGrabbable.rb.constraints = RigidbodyConstraints.None;
+                SocketedGrabbable.Rb.constraints = RigidbodyConstraints.None;
             }
         }
 
-        socketedGrabbable.socket = null;
-        socketedGrabbable = null;
+        //Reset variables for later use.
+        SocketedGrabbable.Socket = null;
+        SocketedGrabbable = null;
 
-        socketedObject = null;
+        SocketedObject = null;
     }
 
-    private void SocketObject(GameObject _socketedObject)
+    private void SocketObject(GameObject ObjectToSocket)
     {
-        print(_socketedObject);
-        OnSocket.Invoke(_socketedObject);
+        OnSocket.Invoke(ObjectToSocket);
 
-        //sockettimer to make sure the object doenst get immmediatly resocketed;
-        reSocketTimer = reSocketDelay;
-        maySocket = false;
+        //Add a delay for unsocketing, so that it doesn't immediatly unsocket it.
+        ReSocketTimer = ReSocketDelay;
+        MaySocket = false;
 
-        socketedObject = _socketedObject;
-        socketedGrabbable = socketedObject.GetComponent<Grabbable>();
-        //Release the socketable from the hand
-        if (socketedGrabbable.hand)
+        SocketedObject = ObjectToSocket;
+        SocketedGrabbable = SocketedObject.GetComponent<Grabbable>();
+
+        //Turn gravity of socketable off.
+        if (SocketedGrabbable.Rb)
         {
-            //socketedGrabbable.hand.ForceRelease();
-        }
+            SocketedGrabbable.Rb.velocity = Vector3.zero;
+            SocketedGrabbable.Rb.angularVelocity = Vector3.zero;
 
-        //Set gravity of socketable off
-        if (socketedGrabbable.rb)
-        {
-            socketedGrabbable.rb.velocity = Vector3.zero;
-            socketedGrabbable.rb.angularVelocity = Vector3.zero;
-
-            if (makeKinematic)
+            //Use MakeKinematic if it doesn't need to move. Use constraints if you want to still be able to move it, but only on certain axis.
+            if (MakeKinematic)
             {
-                socketedGrabbable.rb.isKinematic = true;
+                SocketedGrabbable.Rb.isKinematic = true;
             }
             else
             {
-                //Rudo code here
-                socketedGrabbable.rb.constraints = contraintsp1 | contraintsp2 | contraintsp3 | contraintsr1 | contraintsr2 | contraintsr3;
+                SocketedGrabbable.Rb.constraints = Contraintsp1 | Contraintsp2 | Contraintsp3 | Contraintsr1 | Contraintsr2 | Contraintsr3;
             }
         }
         else
         {
-            Debug.Log("WARNING No rigidbody found, can't socket object", socketedObject);
+            Debug.Log("WARNING: No rigidbody found, can't socket object", SocketedObject);
         }
 
-        socketedGrabbable.socket = this;
+        SocketedGrabbable.Socket = this;
 
-        if (socketPoint) socketedObject.transform.position = socketPoint.position;
-        else socketedObject.transform.position = transform.position;
+        //Set position and rotation of the SocketedObject.
+        if (SocketPoint) SocketedObject.transform.position = SocketPoint.position;
+        else SocketedObject.transform.position = transform.position;
 
-        socketedObject.transform.rotation = socketPoint.transform.rotation;
+        SocketedObject.transform.rotation = SocketPoint.transform.rotation;
     }
 }

@@ -5,49 +5,57 @@ using UnityEngine.InputSystem;
 
 public class HandPhysics : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private PhysicMaterial handMaterial;
-    [SerializeField] private float colliderEnableDelay = 1;
-    [SerializeField] private InputActionProperty grabButton;
-    [SerializeField] private float grabThreshold = 0.1f;
-    [SerializeField] private LayerMask grabLayerMask;
-    [SerializeField] private Transform palmPos;
-    [SerializeField] private float grabCheckSize = 0.1f;
-    [SerializeField] private bool useJoint;
-    [SerializeField] private Transform palmPosTarget;
+    [SerializeField] private Transform Target;
+    [SerializeField] private Rigidbody Rb;
+    [SerializeField] private PhysicMaterial HandMaterial;
+    [SerializeField] private float ColliderEnableDelay = 1;
+    [SerializeField] private InputActionProperty GrabButton;
+    [SerializeField] private float GrabThreshold = 0.1f;
+    [SerializeField] private LayerMask GrabLayerMask;
+    [SerializeField] private Transform PalmPos;
+    [SerializeField] private float GrabCheckSize = 0.1f;
+    [SerializeField] private bool UseJoint;
+    [SerializeField] private Transform PalmPosTarget;
 
-    private Collider[] colliders;
+    private Collider[] HandColliders;
 
-    private FixedJoint fixedJoint;
+    private FixedJoint FixedJoint;
 
-    private Grabbable currentGrabbable;
+    private Grabbable CurrentGrabbable;
 
-    private Grabbable socketedObject;
+    private Grabbable SocketedObject;
 
-    private bool mayGrab = true;
+    private bool MayGrab = true;
 
     private void Awake()
     {
-        colliders = GetComponentsInChildren<Collider>();
-        colliders.ToList().ForEach(x => x.material = handMaterial);
+        //Get all hand colliders and set the hand physics material.
+        HandColliders = GetComponentsInChildren<Collider>();
+        HandColliders.ToList().ForEach(X => X.material = HandMaterial);
     }
 
     private void OnEnable()
     {
-        //Set rigidbody
-        if (rb == null) rb = GetComponent<Rigidbody>();
+        //Find and assign Rigidbody.
+        if (Rb == null) Rb = GetComponent<Rigidbody>();
 
-        transform.position = target.transform.position;
+        //Teleport the physic hand to it's target position.
+        transform.position = Target.transform.position;
     }
 
-    private IEnumerator SetColliders(bool value, float delay)
+    /// <summary>
+    /// Set the all the hand colliders based on "value".
+    /// </summary>
+    /// <param name="Value">Whether or not the hand colliders are on.</param>
+    /// <param name="Delay">How long it waits to change the state of the hand colliders.</param>
+    /// <returns></returns>
+    private IEnumerator SetColliders(bool Value, float Delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(Delay);
 
-        foreach (var item in colliders)
+        foreach (var item in HandColliders)
         {
-            item.enabled = value;
+            item.enabled = Value;
         }
     }
 
@@ -64,142 +72,139 @@ public class HandPhysics : MonoBehaviour
 
     private void LimitPalmSpeed()
     {
-        Rigidbody rb = palmPos.GetComponent<Rigidbody>();
+        Rigidbody Rb = PalmPos.GetComponent<Rigidbody>();
 
-        if (rb.velocity.magnitude > 10)
+        if (Rb.velocity.magnitude > 10)
         {
-            rb.velocity = rb.velocity.normalized * 10;
+            Rb.velocity = Rb.velocity.normalized * 10;
         }
-        if (rb.angularVelocity.magnitude > 10)
+        if (Rb.angularVelocity.magnitude > 10)
         {
-            rb.angularVelocity = rb.angularVelocity.normalized * 10;
+            Rb.angularVelocity = Rb.angularVelocity.normalized * 10;
         }
     }
 
     private void Grabbing()
     {
-        bool isGrabButtonPressed = grabButton.action.ReadValue<float>() > grabThreshold;
+        //Whether or not the grab button is pressed.
+        bool IsGrabButtonPressed = GrabButton.action.ReadValue<float>() > GrabThreshold;
 
-        if (!mayGrab)
+        //You may only grab an object again if you first stop pressing the grabbutton.
+        if (!MayGrab)
         {
-            if (!isGrabButtonPressed)
+            if (!IsGrabButtonPressed)
             {
-                mayGrab = true;
+                MayGrab = true;
             }
             return;
         }
 
-        //TODO: Remove this if im sure fixed joint are the way to go
-        if (isGrabButtonPressed && currentGrabbable && !useJoint)
+        //TODO: Remove this if im sure fixed joint are the way to go.
+        if (IsGrabButtonPressed && CurrentGrabbable && !UseJoint)
         {
-            Transform target;
+            Transform Target;
 
-            //Set movement and rotation target to grabpoint or object itself
-            if (currentGrabbable.grabPoint)
+            //Set movement and rotation target to grabpoint or object itself.
+            if (CurrentGrabbable.GrabPoint)
             {
-                target = currentGrabbable.grabPoint;
+                Target = CurrentGrabbable.GrabPoint;
             }
             else
             {
-                target = currentGrabbable.transform;
+                Target = CurrentGrabbable.transform;
             }
 
-            //Move object towards palm of hand
-            currentGrabbable.rb.velocity = (palmPos.position - target.position).normalized * 10
-                * Vector3.Distance(palmPos.position, target.position);
+            //Move object towards palm of hand.
+            CurrentGrabbable.Rb.velocity = (PalmPos.position - Target.position).normalized * 10
+                * Vector3.Distance(PalmPos.position, Target.position);
 
-            //Rotate the object towards the palm of the hand
-            Quaternion rotationDifference = palmPos.rotation * Quaternion.Inverse(target.rotation);
+            //Rotate the object towards the palm of the hand.
+            Quaternion RotationDifference = PalmPos.rotation * Quaternion.Inverse(Target.rotation);
 
-            rotationDifference.ToAngleAxis(out float angle, out Vector3 axis);
-            Vector3 angularVelocity = 10 * angle * Mathf.Deg2Rad * axis;
+            RotationDifference.ToAngleAxis(out float Angle, out Vector3 Axis);
+            Vector3 AngularVelocity = 10 * Angle * Mathf.Deg2Rad * Axis;
 
-            currentGrabbable.rb.angularVelocity = angularVelocity;
+            CurrentGrabbable.Rb.angularVelocity = AngularVelocity;
         }
 
-        //Check if this hand is trying to grab something, but isn't already holding something
-        if (isGrabButtonPressed && !currentGrabbable)
+        //Check if this hand is trying to grab something, but isn't already holding something.
+        if (IsGrabButtonPressed && !CurrentGrabbable)
         {
-            if (socketedObject)
+            if (SocketedObject)
             {
-                if (Vector3.Distance(transform.TransformPoint(palmPosTarget.position), socketedObject.transform.position) >= socketedObject.socket.ReleaseDistance)
+                if (Vector3.Distance(transform.TransformPoint(PalmPosTarget.position), SocketedObject.transform.position) >= SocketedObject.Socket.GetReleaseDistance)
                 {
-                    currentGrabbable = socketedObject;
+                    CurrentGrabbable = SocketedObject;
                     //currentGrabbable.hand = this;
-                    currentGrabbable.socket.UnSocketObject(socketedObject.gameObject);
-                    socketedObject = null;
+                    CurrentGrabbable.Socket.UnSocketObject(SocketedObject.gameObject);
+                    SocketedObject = null;
                     return;
                 }
             }
 
-            //Look for all colliders in an area around the palm of the hand
-            Collider[] colliders = Physics.OverlapSphere(palmPosTarget.position, grabCheckSize, grabLayerMask, QueryTriggerInteraction.Ignore);
+            //Look for all colliders in an area around the palm of the hand.
+            Collider[] Colliders = Physics.OverlapSphere(PalmPosTarget.position, GrabCheckSize, GrabLayerMask, QueryTriggerInteraction.Ignore);
 
-            //Check if there are any valid colliders and check if the first one has a grabbable script on it
-            if (colliders.Length > 0 && colliders[0].TryGetComponent(out Grabbable grabbable))
+            //Check if there are any valid colliders and check if the first one has a grabbable script on it.
+            if (Colliders.Length > 0 && Colliders[0].TryGetComponent(out Grabbable Grabbable))
             {
-                if (grabbable.isGrabbed && !grabbable.twoHanded) return;
+                if (Grabbable.IsGrabbed && !Grabbable.TwoHanded) return;
 
-                grabbable.isGrabbed = true;
+                Grabbable.IsGrabbed = true;
 
-                //Socket
-                if (grabbable.socket)
+                //Socket.
+                if (Grabbable.Socket)
                 {
-                    socketedObject = grabbable;
+                    SocketedObject = Grabbable;
                 }
                 else
                 {
-                    //Set grabble hand
-                    currentGrabbable = grabbable;
-                    //currentGrabbable.hand = this;
+                    //Set grabble hand.
+                    CurrentGrabbable = Grabbable;
                 }
 
                 StartCoroutine(SetColliders(false, 0));
 
-                if (!useJoint) return;
+                if (!UseJoint) return;
 
-                //Setup fixedjoint
-                fixedJoint = gameObject.AddComponent<FixedJoint>();
-                fixedJoint.autoConfigureConnectedAnchor = false;
+                //Setup fixedjoint.
+                FixedJoint = gameObject.AddComponent<FixedJoint>();
+                FixedJoint.autoConfigureConnectedAnchor = false;
 
-                Vector3 position;
+                Vector3 Position;
 
-                //When there is a grabpoint, set connectedanchor there instead
-                if (grabbable.grabPoint != null)
+                //When there is a grabpoint, set connectedanchor there instead.
+                if (Grabbable.GrabPoint != null)
                 {
                     //position = grabbable.grabPoint.position;
-                    position = palmPosTarget.position;
+                    Position = PalmPosTarget.position;
                 }
                 else
                 {
-                    position = palmPosTarget.position;
+                    Position = PalmPosTarget.position;
                 }
 
-                if (grabbable.rb)
+                if (Grabbable.Rb)
                 {
-                    grabbable.rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+                    Grabbable.Rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
-                    if (grabbable.grabPoint)
+                    if (Grabbable.GrabPoint)
                     {
-                        // Store the original position of the grabbable object
-                        Vector3 originalPosition = grabbable.transform.position;
+                        Vector3 OriginalPosition = Grabbable.transform.position;
 
-                        // Calculate and apply rotation
-                        Quaternion rotationDifference = transform.rotation * Quaternion.Inverse(grabbable.grabPoint.rotation);
-                        grabbable.transform.rotation = rotationDifference * grabbable.transform.rotation;
+                        // Calculate and apply rotation.
+                        Quaternion RotationDifference = transform.rotation * Quaternion.Inverse(Grabbable.GrabPoint.rotation);
+                        Grabbable.transform.rotation = RotationDifference * Grabbable.transform.rotation;
 
-                        // Calculate the offset from the grab point to the object's center
-                        Vector3 grabOffset = grabbable.transform.position - grabbable.grabPoint.position;
+                        // Calculate the offset from the grab point to the object's center.
+                        Vector3 GrabOffset = Grabbable.transform.position - Grabbable.GrabPoint.position;
 
-                        // Calculate the new position
-                        Vector3 newPosition = position + transform.rotation * Quaternion.Inverse(grabbable.grabPoint.rotation) * grabOffset;
+                        Vector3 NewPosition = Position + transform.rotation * Quaternion.Inverse(Grabbable.GrabPoint.rotation) * GrabOffset;
 
-                        // Set the object's position
-                        grabbable.transform.position = newPosition;
+                        Grabbable.transform.position = NewPosition;
 
-                        // Set up the joint
-                        fixedJoint.connectedBody = grabbable.rb;
-                        fixedJoint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
+                        FixedJoint.connectedBody = Grabbable.Rb;
+                        FixedJoint.connectedAnchor = Grabbable.Rb.transform.InverseTransformPoint(Position);
 
                         //Uncomment this when it's not done in fixedupdate (MovementAndRotation)
                         //Quaternion rot = Quaternion.FromToRotation(grabbable.grabPoint.transform.forward, transform.forward);
@@ -207,73 +212,80 @@ public class HandPhysics : MonoBehaviour
                     }
                     else
                     {
-                        fixedJoint.connectedBody = grabbable.rb;
-                        fixedJoint.connectedAnchor = grabbable.rb.transform.InverseTransformPoint(position);
+                        FixedJoint.connectedBody = Grabbable.Rb;
+                        FixedJoint.connectedAnchor = Grabbable.Rb.transform.InverseTransformPoint(Position);
                     }
                 }
                 else
                 {
-                    fixedJoint.connectedAnchor = position;
+                    FixedJoint.connectedAnchor = Position;
                 }
             }
         }
         //Releasing
-        else if (!isGrabButtonPressed && currentGrabbable)
+        else if (!IsGrabButtonPressed && CurrentGrabbable)
         {
-            StartCoroutine(SetColliders(true, colliderEnableDelay));
+            StartCoroutine(SetColliders(true, ColliderEnableDelay));
             ForceRelease();
         }
     }
 
     private void MovementAndRotation()
     {
-        //Phyics position
-        rb.velocity = (target.position - transform.position) / Time.fixedDeltaTime;
+        //Moves the physics hands towards the controllers position.
+        Rb.velocity = (Target.position - transform.position) / Time.fixedDeltaTime;
 
-        //Physics rotation
-        Quaternion rotationDifference = target.rotation * Quaternion.Inverse(transform.rotation);
-        rotationDifference.ToAngleAxis(out float angle, out Vector3 axis);
+        //Rotates the physics hands towards the controllers rotation.
+        Quaternion rotationDifference = Target.rotation * Quaternion.Inverse(transform.rotation);
+        rotationDifference.ToAngleAxis(out float Angle, out Vector3 Axis);
 
-        Vector3 rotation = angle * axis;
+        Vector3 rotation = Angle * Axis;
 
-        rb.angularVelocity = (rotation * Mathf.Deg2Rad) / Time.fixedDeltaTime;
+        Rb.angularVelocity = (rotation * Mathf.Deg2Rad) / Time.fixedDeltaTime;
     }
 
     private void MovePalm()
     {
-        //move palmpos to it's target
-        palmPos.position = palmPosTarget.position;
+        //Move palmpos to it's target.
+        PalmPos.position = PalmPosTarget.position;
 
-        //rotate palmpos to it's target
-        if (currentGrabbable && currentGrabbable.grabPoint)
+        //Rotate palmpos to it's target.
+        if (CurrentGrabbable && CurrentGrabbable.GrabPoint)
         {
-            //TODO: optimize this by calculating an offset and using localrotation instead
-            Quaternion rot = Quaternion.FromToRotation(currentGrabbable.grabPoint.transform.forward, transform.forward);
-            Quaternion worldRot = rot * palmPos.rotation;
+            //This script never got fully finished so some things didn't get fully optimized.
+            //TODO: optimize this by calculating an offset and using localrotation instead.
+            Quaternion Rot = Quaternion.FromToRotation(CurrentGrabbable.GrabPoint.transform.forward, transform.forward);
+            Quaternion WorldRot = Rot * PalmPos.rotation;
 
-            palmPos.rotation = worldRot;
+            PalmPos.rotation = WorldRot;
         }
         else
         {
-            palmPos.localRotation = Quaternion.identity;
+            PalmPos.localRotation = Quaternion.identity;
         }
     }
 
+    /// <summary>
+    /// Releases any object the hand is holding immediatly.
+    /// </summary>
     public void ForceRelease()
     {
-        currentGrabbable.rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
-        currentGrabbable.isGrabbed = false;
+        //Change the collisionDectionMode of the Rigidbody to save performance.
+        CurrentGrabbable.Rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        CurrentGrabbable.IsGrabbed = false;
 
-        currentGrabbable.hand = null;
-        currentGrabbable = null;
+        CurrentGrabbable.Hand = null;
+        CurrentGrabbable = null;
 
-        mayGrab = false;
+        MayGrab = false;
 
-        if (fixedJoint) Destroy(fixedJoint);
+        //Destroys the joint connecting the hand to the object
+        if (FixedJoint) Destroy(FixedJoint);
     }
 
     private void OnDrawGizmosSelected()
     {
-        if (palmPosTarget) Gizmos.DrawWireSphere(palmPosTarget.position, grabCheckSize);
+        //Shows the sphere where the object needs to be in order to be grabbed.
+        if (PalmPosTarget) Gizmos.DrawWireSphere(PalmPosTarget.position, GrabCheckSize);
     }
 }

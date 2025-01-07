@@ -1,34 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Potion))]
 public class HealthPotion : MonoBehaviour
 {
-    [SerializeField] private float healthAmount;
+    [SerializeField] private float HealthAmount;
      
-    private Potion potion;
-    private Player player;
-    private PotionDrinkCollider potionDrinkCollider;
+    private Potion Potion;
+    private Player Player;
+    private PotionDrinkCollider PotionDrinkCollider;
 
     private void Awake()
     {
-        player = FindObjectOfType<Player>();
-        potion = GetComponent<Potion>();
+        Player = FindObjectOfType<Player>();
+        Potion = GetComponent<Potion>();
     }
 
     private void OnEnable()
     {
-        potion.effectEvent.AddListener(AddHealth);
+        //Subscribe "AddHealth" to potion effect event.
+        Potion.effectEvent.AddListener(AddHealth);
     }
 
-    // Function to add health to the player when pouring above head
+    //Function to add health to the player when this potion is pouring above the head.
     private void AddHealth()
     {
-        if (player != null && player.Health < player.MaxHealth && potionDrinkCollider.isColliding)
+        if (Player != null && Player.Health < Player.MaxHealth && PotionDrinkCollider.IsColliding)
         {
-            print("Actually heal");
-            player.Health = Mathf.Min(player.MaxHealth, player.Health + healthAmount);
+            Player.Health = Mathf.Min(Player.MaxHealth, Player.Health + HealthAmount);
         }
     }
 }

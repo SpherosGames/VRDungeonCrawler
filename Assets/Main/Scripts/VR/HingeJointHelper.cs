@@ -5,24 +5,25 @@ using UnityEngine;
 [RequireComponent(typeof(HingeJoint))]
 public class HingeJointHelper : MonoBehaviour
 {
-    private HingeJoint joint;
+    private HingeJoint Joint;
 
     private void Awake()
     {
-        joint = GetComponent<HingeJoint>();
+        Joint = GetComponent<HingeJoint>();
     }
 
     private void OnEnable()
     {
-        joint.enableCollision = false;
+        Joint.enableCollision = false;
 
-        if (joint.useLimits)
+        if (Joint.useLimits)
         {
-            JointLimits limits = joint.limits;
-            limits.bounceMinVelocity = 0.2f;
-            limits.contactDistance = 1f;
-            limits.bounciness = 0f;
-            joint.limits = limits;
+            //Some preset values that are optimal for good VR Physics interaction with joints. This to mostly eliminate jitter.
+            JointLimits Limits = Joint.limits;
+            Limits.bounceMinVelocity = 0.2f;
+            Limits.contactDistance = 1f;
+            Limits.bounciness = 0f;
+            Joint.limits = Limits;
         }
     }
 }

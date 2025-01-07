@@ -1,35 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StrengthPotion : MonoBehaviour
 {
-    [SerializeField] private float strengthMultiplier;
+    [SerializeField] private float StrengthMultiplier;
 
-    private Potion potion;
-    private Player player;
-    private PotionDrinkCollider potionDrinkCollider;
+    private Potion Potion;
+    private Player Player;
+    private PotionDrinkCollider PotionDrinkCollider;
 
     private void Awake()
     {
-        player = FindObjectOfType<Player>();
-        potion = GetComponent<Potion>();
-        potionDrinkCollider = FindObjectOfType<PotionDrinkCollider>();
+        Player = FindObjectOfType<Player>();
+        Potion = GetComponent<Potion>();
+        PotionDrinkCollider = FindObjectOfType<PotionDrinkCollider>();
     }
 
     private void OnEnable()
     {
-        potion.effectEvent.RemoveAllListeners();
-        potion.effectEvent.AddListener(AddStrength);
+        Potion.effectEvent.RemoveAllListeners();
+
+        //Subscribe "AddStrength" to potion effect event.
+        Potion.effectEvent.AddListener(AddStrength);
     }
 
-    // Function to add health to the player when pouring above head
+    //Function to add health to the player when this potion is pouring above the head.
     private void AddStrength()
     {
-        if (player != null && player.Health < player.MaxHealth && potionDrinkCollider.isColliding)
+        if (Player != null && Player.Health < Player.MaxHealth && PotionDrinkCollider.IsColliding)
         {
-            print("Actually heal");
-            player.AddStrength(strengthMultiplier, false);
+            Player.AddStrength(StrengthMultiplier, false);
         }
     }
 }

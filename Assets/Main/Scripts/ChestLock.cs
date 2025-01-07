@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -7,34 +5,33 @@ public class ChestLock : MonoBehaviour
 {
     [SerializeField] private Rigidbody ChestLid;
     [SerializeField] private Chest LockedChest;
-    [SerializeField] private Rigidbody LockModel;
-    [SerializeField] private XRSocketInteractor socketInteractor;
-    [SerializeField] private InteractionLayerMask interactionLayerMask;
+    [SerializeField] private XRSocketInteractor SocketInteractor;
+
     public bool BeenUnlocked = false;
 
     /// <summary>
     /// Checks if you can open the lock on trigger, opens it if you can
     /// </summary>
-    public void CheckOpenLock(SelectEnterEventArgs args)
+    public void CheckOpenLock(SelectEnterEventArgs Args)
     {
-        //If it isnt an item, it cant be a key
-        if (args.interactableObject.transform.gameObject.GetComponent<Item>() == null) return;
+        //If it isnt an item, it cant be a key.
+        if (Args.interactableObject.transform.GetComponent<Item>() == null) return;
 
-        //If it is a key and the chest hasnt been openend
-        if (args.interactableObject.transform.gameObject.GetComponent<Item>().ItemType == "Key" && !LockedChest.HasBeenOpened && !BeenUnlocked)
+        //If it is a key and the chest hasn't been openend.
+        if (Args.interactableObject.transform.GetComponent<Item>().ItemType == "Key" && !LockedChest.HasBeenOpened && !BeenUnlocked)
         {
-            //Sets the chests hinge limits higher
-            JointLimits limits = ChestLid.GetComponent<HingeJoint>().limits;
-            limits.min = -135;
-            ChestLid.GetComponent<HingeJoint>().limits = limits;
+            //Sets the chests hinge limits so that it can be opened by the player.
+            JointLimits Limits = ChestLid.GetComponent<HingeJoint>().limits;
+            Limits.min = -135;
+            ChestLid.GetComponent<HingeJoint>().limits = Limits;
 
-            //Makes the key unusable
-            args.interactableObject.transform.gameObject.GetComponent<Item>().ItemType = "UsedKey";
+            //Makes the key unusable.
+            Args.interactableObject.transform.GetComponent<Item>().ItemType = "UsedKey";
 
-            args.interactableObject.transform.position = socketInteractor.attachTransform.position;
-            args.interactableObject.transform.rotation = socketInteractor.attachTransform.rotation;
-            args.interactableObject.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            socketInteractor.socketActive = false;
+            //Set the keys position.
+            Args.interactableObject.transform.SetPositionAndRotation(SocketInteractor.attachTransform.position, SocketInteractor.attachTransform.rotation);
+            Args.interactableObject.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            SocketInteractor.socketActive = false;
 
             BeenUnlocked = true;
         }

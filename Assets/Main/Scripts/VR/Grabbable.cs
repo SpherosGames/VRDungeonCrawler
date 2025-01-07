@@ -4,90 +4,92 @@ using UnityEngine;
 
 public class Grabbable : MonoBehaviour
 {
-    public NewPhysicsHand hand;
-    public Rigidbody rb;
-    public VRSocket socket;
-    public Transform grabPoint;
-    public bool twoHanded = false;
-    public bool isGrabbed;
-    public bool setCOM;
-    public bool keepAwake;
-    public float velocityThreshold = 0.01f;
-    public float sleepDelay = 2f;
-    public bool optimizePhysics = false;
+    public NewPhysicsHand Hand;
+    public Rigidbody Rb;
+    public VRSocket Socket;
+    public Transform GrabPoint;
+    public bool TwoHanded = false;
+    public bool IsGrabbed;
+    public bool SetCOM;
+    public bool KeepAwake;
+    public float VelocityThreshold = 0.01f;
+    public float SleepDelay = 2f;
+    public bool OptimizePhysics = false;
 
-    private float checkTimer;
-    private float checkTime = 0.5f;
-    private float acceptDistance = 1;
+    private float CheckTimer;
+    private float CheckTime = 0.5f;
+    private float AcceptDistance = 1;
 
-    private Transform player;
+    private Transform Player;
 
-    private bool isSleeping = false;
-    private float sleepTimer;
+    private bool IsSleeping = false;
+    private float SleepTimer;
 
     private void Awake()
     {
-        if (rb == null) rb = GetComponent<Rigidbody>();
+        if (Rb == null) Rb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
     {
-        if (setCOM) rb.centerOfMass = transform.TransformPoint(grabPoint.position);
+        if (SetCOM) Rb.centerOfMass = transform.TransformPoint(GrabPoint.position);
 
-        if (optimizePhysics)
+        if (OptimizePhysics)
         {
-            rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
-            checkTimer = checkTime;
-            //player = FindObjectOfType<Player>().transform;
+            Rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+            CheckTimer = CheckTime;
+            Player = FindObjectOfType<Player>().transform;
         }
     }
 
     private void FixedUpdate()
     {
-        //if (checkTimer > 0)
-        //{
-        //    checkTimer -= Time.deltaTime;
+        if (CheckTimer > 0)
+        {
+            CheckTimer -= Time.deltaTime;
 
-        //    if (checkTimer <= 0)
-        //    {
-        //        float dist = Vector3.Distance(player.transform.position, transform.position);
+            //Check every "CheckTime" seconds for the distance between the object and the player and make it isKinematic if it's close enough.
+            if (CheckTimer <= 0)
+            {
+                float dist = Vector3.Distance(Player.transform.position, transform.position);
 
-        //        if (dist < acceptDistance)
-        //        {
-        //            rb.isKinematic = false;
-        //        }
-        //        else
-        //        {
-        //            rb.isKinematic = true;
-        //        }
+                if (dist < AcceptDistance)
+                {
+                    Rb.isKinematic = false;
+                }
+                else
+                {
+                    Rb.isKinematic = true;
+                }
 
-        //        checkTimer = checkTime;
-        //    }
-        //}
+                CheckTimer = CheckTime;
+            }
+        }
 
-        //if (isSleeping || isGrabbed || keepAwake) return;
+        if (IsSleeping || IsGrabbed || KeepAwake) return;
 
-        ////print("Update go brr");
-        ////print(rb.velocity.magnitude);
-        //if (rb.velocity.magnitude < velocityThreshold)
-        //{
-        //    sleepTimer += Time.fixedDeltaTime;
-        //    if (sleepTimer >= sleepDelay)
-        //    {
-        //        //print("Sleep");
-        //        rb.Sleep();
-        //        isSleeping = true;
-        //    }
-        //}
-        //else
-        //{
-        //    sleepTimer = 0f;
-        //}
+        //If the object is moving very slowly for "SleepDelay" seconds the rigidbody turns itself off by calling the Sleep function.
+        if (Rb.velocity.magnitude < VelocityThreshold)
+        {
+            SleepTimer += Time.fixedDeltaTime;
+            if (SleepTimer >= SleepDelay)
+            {
+                Rb.Sleep();
+                IsSleeping = true;
+            }
+        }
+        else
+        {
+            SleepTimer = 0f;
+        }
     }
 
+    /// <summary>
+    /// Wakes up the Grabbables Rigidbody.
+    /// </summary>
     public void WakeUp()
     {
-        print("Wake up");
-        isSleeping = true;
+        Rb.WakeUp();
+        IsSleeping = true;
     }
 }

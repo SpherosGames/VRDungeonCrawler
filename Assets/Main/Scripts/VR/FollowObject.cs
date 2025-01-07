@@ -2,48 +2,51 @@ using UnityEngine;
 
 public class FollowObject : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    [SerializeField] private Transform Target;
 
-    [SerializeField] private Vector3 posOffset;
-    [SerializeField] private bool followPos;
-    [SerializeField] private bool followPosX;
-    [SerializeField] private bool followPosY;
-    [SerializeField] private bool followPosZ;
+    [SerializeField] private Vector3 PosOffset;
+    [SerializeField] private bool FollowPos;
+    [SerializeField] private bool FollowPosX;
+    [SerializeField] private bool FollowPosY;
+    [SerializeField] private bool FollowPosZ;
 
-    [SerializeField] private Vector3 rotOffset;
-    [SerializeField] private bool followRot;
-    [SerializeField] private bool followRotX;
-    [SerializeField] private bool followRotY;
-    [SerializeField] private bool followRotZ;
+    [SerializeField] private Vector3 RotOffset;
+    [SerializeField] private bool FollowRot;
+    [SerializeField] private bool FollowRotX;
+    [SerializeField] private bool FollowRotY;
+    [SerializeField] private bool FollowRotZ;
 
     private void Update()
     {
-        if (followPos)
+        //Follow the position of the specified axis.
+        if (FollowPos)
         {
-            Vector3 finalPos = target.position + posOffset;
+            Vector3 FinalPos = Target.position + PosOffset;
 
-            if (!followPosX) finalPos.x = transform.position.x;
-            if (!followPosY) finalPos.y = transform.position.y;
-            if (!followPosZ) finalPos.z = transform.position.z;
+            if (!FollowPosX) FinalPos.x = transform.position.x;
+            if (!FollowPosY) FinalPos.y = transform.position.y;
+            if (!FollowPosZ) FinalPos.z = transform.position.z;
 
-            transform.position = finalPos;
+            transform.position = FinalPos;
         }
 
-        if (followRot)
+        //Follow the rotation of the specified axis.
+        if (FollowRot)
         {
-            Vector3 targetRotation = target.transform.rotation.eulerAngles;
+            Vector3 TargetRotation = Target.transform.rotation.eulerAngles;
 
-            if (!followRotX) targetRotation.x = transform.rotation.x;
-            if (!followRotY) targetRotation.y = transform.rotation.y;
-            if (!followRotZ) targetRotation.z = transform.rotation.z;
+            if (!FollowRotX) TargetRotation.x = transform.rotation.x;
+            if (!FollowRotY) TargetRotation.y = transform.rotation.y;
+            if (!FollowRotZ) TargetRotation.z = transform.rotation.z;
 
-            Quaternion rotation = Quaternion.Euler(targetRotation) * Quaternion.Euler(rotOffset);
+            Quaternion Rotation = Quaternion.Euler(TargetRotation) * Quaternion.Euler(RotOffset);
 
-            transform.rotation = rotation;
+            transform.rotation = Rotation;
 
-            Vector3 newPos = rotation * (transform.position - target.position) + target.position;
+            //Set the position so that it rotates around the middle point.
+            Vector3 NewPos = Rotation * (transform.position - Target.position) + Target.position;
 
-            transform.position = newPos;
+            transform.position = NewPos;
         }
     }
 }

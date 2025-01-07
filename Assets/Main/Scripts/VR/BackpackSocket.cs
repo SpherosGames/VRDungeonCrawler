@@ -1,32 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class BackpackSocket : MonoBehaviour
 {
-    [SerializeField] private int backpackNonInteractLayer;
-    [SerializeField] private float scaleFactor;
+    [SerializeField] private int BackpackNonInteractLayer;
+    [SerializeField] private float ScaleFactor;
     
-    private int interactableLayer = 0;
-    private Vector3 interactableScale;
+    private int InteractableLayer = 0;
+    private Vector3 InteractableScale;
 
     public void Socket(SelectEnterEventArgs args)
     {
         GameObject interactableObject = args.interactableObject.transform.gameObject;
 
-        interactableScale = interactableObject.transform.lossyScale;
-        interactableLayer = interactableObject.layer;
+        InteractableScale = interactableObject.transform.lossyScale;
+        InteractableLayer = interactableObject.layer;
 
-        interactableObject.layer = backpackNonInteractLayer;
-        //interactableObject.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+        //Scale the socket down when socketing.
+        interactableObject.layer = BackpackNonInteractLayer;
+        interactableObject.transform.localScale = new Vector3(ScaleFactor, ScaleFactor, ScaleFactor);
     }
 
     public void UnSocket(SelectExitEventArgs args)
     {
         GameObject interactableObject = args.interactableObject.transform.gameObject;
 
-        interactableObject.layer = interactableLayer;
-        interactableObject.transform.localScale = interactableScale;
+        //Reset scale back to saved scale.
+        interactableObject.layer = InteractableLayer;
+        interactableObject.transform.localScale = InteractableScale;
     }
 }

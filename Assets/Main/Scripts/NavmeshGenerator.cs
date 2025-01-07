@@ -1,22 +1,22 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 
 [RequireComponent(typeof(NavMeshSurface))]
 public class NavmeshGenerator : MonoBehaviour
 {
-    private NavMeshSurface navMeshSurface;
+    private NavMeshSurface NavMeshSurface;
 
     private void Awake()
     {
-        navMeshSurface = GetComponent<NavMeshSurface>();
+        NavMeshSurface = GetComponent<NavMeshSurface>();
     }
 
+    //Wait for the dungeon to generate and then build the navmesh.
     private IEnumerator Start()
     {
         yield return new WaitForEndOfFrame();
 
-        navMeshSurface.BuildNavMesh();
+        NavMeshSurface.BuildNavMesh();
     }
 }

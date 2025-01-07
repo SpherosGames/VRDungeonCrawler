@@ -5,27 +5,28 @@ using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private InputActionProperty menuButton;
-    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private InputActionProperty MenuButton;
+    [SerializeField] private GameObject PauseMenuObject;
     [SerializeField] private Transform playerCamera;
-    [SerializeField] private float pauseMenuDistance = 2;
-    [SerializeField] private Player player;
-    [SerializeField] private VRPlayerMovement playerMovement;
+    [SerializeField] private float PauseMenuDistance = 2;
+    [SerializeField] private Player Player;
+    [SerializeField] private VRPlayerMovement PlayerMovement;
 
-    private GameObject spawnPauseMenu;
+    private GameObject SpawnPauseMenu;
 
-    private bool isOpen;
+    private bool IsOpen;
 
     private void OnEnable()
     {
-        menuButton.action.performed += (InputAction.CallbackContext callBackContext) => MenuButtonPressed(callBackContext);
+        MenuButton.action.performed += (InputAction.CallbackContext callBackContext) => MenuButtonPressed();
     }
 
-    private void MenuButtonPressed(InputAction.CallbackContext callBackContext)
+    //Toggle the pause menu if the button is pressed.
+    private void MenuButtonPressed()
     {
-        if (isOpen)
+        if (IsOpen)
         {
-            ClosePauseMenu(true);
+            ClosePauseMenu();
         }
         else
         {
@@ -35,32 +36,41 @@ public class PauseMenu : MonoBehaviour
 
     private void OpenPauseMenu()
     {
-        ClosePauseMenu(false);
+        ClosePauseMenu();
 
-        isOpen = true;
+        IsOpen = true;
 
-        playerMovement.mayTurn = false;
-        playerMovement.mayMove = false;
+        //Disallow the player moving and turning.
+        PlayerMovement.MayTurn = false;
+        PlayerMovement.MayMove = false;
 
-        spawnPauseMenu = Instantiate(pauseMenu, playerCamera.position + playerCamera.forward * pauseMenuDistance, Quaternion.identity);
-        PauseMenuUI spawnPauseMenuUI = spawnPauseMenu.GetComponentInChildren<PauseMenuUI>();
+        //Spawn the pause menu in front of the player.
+        SpawnPauseMenu = Instantiate(PauseMenuObject, playerCamera.position + playerCamera.forward * PauseMenuDistance, Quaternion.identity);
+        PauseMenuUI spawnPauseMenuUI = SpawnPauseMenu.GetComponentInChildren<PauseMenuUI>();
 
+        //Set the stats text based on the stats of the player.
         string statsText = "Stats: \n";
-        statsText += "Strength: " + player.strength + "\n";
-        if (player.hasTempStrengthPotion) statsText += "Strength potion time remaining: " + player.strengthPotionTimer + "\n";
-        statsText += "Max health: " + player.MaxHealth + "\n";
-        statsText += "Health: " + player.Health + "\n";
+        statsText += "Strength: " + Player.Strength + "\n";
+        if (Player.HasTempStrengthPotion) statsText += "Strength potion time remaining: " + Player.StrengthPotionTimer + "\n";
+        statsText += "Max health: " + Player.MaxHealth + "\n";
+        statsText += "Health: " + Player.Health + "\n";
 
+        //Setup the actual spawned pause menu.
         spawnPauseMenuUI.Setup(this, statsText);
     }
 
-    public void ClosePauseMenu(bool open)
+    /// <summary>
+    /// Closes the pause menu.
+    /// </summary>
+    public void ClosePauseMenu()
     {
-        isOpen = false;
+        IsOpen = false;
 
-        playerMovement.mayTurn = true;
-        playerMovement.mayMove = true;
+        //Allow the player to move and turn again.
+        PlayerMovement.MayTurn = true;
+        PlayerMovement.MayMove = true;
 
-        if (spawnPauseMenu) Destroy(spawnPauseMenu);
+        //Destroy the pause menu.
+        if (SpawnPauseMenu) Destroy(SpawnPauseMenu);
     }
 }

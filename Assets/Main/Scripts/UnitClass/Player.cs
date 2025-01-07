@@ -6,44 +6,45 @@ using UnityEngine.UI;
 
 public class Player : Unit
 {
-    [SerializeField] private string loseSceneName;
-    [SerializeField] private Slider healthSlider;
-    [SerializeField] private float strengthPotionTime = 30;
+    [SerializeField] private string LoseSceneName;
+    [SerializeField] private Slider HealthSlider;
+    [SerializeField] private float StrengthPotionTime = 30;
 
-    [SerializeField] private List<float> strengthBuffs = new();
+    [SerializeField] private List<float> StrengthBuffs = new();
 
-    public bool hasTempStrengthPotion;
-    public float strengthPotionTimer;
-    public float strength;
+    public bool HasTempStrengthPotion;
+    public float StrengthPotionTimer;
+    public float Strength;
 
-    private Sword sword;
+    private Sword Sword;
 
     private void Awake()
     {
-        sword = FindObjectOfType<Sword>();
+        Sword = FindObjectOfType<Sword>();
     }
 
     private void OnEnable()
     {
-        if (healthSlider) healthSlider.maxValue = MaxHealth;
+        if (HealthSlider) HealthSlider.maxValue = MaxHealth;
 
-        strength = 1;
+        Strength = 1;
     }
 
     public override void Update()
     {
         base.Update();
 
-        if (healthSlider) healthSlider.value = Health;
+        if (HealthSlider) HealthSlider.value = Health;
 
-        if (hasTempStrengthPotion)
+        //Remove the effect of the temp strength potion after "StrengthPotionTimer" seconds.
+        if (HasTempStrengthPotion)
         {
-            strengthPotionTimer -= Time.deltaTime;
+            StrengthPotionTimer -= Time.deltaTime;
 
-            if (strengthPotionTimer <= 0)
+            if (StrengthPotionTimer <= 0)
             {
-                strengthPotionTimer = strengthPotionTime;
-                hasTempStrengthPotion = false;
+                StrengthPotionTimer = StrengthPotionTime;
+                HasTempStrengthPotion = false;
                 CalculateStrength(0);
             }
         }
@@ -51,30 +52,35 @@ public class Player : Unit
 
     public override void Die()
     {
-        SceneManager.LoadScene(loseSceneName);
+        SceneManager.LoadScene(LoseSceneName);
     }
 
-    public void AddStrength(float amount, bool isPermanent)
+    /// <summary>
+    /// Adds strength to the players sword.
+    /// </summary>
+    /// <param name="Amount">The multiplier for the strength. For example: 1.2 increases the strength of the player by 20%.</param>
+    /// <param name="IsPermanent">Wether or not the strength buff is permanent or not. If not it will be removed in "StrengthPotionTimer" seconds.</param>
+    public void AddStrength(float Amount, bool IsPermanent)
     {
-        if (isPermanent)
+        if (IsPermanent)
         {
-            strengthBuffs.Add(amount);
+            StrengthBuffs.Add(Amount);
         }
         else
         {
-            hasTempStrengthPotion = true;
+            HasTempStrengthPotion = true;
         }
 
-        CalculateStrength(amount);
+        CalculateStrength(Amount);
     }
 
     private void CalculateStrength(float amount)
     {
-        strength = 1;
-        if (hasTempStrengthPotion) strength *= amount;
-        for (int i = 0; i < strengthBuffs.Count; i++)
+        Strength = 1;
+        if (HasTempStrengthPotion) Strength *= amount;
+        for (int i = 0; i < StrengthBuffs.Count; i++)
         {
-            strength *= strengthBuffs[i];
+            Strength *= StrengthBuffs[i];
         }
 
         //if (sword) sword.SetDamageMultiplier(strength);

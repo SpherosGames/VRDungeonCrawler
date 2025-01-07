@@ -1,96 +1,98 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class VRPlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float walkSpeed;
-    [SerializeField] private float sprintSpeed;
-    [SerializeField] private InputActionProperty sprintButton;
-    [SerializeField] private float turnSpeed;
-    [SerializeField] private bool snapTurn;
-    [SerializeField] private float snapTurnAngle;
-    [SerializeField] private float snapTurnCooldown;
-    [SerializeField] private InputActionProperty moveInput;
-    [SerializeField] private InputActionProperty turnInput;
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private Transform directionSource;
-    [SerializeField] private Transform pivotPoint;
-    [SerializeField] private float extraGravity = 50;
+    [SerializeField] private float WalkSpeed;
+    [SerializeField] private float SprintSpeed;
+    [SerializeField] private InputActionProperty SprintButton;
+    [SerializeField] private float TurnSpeed;
+    [SerializeField] private bool UseSnapTurn;
+    [SerializeField] private float SnapTurnAngle;
+    [SerializeField] private float SnapTurnCooldown;
+    [SerializeField] private InputActionProperty MoveInput;
+    [SerializeField] private InputActionProperty TurnInput;
+    [SerializeField] private Rigidbody Rb;
+    [SerializeField] private Transform DirectionSource;
+    [SerializeField] private Transform PivotPoint;
+    [SerializeField] private float ExtraGravity = 50;
 
     [Header("Jumping")]
-    [SerializeField] private float jumpForce;
-    [SerializeField] private Transform feetPos;
-    [SerializeField] private float groundCheckRadius = 0.1f;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private InputActionProperty jumpButton;
-    [SerializeField] private float minHandVelocity;
-    [SerializeField] private Transform leftHand;
-    [SerializeField] private Transform rightHand;
+    [SerializeField] private float JumpForce;
+    [SerializeField] private Transform FeetPos;
+    [SerializeField] private float GroundCheckRadius = 0.1f;
+    [SerializeField] private LayerMask GroundLayer;
+    [SerializeField] private InputActionProperty JumpButton;
+    [SerializeField] private float MinHandVelocity;
+    [SerializeField] private Transform LeftHand;
+    [SerializeField] private Transform RightHand;
 
     [Header("Body Collider")]
-    [SerializeField] private Transform playerHead;
-    [SerializeField] private CapsuleCollider bodyCollider;
-    [SerializeField] private Vector2 bodyHeightLimits = new Vector2(0.5f, 2f);
+    [SerializeField] private Transform PlayerHead;
+    [SerializeField] private CapsuleCollider BodyCollider;
+    [SerializeField] private Vector2 BodyHeightLimits = new(0.5f, 2f);
 
-    private Vector2 moveInputAxis;
-    private float inputTurnAxis;
+    private Vector2 MoveInputAxis;
+    private float InputTurnAxis;
 
-    private bool sprintButtonState;
+    private bool SprintButtonState;
 
-    private float snapTurnTimer;
+    private float SnapTurnTimer;
 
-    private float moveSpeed;
+    private float MoveSpeed;
 
-    private bool isGrounded;
+    private bool IsGrounded;
 
-    private float leftHandYVel;
-    private float rightHandYVel;
+    private float LeftHandYVel;
+    private float RightHandYVel;
 
-    private Vector3 lastLeftHandPos;
-    private Vector3 lastRightHandPos;
+    private Vector3 LastLeftHandPos;
+    private Vector3 LastRightHandPos;
 
-    public bool mayMove;
-    public bool mayTurn;
+    public bool MayMove;
+    public bool MayTurn;
 
     private void Awake()
     {
-        if (!rb) rb = GetComponent<Rigidbody>();
+        //Assign Rigidbody.
+        if (!Rb) Rb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
     {
-        jumpButton.action.performed += (InputAction.CallbackContext context) => Jumping();
+        //Call jump function when the jump button is pressed.
+        JumpButton.action.performed += (InputAction.CallbackContext context) => Jumping();
 
-        mayMove = true;
-        mayTurn = true;
+        MayMove = true;
+        MayTurn = true;
     }
 
     private void Update()
     {
-        moveInputAxis = moveInput.action.ReadValue<Vector2>();
-        inputTurnAxis = turnInput.action.ReadValue<Vector2>().x;
-        sprintButtonState = sprintButton.action.ReadValue<float>() > 0.5f;
+        //Set input variables.
+        MoveInputAxis = MoveInput.action.ReadValue<Vector2>();
+        InputTurnAxis = TurnInput.action.ReadValue<Vector2>().x;
+        SprintButtonState = SprintButton.action.ReadValue<float>() > 0.5f;
 
-        if (snapTurn) snapTurnTimer -= Time.deltaTime;
+        if (UseSnapTurn) SnapTurnTimer -= Time.deltaTime;
 
         CalculateHandVelocities();
     }
 
+    //Calculate the speed of both hands, for jumping.
     private void CalculateHandVelocities()
     {
-        leftHandYVel = (leftHand.position.y - lastLeftHandPos.y) / Time.deltaTime;
-        rightHandYVel = (rightHand.position.y - lastRightHandPos.y) / Time.deltaTime;
+        LeftHandYVel = (LeftHand.position.y - LastLeftHandPos.y) / Time.deltaTime;
+        RightHandYVel = (RightHand.position.y - LastRightHandPos.y) / Time.deltaTime;
 
-        lastLeftHandPos = leftHand.position;
-        lastRightHandPos = rightHand.position;
+        LastLeftHandPos = LeftHand.position;
+        LastRightHandPos = RightHand.position;
     }
 
     private void FixedUpdate()
     {
-        //Extra gravity
-        rb.AddForce(extraGravity * rb.mass * Vector3.down);
+        //Extra gravity.
+        Rb.AddForce(ExtraGravity * Rb.mass * Vector3.down);
 
         Crouching();
 
@@ -98,107 +100,117 @@ public class VRPlayerMovement : MonoBehaviour
 
         Sprinting();
 
-        if (mayMove) Movement();
+        if (MayMove) Movement();
 
-        if (mayTurn) SnapTurn();
-
-        if (snapTurn) return;
-
-        SmoothRotation();
+        //Use snap turn or smooth turn based on boolean.
+        if (MayTurn)
+        {
+            if (UseSnapTurn) SnapTurn();
+            else SmoothRotation();
+        }
     }
 
+    //Use checksphere to check if the feet are hitting the ground.
     private void CheckGrounded()
     {
-        isGrounded = Physics.CheckSphere(feetPos.position, groundCheckRadius, groundLayer);
+        IsGrounded = Physics.CheckSphere(FeetPos.position, GroundCheckRadius, GroundLayer);
     }
-
+    
+    //If the hands are moving fast enough and the player is grounded: jump.
     private void Jumping()
     {
         bool handsJumping = false;
 
-        if (leftHandYVel > minHandVelocity && rightHandYVel > minHandVelocity)
+        if (LeftHandYVel > MinHandVelocity && RightHandYVel > MinHandVelocity)
         {
             handsJumping = true;
         }
 
-        if (handsJumping && isGrounded)
+        if (handsJumping && IsGrounded)
         {
-            float extraJumpAmount = Mathf.Clamp(((leftHandYVel + rightHandYVel) / 4), 1, 2);
+            //Jump higher based on speed of hands with limit.
+            float extraJumpAmount = Mathf.Clamp(((LeftHandYVel + RightHandYVel) / 4), 1, 2);
 
-            rb.AddForce(Vector3.up * (jumpForce * extraJumpAmount), ForceMode.Impulse);
+            Rb.AddForce(Vector3.up * (JumpForce * extraJumpAmount), ForceMode.Impulse);
         }
     }
 
+    //Crouch by changing the body collider (capsule collider) based on head position with limits.
     private void Crouching()
     {
-        bodyCollider.height = Mathf.Clamp(playerHead.position.y, bodyHeightLimits.x, bodyHeightLimits.y);
-        bodyCollider.center = new Vector3(playerHead.localPosition.x, bodyCollider.height / 2, playerHead.localPosition.z);
+        BodyCollider.height = Mathf.Clamp(PlayerHead.position.y, BodyHeightLimits.x, BodyHeightLimits.y);
+        BodyCollider.center = new Vector3(PlayerHead.localPosition.x, BodyCollider.height / 2, PlayerHead.localPosition.z);
     }
 
+    //Change "MoveSpeed" based on if the sprint button is pressed or not.
     private void Sprinting()
     {
-        moveSpeed = sprintButtonState ? sprintSpeed : walkSpeed;
+        MoveSpeed = SprintButtonState ? SprintSpeed : WalkSpeed;
     }
 
     private void SmoothRotation()
     {
-        //Smooth rotation
-        Quaternion rotation = Quaternion.AngleAxis(turnSpeed * Time.fixedDeltaTime * inputTurnAxis, Vector3.up);
+        Quaternion rotation = Quaternion.AngleAxis(TurnSpeed * Time.fixedDeltaTime * InputTurnAxis, Vector3.up);
 
-        rb.MoveRotation(rb.rotation * rotation);
+        Rb.MoveRotation(Rb.rotation * rotation);
 
-        //Correct position so that the player can move away from middle of the playspace
-        Vector3 newPos = rotation * (rb.position - pivotPoint.position) + pivotPoint.position;
+        //Correct position so that the player can move away from middle of the playspace.
+        Vector3 newPos = rotation * (Rb.position - PivotPoint.position) + PivotPoint.position;
 
-        rb.MovePosition(newPos);
+        Rb.MovePosition(newPos);
     }
 
     private void SnapTurn()
     {
-        if (snapTurn)
+        //Only allow snap turn every "SnapTurnCooldown" seconds.
+        if (SnapTurnTimer <= 0)
         {
-            if (snapTurnTimer <= 0)
-            {
-                if (inputTurnAxis > 0.5f) SnapTurn(snapTurnAngle);
-                else if (inputTurnAxis < -0.5f) SnapTurn(-snapTurnAngle);
-            }
+            if (InputTurnAxis > 0.5f) SnapTurn(SnapTurnAngle);
+            else if (InputTurnAxis < -0.5f) SnapTurn(-SnapTurnAngle);
         }
     }
 
-    Vector3 moveDir;
+    Vector3 MoveDir;
 
     private void Movement()
     {
-        Quaternion yaw = Quaternion.Euler(0, directionSource.eulerAngles.y, 0);
-
-        if (moveInputAxis != Vector2.zero && isGrounded)
+        Quaternion yaw = Quaternion.Euler(0, DirectionSource.eulerAngles.y, 0);
+        
+        if (IsGrounded)
         {
-            moveDir = yaw * new Vector3(moveInputAxis.x, 0, moveInputAxis.y);
-        }
-        else if (moveInputAxis == Vector2.zero && isGrounded)
-        {
-            moveDir = Vector3.zero;
+            //If the player is inputting a value for movement, calculate the movement direction.
+            if (MoveInputAxis != Vector2.zero)
+            {
+                MoveDir = yaw * new Vector3(MoveInputAxis.x, 0, MoveInputAxis.y);
+            }
+            //If the player is not inputting a value for movement, reset the movement direction.
+            //This is so that the player stops moving when no values are inputted, but not when airborne.
+            else if (MoveInputAxis == Vector2.zero)
+            {
+                MoveDir = Vector3.zero;
+            }
         }
 
-        rb.velocity = moveSpeed * moveDir;
+        Rb.velocity = MoveSpeed * MoveDir;
     }
 
     private void SnapTurn(float angle)
     {
         Quaternion newRotation = Quaternion.Euler(0, angle, 0);
 
-        rb.MoveRotation(rb.rotation * newRotation);
+        Rb.MoveRotation(Rb.rotation * newRotation);
 
-        //Correct position so that the player can move away from middle of the playspace
-        Vector3 newPos = newRotation * (rb.position - pivotPoint.position) + pivotPoint.position;
+        //Correct position so that the player can move away from middle of the playspace.
+        Vector3 newPos = newRotation * (Rb.position - PivotPoint.position) + PivotPoint.position;
 
-        rb.MovePosition(newPos);
+        Rb.MovePosition(newPos);
 
-        snapTurnTimer = snapTurnCooldown;
+        SnapTurnTimer = SnapTurnCooldown;
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(feetPos.position, groundCheckRadius);
+        //Draw a sphere at the players feet for debugging.
+        Gizmos.DrawSphere(FeetPos.position, GroundCheckRadius);
     }
 }
